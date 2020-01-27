@@ -1,5 +1,5 @@
 {
-  "name": "express-handlebars-sass-boilerplate",
+  "name": "TaskTimer",
   "version": "0.0.0",
   "private": true,
   "description": "An express API setup with handlebars as  view engine and sass for styling using the 7-1 architecture",
@@ -18,10 +18,9 @@
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
-    "express": "~4.16.1",
+    "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
-    "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
+    "http-errors": "^1.7.3",
     "morgan": "~1.9.1"
   },
   "devDependencies": {
@@ -29,7 +28,6 @@
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-es2015-ie": "^6.7.0",
-    "bulma": "^0.8.0",
     "node-sass": "^4.13.1",
     "nodemon": "^2.0.2",
     "npm-run-all": "^4.1.5",
