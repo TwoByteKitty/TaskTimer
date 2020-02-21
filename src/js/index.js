@@ -1,17 +1,11 @@
-import '../scss/main.scss';
-
-// Either import everything
+import { dom } from '@fortawesome/fontawesome-svg-core'
 import 'foundation-sites'
 
-// Or import individual modules
-// import 'foundation-sites/dist/js/plugins/foundation.core';
-// import 'foundation-sites/dist/js/plugins/foundation.dropdownMenu.min.js';
-// import 'foundation-sites/dist/js/plugins/foundation.util.keyboard.min.js';
-// import 'foundation-sites/dist/js/plugins/foundation.util.box.min.js';
-// import 'foundation-sites/dist/js/plugins/foundation.util.nest.min.js';
-
+import './fontawesome';
+import '../scss/main.scss';
 
 document.addEventListener("DOMContentLoaded", function(){
     console.info('Loaded');
+    dom.watch()
     $(document).foundation();
 });
