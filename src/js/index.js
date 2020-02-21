@@ -13,4 +13,5 @@ import 'foundation-sites'
 
 document.addEventListener("DOMContentLoaded", function(){
     console.info('Loaded');
+    $(document).foundation();
 });

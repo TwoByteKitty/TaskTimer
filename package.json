@@ -3,14 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "description": "An express API setup with handlebars as  view engine and sass for styling using the 7-1 architecture",
-  "scripts": {    
+  "scripts": {
     "watch-client": "webpack --watch --progress",
     "watch-server": "nodemon ./bin/www",
-    "watch-dev":"npm-run-all --parallel watch-server watch-client",
+    "watch-dev": "npm-run-all --parallel watch-server watch-client",
     "build-client": "webpack",
     "start-server": "node ./bin/www"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.12.1",
     "cookie-parser": "~1.4.4",
     "core-js": "^3.6.4",
     "debug": "~2.6.9",
