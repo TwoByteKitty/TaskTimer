@@ -3,20 +3,16 @@
   "version": "0.0.0",
   "private": true,
   "description": "An express API setup with handlebars as  view engine and sass for styling using the 7-1 architecture",
-  "scripts": {
-    "css-build": "node-sass src/sass/main.scss public/css/main.css",
-    "css-deploy": "npm run css-build && npm run css-postcss",
-    "css-postcss": "postcss --use autoprefixer --output css/main.css css/main.css",
-    "css-watch": "npm run css-build -- --watch",
-    "deploy": "npm run css-deploy && npm run js-build",
-    "js-build": "babel src/js --out-dir public/js",
-    "js-watch": "npm run js-build -- --watch",
-    "watch-all": "npm-run-all --parallel css-watch js-watch",
-    "dev": "nodemon ./bin/www",
-    "start": "node ./bin/www"
+  "scripts": {    
+    "watch-client": "webpack --watch --progress",
+    "watch-server": "nodemon ./bin/www",
+    "watch-dev":"npm-run-all --parallel watch-server watch-client",
+    "build-client": "webpack",
+    "start-server": "node ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
+    "core-js": "^3.6.4",
     "debug": "~2.6.9",
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
@@ -27,13 +23,28 @@
     "what-input": "^5.2.6"
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/node": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-react": "^7.8.3",
     "autoprefixer": "^9.7.4",
     "babel-cli": "^6.26.0",
+    "babel-loader": "^8.0.6",
     "babel-preset-env": "^1.7.0",
     "babel-preset-es2015-ie": "^6.7.0",
+    "css-loader": "^3.4.2",
+    "file-loader": "^5.1.0",
+    "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.1",
     "nodemon": "^2.0.2",
     "npm-run-all": "^4.1.5",
-    "postcss-cli": "^6.1.3"
+    "postcss-cli": "^6.1.3",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.1.3",
+    "url-loader": "^3.0.0",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
   }
 }
