@@ -5082,6 +5082,50 @@ html.is-reveal-open {
 .header {
   background-color: red; }
 
+@-webkit-keyframes spin1 {
+  0% {
+    -webkit-transform: rotate(405deg);
+            transform: rotate(405deg); }
+  50% {
+    -webkit-transform: rotate(225deg);
+            transform: rotate(225deg); }
+  100% {
+    -webkit-transform: rotate(225deg);
+            transform: rotate(225deg); } }
+
+@keyframes spin1 {
+  0% {
+    -webkit-transform: rotate(405deg);
+            transform: rotate(405deg); }
+  50% {
+    -webkit-transform: rotate(225deg);
+            transform: rotate(225deg); }
+  100% {
+    -webkit-transform: rotate(225deg);
+            transform: rotate(225deg); } }
+
+@-webkit-keyframes spin2 {
+  0% {
+    -webkit-transform: rotate(405deg);
+            transform: rotate(405deg); }
+  50% {
+    -webkit-transform: rotate(405deg);
+            transform: rotate(405deg); }
+  100% {
+    -webkit-transform: rotate(225deg);
+            transform: rotate(225deg); } }
+
+@keyframes spin2 {
+  0% {
+    -webkit-transform: rotate(405deg);
+            transform: rotate(405deg); }
+  50% {
+    -webkit-transform: rotate(405deg);
+            transform: rotate(405deg); }
+  100% {
+    -webkit-transform: rotate(225deg);
+            transform: rotate(225deg); } }
+
 .timer-group {
   height: 400px;
   margin: 0 auto;
@@ -5119,13 +5163,11 @@ html.is-reveal-open {
         -webkit-animation-name: spin2;
                 animation-name: spin2; }
       .timer-group .timer .hand span {
-        -webkit-animation-duration: 4s;
-                animation-duration: 4s;
         -webkit-animation-iteration-count: infinite;
                 animation-iteration-count: infinite;
         -webkit-animation-timing-function: linear;
                 animation-timing-function: linear;
-        border: 50px solid rgba(0, 255, 255, 0.4);
+        border-style: solid;
         border-bottom-color: transparent;
         border-left-color: transparent;
         border-radius: 50%;
@@ -5172,7 +5214,7 @@ html.is-reveal-open {
         border-right-color: rgba(0, 255, 255, 0.4);
         border-width: 175px; }
     .timer-group .timer.second {
-      background: rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.1);
       height: 300px;
       left: 50px;
       width: 300px;
@@ -5211,48 +5253,4 @@ html.is-reveal-open {
       top: 17px;
       width: 260px;
       left: 20px; }
-
-@-webkit-keyframes spin1 {
-  0% {
-    -webkit-transform: rotate(225deg);
-            transform: rotate(225deg); }
-  50% {
-    -webkit-transform: rotate(225deg);
-            transform: rotate(225deg); }
-  100% {
-    -webkit-transform: rotate(405deg);
-            transform: rotate(405deg); } }
-
-@keyframes spin1 {
-  0% {
-    -webkit-transform: rotate(225deg);
-            transform: rotate(225deg); }
-  50% {
-    -webkit-transform: rotate(225deg);
-            transform: rotate(225deg); }
-  100% {
-    -webkit-transform: rotate(405deg);
-            transform: rotate(405deg); } }
-
-@-webkit-keyframes spin2 {
-  0% {
-    -webkit-transform: rotate(225deg);
-            transform: rotate(225deg); }
-  50% {
-    -webkit-transform: rotate(405deg);
-            transform: rotate(405deg); }
-  100% {
-    -webkit-transform: rotate(405deg);
-            transform: rotate(405deg); } }
-
-@keyframes spin2 {
-  0% {
-    -webkit-transform: rotate(225deg);
-            transform: rotate(225deg); }
-  50% {
-    -webkit-transform: rotate(405deg);
-            transform: rotate(405deg); }
-  100% {
-    -webkit-transform: rotate(405deg);
-            transform: rotate(405deg); } }
 

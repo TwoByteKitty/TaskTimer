@@ -1,11 +1,40 @@
-$hand-border-color-default: rgba(0, 255, 255, 0.4);
+$hand-background-color-hour: rgba(0, 0, 0, 0.3);
 $hand-border-color-hour: rgba(255, 0, 255, 0.4);
-$hand-border-color-minute: rgba(0, 255, 255, .4);
+
+$hand-background-color-minute: rgba(0, 0, 0, 0.2);
+$hand-border-color-minute: rgba(0, 255, 255, 0.4);
+
+$hand-background-color-second: rgba(0, 0, 0, 0.1);
 $hand-border-color-second: rgba(255, 255, 255, 0.15);
 
-$hour-duration: 3600s;
-$minute-duration: 60s;
-$second-duration: 1s;
+$duration-hour: 3600s;
+$duration-minute: 60s;
+$duration-second: 1s;
+
+@keyframes spin1 {
+  0% {
+    transform: rotate(405deg);
+  }
+  50% {
+    transform: rotate(225deg);
+  }
+  100% {
+    transform: rotate(225deg);
+  }
+}
+
+@keyframes spin2 {
+  0% {
+    transform: rotate(405deg);
+  }
+  50% {
+    transform: rotate(405deg);
+  }
+  100% {
+    transform: rotate(225deg);
+  }
+}
+
 
 .timer-group {
   height: 400px;
@@ -46,10 +75,9 @@ $second-duration: 1s;
         animation-name: spin2;
       }
       span {
-        animation-duration: 4s;
         animation-iteration-count: infinite;
         animation-timing-function: linear;
-        border: 50px solid $hand-border-color-default;
+        border-style: solid;
         border-bottom-color: transparent;
         border-left-color: transparent;
         border-radius: 50%;
@@ -63,7 +91,7 @@ $second-duration: 1s;
       }
     }
     &.hour {
-      background: rgba(0, 0, 0, 0.3);
+      background: $hand-background-color-hour;
       height: 400px;
       left: 0;
       width: 400px;
@@ -75,14 +103,14 @@ $second-duration: 1s;
         top: 20px;
       }
       .hand span {
-        animation-duration: $hour-duration;
+        animation-duration: $duration-hour;
         border-top-color: $hand-border-color-hour;
         border-right-color: $hand-border-color-hour;
         border-width: 200px;
       }
     }
     &.minute {
-      background: rgba(0, 0, 0, 0.2);
+      background: $hand-background-color-minute;
       height: 350px;
       left: 25px;
       width: 350px;
@@ -94,14 +122,14 @@ $second-duration: 1s;
         top: 20px;
       }
       .hand span {
-        animation-duration: $minute-duration;
+        animation-duration: $duration-minute;
         border-top-color: $hand-border-color-minute;
         border-right-color: $hand-border-color-minute;
         border-width: 175px;
       }
     }
     &.second {
-      background: rgba(0, 0, 0, 0.2);
+      background: $hand-background-color-second;
       height: 300px;
       left: 50px;
       width: 300px;
@@ -113,7 +141,7 @@ $second-duration: 1s;
         top: 2px;
       }
       .hand span {
-        animation-duration: $second-duration;
+        animation-duration: $duration-second;
         border-top-color: $hand-border-color-second;
         border-right-color: $hand-border-color-second;
         border-width: 150px;
@@ -148,26 +176,4 @@ $second-duration: 1s;
     }
   }
 }
-@keyframes spin1 {
-  0% {
-    transform: rotate(225deg);
-  }
-  50% {
-    transform: rotate(225deg);
-  }
-  100% {
-    transform: rotate(405deg);
-  }
-}
 
-@keyframes spin2 {
-  0% {
-    transform: rotate(225deg);
-  }
-  50% {
-    transform: rotate(405deg);
-  }
-  100% {
-    transform: rotate(405deg);
-  }
-}
