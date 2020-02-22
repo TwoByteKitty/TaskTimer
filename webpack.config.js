@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   target: 'web',
   mode: 'development',
+  devtool: 'sourcemap',
   context: path.resolve(__dirname, './src'),
   plugins: [
     new webpack.ProgressPlugin(),
@@ -15,6 +16,9 @@ module.exports = {
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery'
+    }),
+    new webpack.ProvidePlugin({
+      moment: 'moment'
     })
   ],
   entry: {

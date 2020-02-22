@@ -1,30 +1,52 @@
-let defaults = {}
-  , one_second = 1000
-  , one_minute = one_second * 60
-  , one_hour = one_minute * 60
-  , one_day = one_hour * 24
-  , startDate = new Date()
-  , face = document.getElementById('lazy');
+const DEFAULTS = {};
+const ONE_SECOND = 1000;
+const ONE_MINUTE = ONE_SECOND * 60;
+const ONE_HOUR = ONE_MINUTE * 60;
+const ONE_DAY = ONE_HOUR * 24;
+const START_DATE = new Date();
+const TIMER_MINUTES = $('.timer-group .timer.minute .hand span');
+const TIMER_SECONDS = $('.timer-group .timer.second .hand span');
+const $FACE = $('#lazy');
 
+let timer;
+let timerInterval;
 
-tick();
+function runTimer() {
+  timer.subtract(1, 's');
+  if (timer.seconds() < 1) {
+    clearInterval(timerInterval);
+    $FACE.text(`Time's Up!!`);
+    return;
+  }
+  $FACE.text(`${timer.minutes() > 0 ?  timer.minutes() +  ' : ' : ''}
+    ${timer.seconds() < 10 ? '0' + timer.seconds() : timer.seconds()}`);
+}
 
-function tick() {
+function tick(){
+  const NOW = new Date();
+  const ELAPSED = NOW - START_DATE;
+  const PARTS = [];
 
-  let now = new Date()
-    , elapsed = now - startDate
-    , parts = [];
+  PARTS[0] = '' + Math.floor(ELAPSED / ONE_HOUR);
+  PARTS[1] = '' + Math.floor((ELAPSED % ONE_HOUR) / ONE_MINUTE);
+  PARTS[2] = '' + Math.floor(((ELAPSED % ONE_HOUR) % ONE_MINUTE) / ONE_SECOND);
 
-  parts[0] = '' + Math.floor( elapsed / one_hour );
-  parts[1] = '' + Math.floor( (elapsed % one_hour) / one_minute );
-  parts[2] = '' + Math.floor( ( (elapsed % one_hour) % one_minute ) / one_second );
-
-  parts[0] = (parts[0].length == 1) ? '0' + parts[0] : parts[0];
-  parts[1] = (parts[1].length == 1) ? '0' + parts[1] : parts[1];
-  parts[2] = (parts[2].length == 1) ? '0' + parts[2] : parts[2];
-
-  face.innerText = parts.join(':');
-  
+  PARTS[0] = PARTS[0].length == 1 ? '0' + PARTS[0] : PARTS[0];
+  PARTS[1] = PARTS[1].length == 1 ? '0' + PARTS[1] : PARTS[1];
+  PARTS[2] = PARTS[2].length == 1 ? '0' + PARTS[2] : PARTS[2];
+  $FACE.text(PARTS.join(':'));
   window.requestAnimationFrame(tick);
-  
+}
+
+export function startTimer(minutes) {
+  if (!timer) {
+    timer = moment.duration(minutes, 'minutes');
+  }
+  TIMER_MINUTES.css({ 'animation-duration': `${timer.asSeconds()}s` });
+  TIMER_SECONDS.css({ 'animation-iteration-count': `${timer.asSeconds()}`, 'animation-duration': '1s' });
+  timerInterval = setInterval(runTimer, 1000);
+}
+
+export function stopTimer() {
+  clearInterval(timerInterval);
 }

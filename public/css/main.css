@@ -5138,7 +5138,7 @@ html.is-reveal-open {
     position: absolute;
     width: 100px; }
     .timer-group .timer:after {
-      background: #111 url(https://codepen.io/images/classy_fabric.png);
+      background: #111;
       border-radius: 50%;
       content: '';
       display: block;
@@ -5163,8 +5163,6 @@ html.is-reveal-open {
         -webkit-animation-name: spin2;
                 animation-name: spin2; }
       .timer-group .timer .hand span {
-        -webkit-animation-iteration-count: infinite;
-                animation-iteration-count: infinite;
         -webkit-animation-timing-function: linear;
                 animation-timing-function: linear;
         border-style: solid;
@@ -5208,8 +5206,6 @@ html.is-reveal-open {
         width: 310px;
         top: 20px; }
       .timer-group .timer.minute .hand span {
-        -webkit-animation-duration: 60s;
-                animation-duration: 60s;
         border-top-color: rgba(0, 255, 255, 0.4);
         border-right-color: rgba(0, 255, 255, 0.4);
         border-width: 175px; }
@@ -5225,8 +5221,6 @@ html.is-reveal-open {
         width: 296px;
         top: 2px; }
       .timer-group .timer.second .hand span {
-        -webkit-animation-duration: 1s;
-                animation-duration: 1s;
         border-top-color: rgba(255, 255, 255, 0.15);
         border-right-color: rgba(255, 255, 255, 0.15);
         border-width: 150px; }
@@ -5254,3 +5248,5 @@ html.is-reveal-open {
       width: 260px;
       left: 20px; }
 
+
+/*# sourceMappingURL=main.css.map*/
