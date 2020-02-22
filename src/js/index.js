@@ -2,6 +2,7 @@ import { dom } from '@fortawesome/fontawesome-svg-core'
 import 'foundation-sites'
 
 import './fontawesome';
+import './timer';
 import '../scss/main.scss';
 
 document.addEventListener("DOMContentLoaded", function(){
