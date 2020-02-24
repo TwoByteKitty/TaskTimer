@@ -1,3 +1,19 @@
 .header {
-    background-color: red;
+    background-color: $black;
+    box-shadow: 0 0 10px 5px rgba($dark-gray, 0.5);
 }
+.subHeader {
+    background-color: $dark-gray;
+}
+.headerBtn {
+    color: rgba($black, 0.7);
+    background-color: map-get($foundation-palette, "alert");
+    border-radius: 2500px;
+    padding: 25px;
+    margin: 0 15px;
+    box-shadow: 7px 7px 9px rgba($black, 0.7) !important;
+}
+.headWelcome {
+    color: $light-gray !important;
+}
+

@@ -54810,12 +54810,33 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-document.addEventListener('DOMContentLoaded', function () {
+
+function handlePlay(event) {
+  console.log(event);
+  Object(_timer__WEBPACK_IMPORTED_MODULE_3__["startTimer"])(2, 'work');
+}
+
+;
+const playBtn = document.getElementById("startTimerBtn");
+playBtn.addEventListener("click", handlePlay);
+
+function handlePause(event) {
+  Object(_timer__WEBPACK_IMPORTED_MODULE_3__["stopTimer"])();
+}
+
+;
+const pauseBtn = document.getElementById("pauseTimerBtn");
+pauseBtn.addEventListener("click", handlePause);
+
+function initPg(event) {
+  console.log(event);
   console.info('Loaded');
   _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["dom"].watch();
-  $(document).foundation();
-  Object(_timer__WEBPACK_IMPORTED_MODULE_3__["startTimer"])(1);
-});
+  $(document).foundation(); //  startTimer(1);
+}
+
+;
+document.addEventListener('DOMContentLoaded', initPg);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "../node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
@@ -54831,22 +54852,20 @@ document.addEventListener('DOMContentLoaded', function () {
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function($, moment) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startTimer", function() { return startTimer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stopTimer", function() { return stopTimer; });
-const DEFAULTS = {};
-const ONE_SECOND = 1000;
-const ONE_MINUTE = ONE_SECOND * 60;
-const ONE_HOUR = ONE_MINUTE * 60;
-const ONE_DAY = ONE_HOUR * 24;
-const START_DATE = new Date();
-const TIMER_MINUTES = $('.timer-group .timer.minute .hand span');
-const TIMER_SECONDS = $('.timer-group .timer.second .hand span');
-const $FACE = $('#lazy');
-let timer;
-let timerInterval;
+const $TIMER_MINUTES = $('.timer-group .timer.minute .hand span');
+const $TIMER_SECONDS = $('.timer-group .timer.second .hand span');
+const $FACE = $('#timeDisplay');
+const TIMER_TOGGLE = document.getElementById('workOrRest');
+let timer = undefined;
+let timerInterval = undefined;
+let typeOfTimerNow = "work";
+let workTime = 2;
+let breakTime = 1;
 
 function runTimer() {
-  timer.subtract(1, 's');
+  timer.subtract(1000, 'ms');
 
-  if (timer.seconds() < 1) {
+  if (timer.asMilliseconds() < 1) {
     clearInterval(timerInterval);
     $FACE.text(`Time's Up!!`);
     return;
@@ -54856,36 +54875,48 @@ function runTimer() {
     ${timer.seconds() < 10 ? '0' + timer.seconds() : timer.seconds()}`);
 }
 
-function tick() {
-  const NOW = new Date();
-  const ELAPSED = NOW - START_DATE;
-  const PARTS = [];
-  PARTS[0] = '' + Math.floor(ELAPSED / ONE_HOUR);
-  PARTS[1] = '' + Math.floor(ELAPSED % ONE_HOUR / ONE_MINUTE);
-  PARTS[2] = '' + Math.floor(ELAPSED % ONE_HOUR % ONE_MINUTE / ONE_SECOND);
-  PARTS[0] = PARTS[0].length == 1 ? '0' + PARTS[0] : PARTS[0];
-  PARTS[1] = PARTS[1].length == 1 ? '0' + PARTS[1] : PARTS[1];
-  PARTS[2] = PARTS[2].length == 1 ? '0' + PARTS[2] : PARTS[2];
-  $FACE.text(PARTS.join(':'));
-  window.requestAnimationFrame(tick);
+function workRestToggle(event) {
+  clearInterval(timerInterval);
+  timer = undefined;
+  $TIMER_MINUTES.css({
+    'animation-duration': 0,
+    'animation-iteration-count': `0`
+  });
+  $TIMER_SECONDS.css({
+    'animation-duration': 0,
+    'animation-iteration-count': `0`
+  });
+  console.log(event);
+  console.log(TIMER_TOGGLE.checked);
 }
 
-function startTimer(minutes) {
-  if (!timer) {
+;
+TIMER_TOGGLE.addEventListener("click", workRestToggle);
+function startTimer(minutes, timerType) {
+  if (!timer || timer.asMilliseconds() === 0 || typeOfTimerNow !== timerType) {
+    typeOfTimerNow = timerType;
     timer = moment.duration(minutes, 'minutes');
   }
 
-  TIMER_MINUTES.css({
-    'animation-duration': `${timer.asSeconds()}s`
-  });
-  TIMER_SECONDS.css({
-    'animation-iteration-count': `${timer.asSeconds()}`,
-    'animation-duration': '1s'
-  });
   timerInterval = setInterval(runTimer, 1000);
+  $TIMER_MINUTES.css({
+    'animation-duration': `${timer.asSeconds()}s`,
+    'animation-play-state': 'running'
+  });
+  $TIMER_SECONDS.css({
+    'animation-iteration-count': `${timer.asSeconds()}`,
+    'animation-duration': '1000ms',
+    'animation-play-state': 'running'
+  });
 }
 function stopTimer() {
   clearInterval(timerInterval);
+  $TIMER_MINUTES.css({
+    'animation-play-state': 'paused'
+  });
+  $TIMER_SECONDS.css({
+    'animation-play-state': 'paused'
+  });
 }
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "../node_modules/jquery/dist/jquery.js"), __webpack_require__(/*! moment */ "../node_modules/moment/moment.js")))
 

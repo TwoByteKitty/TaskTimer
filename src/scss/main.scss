@@ -3,3 +3,13 @@
 @import 'layout/header';
 
 @import 'layout/timer';
+
+@import 'layout/taskList';
+
+.button {
+    box-shadow: 2px 3px 5px 3px rgba($dark-gray, 0.5);
+}
+
+#completeTaskBtn {
+    color: $black;
+}

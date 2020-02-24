@@ -70,16 +70,16 @@ $global-font-size: 100%;
 $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
 $foundation-palette: (
-  primary: #3a8aaab0,
-  secondary: #767676,
-  success: #069992,
-  warning: #f5cd4b,
-  alert: #bd408de8,
+  primary: #7D6DAD,
+  secondary: rgb(103, 96, 124),
+  success: #07BB9C,
+  warning: #EFDCF9,
+  alert: #BB2684,
 );
-$light-gray: #e6e6e6;
-$medium-gray: #cacaca;
-$dark-gray: #8a8a8a;
-$black: #0a0a0a;
+$light-gray: #E4E2EA;
+$medium-gray: #9A9EAB;
+$dark-gray: rgb(56, 59, 65);
+$black: rgb(0, 0, 0);
 $white: #fefefe;
 $body-background: $white;
 $body-font-color: $black;
@@ -287,13 +287,13 @@ $button-background: $primary-color;
 $button-background-hover: scale-color($button-background, $lightness: -15%);
 $button-color: $white;
 $button-color-alt: $black;
-$button-radius: $global-radius;
-$button-hollow-border-width: 1px;
+$button-radius: $global-radius + 10px;
+$button-hollow-border-width: 2px;
 $button-sizes: (
   tiny: 0.6rem,
   small: 0.75rem,
   default: 0.9rem,
-  large: 1.25rem,
+  large: 1.5rem,
 );
 $button-palette: $foundation-palette;
 $button-opacity-disabled: 0.25;
@@ -305,8 +305,8 @@ $button-responsive-expanded: false;
 // 12. Button Group
 // ----------------
 
-$buttongroup-margin: 1rem;
-$buttongroup-spacing: 1px;
+$buttongroup-margin: 10rem;
+$buttongroup-spacing: 25px;
 $buttongroup-child-selector: '.button';
 $buttongroup-expand-max: 6;
 $buttongroup-radius-on-each: true;
@@ -331,7 +331,7 @@ $card-background: $white;
 $card-font-color: $body-font-color;
 $card-divider-background: $light-gray;
 $card-border: 1px solid $light-gray;
-$card-shadow: none;
+$card-shadow: 10px 10px 7px 5px rgba($black, 0.5);
 $card-border-radius: $global-radius;
 $card-padding: $global-padding;
 $card-margin-bottom: $global-margin;
@@ -502,7 +502,7 @@ $offcanvas-vertical-sizes: (
   small: 250px,
 );
 $offcanvas-background: $light-gray;
-$offcanvas-shadow: 0 0 10px rgba($black, 0.7);
+$offcanvas-shadow: 10px 10px 8px 10px rgba($black, 0.7);
 $offcanvas-inner-shadow-size: 20px;
 $offcanvas-inner-shadow-color: rgba($black, 0.25);
 $offcanvas-overlay-zindex: 11;
@@ -757,7 +757,7 @@ $slider-radius: $global-radius;
 // ----------
 
 $switch-background: $dark-gray;
-$switch-background-active: $success-color;
+$switch-background-active: $alert-color;
 $switch-height: 2.5rem;
 $switch-height-tiny: 1.5rem;
 $switch-height-small: 1.75rem;
