@@ -1,0 +1,31 @@
+<div class="grid-x container-full">
+    <div class="cell small-12">
+        <label>Work Timer
+            <input type="number" aria-describedby="workTimerHelpText">
+        </label>
+        <p class="help-text" id="workTimerHelpText">Choose a duration for your work timer in minutes. Minimum 10
+            minutes, maximum 120 minutes.</p>
+    </div>
+    <div class="cell small-12">
+        <label>Rest Timer
+            <input type="number" aria-describedby="restTimerHelpText">
+        </label>
+        <p class="help-text" id="restTimerHelpText">Choose a duration for your rest timer in minutes. Minimum 5
+            minutes, maximum 30 minutes.</p>
+    </div>
+    <div class="cell small-12">
+        <label for="volSlider">Volume
+            <div class="slider" data-slider data-initial-start="50" data-end="100" id="volSlider">
+                <span class="slider-handle" data-slider-handle role="slider" tabindex="1"></span>
+                <span class="slider-fill" data-slider-fill></span>
+                <input type="hidden">
+            </div>
+        </label>
+    </div>
+    <fieldset class="small-12 cell fieldset">
+        <legend>Choose Your Alarm Sound</legend>
+        <input type="radio" name="alarm" value="Red" id="alarmRed" required><label for="alarmRed">Red</label>
+        <input type="radio" name="alarm" value="Blue" id="alarmBlue"><label for="alarmBlue">Blue</label>
+        <input type="radio" name="alarm" value="Yellow" id="alarmYellow"><label for="alarmYellow">Yellow</label>
+    </fieldset>
+</div>

@@ -5087,7 +5087,7 @@ html.is-reveal-open {
   background-color: #383b41; }
 
 .headerBtn {
-  color: rgba(0, 0, 0, 0.7);
+  color: black;
   background-color: #BB2684;
   border-radius: 2500px;
   padding: 25px;
