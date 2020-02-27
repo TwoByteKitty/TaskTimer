@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 
-router.get('/tasks', function(req, res, next) {
-  res.render('tasks', {page: "tasks"});
+router.get('/create', function(req, res, next) {
+  res.render('createOrEditTasks');
 });
 
 module.exports = router;

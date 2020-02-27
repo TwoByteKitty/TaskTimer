@@ -7,8 +7,8 @@ function generateNewTaskMarkup() {
     const date = moment().format('LLL');
     const description = document.getElementById("taskDescrInput").value;
     //get the priority level from fieldset. use it to apply a class to "card" div, used to style color
-    const priorityLvl;
-    //plug the above values into the template, render to taskList.
+    const priorityLvl = mediumPri;
+    //plug the above values into the template, render to taskList inside #tasksContainer.
     const taskCardTemplate = ` 
 <div class="cell small-12">
     <div class="card ${priorityLvl}" style="width: 100%;">
@@ -24,6 +24,7 @@ function generateNewTaskMarkup() {
         <div class="card-section">
             <button class="button large" id="setTaskActive">Set As Active</button>
             <button class="button large" id="markTaskCompl">Mark Complete</button>
+            <button class="button large" id="editTask">Edit</button>
         </div>
     </div>
 </div>

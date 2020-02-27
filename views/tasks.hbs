@@ -1,1 +1,11 @@
-<h1>Task Management Page</h1>
+<div class="grid-x container-full">
+    <div class="cell">
+        <button class="button large expanded">Create a New Task!</button>
+    </div>
+    <div class="cell">
+        {{> taskList page }}
+    </div>
+    <div class="cell">
+        {{> completedTasks }}
+    </div>
+</div>
