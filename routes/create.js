@@ -1,9 +1,26 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const tasksModel = require('../models/tasksModel');
 
 
-router.get('/create', function(req, res, next) {
-  res.render('createOrEditTasks');
+router.get('/create', function (req, res, next) {
+  res.render('createOrEditTask');
+});
+
+router.post('/create', function (req, res, next) {
+  const task = new tasksModel({ ...req.body });
+
+  task.save(function (err, task) {
+    if (err) {
+      return res.status(500).json({
+        message: 'Error when creating task',
+        error: err
+      });
+    }
+    res.redirect('/')
+  });
+
+
 });
 
 module.exports = router;

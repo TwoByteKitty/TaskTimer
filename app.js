@@ -1,15 +1,18 @@
-var createError = require('http-errors');
-var express = require('express');
+const createError = require('http-errors');
+const express = require('express');
 const exphbs = require('express-handlebars');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const mongoose = require("mongoose");
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const tasksRouter = require('./routes/tasks');
+const createRouter = require('./routes/create');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var tasksRouter = require('./routes/tasks');
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/taskTracker", { useNewUrlParser: true });
 
-var app = express();
+const app = express();
 
 // Register Handlebars view engine
 app.engine('.hbs', exphbs({defaultLayout: 'main', extname: '.hbs'}));
@@ -18,13 +21,14 @@ app.set('view engine', '.hbs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/tasks', tasksRouter);
+app.use(createRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
