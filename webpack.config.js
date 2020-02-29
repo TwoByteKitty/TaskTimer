@@ -22,7 +22,9 @@ module.exports = {
     })
   ],
   entry: {
-    'app.build': './js/index.js'
+    'global.build' : './js/global.js',
+    'home-page.build': './js/home-page.js',
+    'task-page.build':'./js/task-page.js'
   },
   output: {
     filename: 'js/[name].js',

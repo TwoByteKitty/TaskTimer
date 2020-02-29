@@ -1,4 +1,11 @@
-<form name="task" action="/create" method="POST">
+
+{{JSON task}}
+<!-- 
+    TODO: Need to Bind task fields to appropriate inputs for edit. 
+    TODO: Need to change action URL if task exists = /task/[id]
+    TODO: Need to change method to PUT if task exists
+    -->
+<form name="task" action="/tasks/create" method="POST">
     <div class="grid-x">
         <div class="cell">
             <div class="input-group">
@@ -29,3 +36,4 @@
         </div>
     </div>
 </form>
+<script type="text/javascript" src="/js/task-page.build.js"></script>

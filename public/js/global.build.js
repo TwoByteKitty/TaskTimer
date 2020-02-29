@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./js/index.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./js/global.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -54747,10 +54747,49 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./js/fontawesome.js":
-/*!***************************!*\
-  !*** ./js/fontawesome.js ***!
-  \***************************/
+/***/ "./js/components/header.js":
+/*!*********************************!*\
+  !*** ./js/components/header.js ***!
+  \*********************************/
+/*! exports provided: initHeader */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(moment, $) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initHeader", function() { return initHeader; });
+function timer(timeEl) {
+  setInterval(() => {
+    let currentDateAndTime = moment().format('LLLL');
+    timeEl.html(currentDateAndTime);
+  }, 10000);
+}
+
+function initHeader(user) {
+  let userGreeting = '';
+  const greetingMsgEl = $('#greeting');
+  const dateAndTimeEl = $('#headDateTime'); // Done on the server in handlebars now.
+
+  /* 
+  if (user) {
+         userGreeting = `Welcome, ${user.name}!`
+     } else {
+         userGreeting = "Welcome, New User!"
+     };
+    
+    greetingMsgEl.text(userGreeting);
+    */
+
+  dateAndTimeEl.text(moment().format('LLLL'));
+  timer(dateAndTimeEl);
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! moment */ "../node_modules/moment/moment.js"), __webpack_require__(/*! jquery */ "../node_modules/jquery/dist/jquery.js")))
+
+/***/ }),
+
+/***/ "./js/configs/fontawesome.js":
+/*!***********************************!*\
+  !*** ./js/configs/fontawesome.js ***!
+  \***********************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -54761,7 +54800,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/free-regular-svg-icons */ "../node_modules/@fortawesome/free-regular-svg-icons/index.es.js");
 /* harmony import */ var _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/free-brands-svg-icons */ "../node_modules/@fortawesome/free-brands-svg-icons/index.es.js");
 /**
- * @fileoverview Font Awesome 5
+ * @fileoverview This is the font awesome conguration. 
  * @link https://fontawesome.com/how-to-use/with-the-api/
  */
  // Solid
@@ -54790,49 +54829,10 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
 /***/ }),
 
-/***/ "./js/header.js":
+/***/ "./js/global.js":
 /*!**********************!*\
-  !*** ./js/header.js ***!
+  !*** ./js/global.js ***!
   \**********************/
-/*! exports provided: initHeader */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(moment, $) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initHeader", function() { return initHeader; });
-let userName;
-
-function timer(timeEl) {
-  setInterval(() => {
-    let currentDateAndTime = moment().format('LLLL');
-    timeEl.html(currentDateAndTime);
-  }, 10000);
-}
-
-function initHeader(user) {
-  let userGreeting = "";
-  const greetingMsgEl = $("#greeting");
-  const dateAndTimeEl = $("#headDateTime");
-
-  if (user) {
-    userGreeting = `Welcome, ${user.name}!`;
-  } else {
-    userGreeting = "Welcome, New User!";
-  }
-
-  ;
-  greetingMsgEl.text(userGreeting);
-  dateAndTimeEl.text(moment().format('LLLL'));
-  timer(dateAndTimeEl);
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! moment */ "../node_modules/moment/moment.js"), __webpack_require__(/*! jquery */ "../node_modules/jquery/dist/jquery.js")))
-
-/***/ }),
-
-/***/ "./js/index.js":
-/*!*********************!*\
-  !*** ./js/index.js ***!
-  \*********************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -54840,110 +54840,30 @@ function initHeader(user) {
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "../node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
 /* harmony import */ var foundation_sites__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! foundation-sites */ "../node_modules/foundation-sites/dist/js/foundation.esm.js");
-/* harmony import */ var _fontawesome__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./fontawesome */ "./js/fontawesome.js");
-/* harmony import */ var _timer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./timer */ "./js/timer.js");
-/* harmony import */ var _header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./header */ "./js/header.js");
-/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../scss/main.scss */ "./scss/main.scss");
-/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_scss_main_scss__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _configs_fontawesome__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./configs/fontawesome */ "./js/configs/fontawesome.js");
+/* harmony import */ var _components_header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/header */ "./js/components/header.js");
+/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../scss/main.scss */ "./scss/main.scss");
+/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_scss_main_scss__WEBPACK_IMPORTED_MODULE_4__);
+/**
+ * This file is where global set up is done. 
+ * Anything that should exist and needs set up on all pages should be handled here.
+ */
 
 
 
 
 
 
-
-function initPg(event) {
-  console.log(event);
-  console.info('Loaded');
+function initGlobals(event) {
   _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["dom"].watch();
-  Object(_header__WEBPACK_IMPORTED_MODULE_4__["initHeader"])();
-  Object(_timer__WEBPACK_IMPORTED_MODULE_3__["initTimer"])();
+  Object(_components_header__WEBPACK_IMPORTED_MODULE_3__["initHeader"])();
   $(document).foundation();
+  console.info('Globals Loaded');
 }
 
 ;
-document.addEventListener('DOMContentLoaded', initPg);
+document.addEventListener('DOMContentLoaded', initGlobals);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "../node_modules/jquery/dist/jquery.js")))
-
-/***/ }),
-
-/***/ "./js/timer.js":
-/*!*********************!*\
-  !*** ./js/timer.js ***!
-  \*********************/
-/*! exports provided: initTimer, startTimer, pauseTimer */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function($, moment) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initTimer", function() { return initTimer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startTimer", function() { return startTimer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pauseTimer", function() { return pauseTimer; });
-const PLAYBTN = document.getElementById("startTimerBtn");
-const PAUSEBTN = document.getElementById("pauseTimerBtn");
-const $TIMER_MINUTES = $('.timer-group .timer.minute .hand span');
-const $TIMER_SECONDS = $('.timer-group .timer.second .hand span');
-const $FACE = $('#timeDisplay');
-const TIMER_TOGGLE = document.getElementById('workOrRest');
-const DEFAULTS = {
-  timer: undefined,
-  typeOfTimer: "work",
-  workTime: 2,
-  breakTime: 1
-};
-let timerInterval = undefined;
-let settings = {};
-
-function runTimer() {
-  settings.timer.subtract(1000, 'ms');
-
-  if (settings.timer.asMilliseconds() < 1) {
-    clearInterval(timerInterval);
-    $FACE.text(`Time's Up!!`);
-    return;
-  }
-
-  $FACE.text(`${settings.timer.minutes() > 0 ? settings.timer.minutes() + ' : ' : ''}
-    ${settings.timer.seconds() < 10 ? '0' + settings.timer.seconds() : settings.timer.seconds()}`);
-}
-
-function initTimer(options = {}) {
-  let minutes;
-  settings = Object.assign(DEFAULTS, options);
-
-  if (settings.typeOfTimer === "work") {
-    minutes = settings.workTime;
-  } else {
-    minutes = settings.breakTime;
-  }
-
-  settings.timer = moment.duration(minutes, 'minutes');
-  PLAYBTN.addEventListener("click", startTimer);
-  PAUSEBTN.addEventListener("click", pauseTimer);
-}
-;
-function startTimer() {
-  timerInterval = setInterval(runTimer, 1000);
-  $TIMER_MINUTES.css({
-    'animation-duration': `${settings.timer.asSeconds()}s`,
-    'animation-play-state': 'running'
-  });
-  $TIMER_SECONDS.css({
-    'animation-iteration-count': `${settings.timer.asSeconds()}`,
-    'animation-duration': '1000ms',
-    'animation-play-state': 'running'
-  });
-}
-function pauseTimer() {
-  clearInterval(timerInterval);
-  $TIMER_MINUTES.css({
-    'animation-play-state': 'paused'
-  });
-  $TIMER_SECONDS.css({
-    'animation-play-state': 'paused'
-  });
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "../node_modules/jquery/dist/jquery.js"), __webpack_require__(/*! moment */ "../node_modules/moment/moment.js")))
 
 /***/ }),
 
@@ -54959,4 +54879,4 @@ function pauseTimer() {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.build.js.map
+//# sourceMappingURL=global.build.js.map

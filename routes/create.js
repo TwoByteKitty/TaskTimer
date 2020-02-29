@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const tasksModel = require('../models/tasksModel');
 
-
+//If the tasks/* structure makes sense you dont need this.
 router.get('/create', function (req, res, next) {
   res.render('createOrEditTask');
 });
@@ -19,8 +19,6 @@ router.post('/create', function (req, res, next) {
     }
     res.redirect('/')
   });
-
-
 });
 
 module.exports = router;

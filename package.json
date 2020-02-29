@@ -6,7 +6,7 @@
   "scripts": {
     "watch-client": "webpack --watch --progress",
     "watch-server": "nodemon ./bin/www",
-    "watch-dev": "npm-run-all --parallel watch-server watch-client",
+    "watch-dev": "set DEBUG=express-api:server & npm-run-all --parallel watch-server watch-client",
     "build-client": "webpack",
     "start-server": "node ./bin/www"
   },

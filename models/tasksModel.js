@@ -8,4 +8,4 @@ var taskSchema = new Schema({
     'dateCreated' : String
 });
 
-module.exports = mongoose.model('taskSchema', taskSchema);
+module.exports = mongoose.model('tasks', taskSchema);
