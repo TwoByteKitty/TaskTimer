@@ -17,29 +17,36 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/taskTracker", {
 const app = express();
 
 // Register Handlebars view engine
-app.engine('.hbs', exphbs({defaultLayout: 'main', extname: '.hbs'}));
+app.engine('.hbs', exphbs({
+  defaultLayout: 'main',
+  extname: '.hbs',
+  helpers: {
+    json: obj => JSON.stringify(obj),
+    equals: (val1, val2) => val1 === val2//This is a helper to see an object as a string on the page from handlebars.
+  }
+}));
 //Use handlebars view engine
 app.set('view engine', '.hbs');
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/tasks', tasksRouter);
-//If the tasks/* structure makes sense you dont need this.
-//app.use(createRouter);
+
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

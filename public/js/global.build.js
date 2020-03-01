@@ -54765,20 +54765,7 @@ function timer(timeEl) {
 }
 
 function initHeader(user) {
-  let userGreeting = '';
-  const greetingMsgEl = $('#greeting');
-  const dateAndTimeEl = $('#headDateTime'); // Done on the server in handlebars now.
-
-  /* 
-  if (user) {
-         userGreeting = `Welcome, ${user.name}!`
-     } else {
-         userGreeting = "Welcome, New User!"
-     };
-    
-    greetingMsgEl.text(userGreeting);
-    */
-
+  const dateAndTimeEl = $('#headDateTime');
   dateAndTimeEl.text(moment().format('LLLL'));
   timer(dateAndTimeEl);
 }

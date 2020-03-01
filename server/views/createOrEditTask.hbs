@@ -1,0 +1,41 @@
+<form class="creTskFrmEl" name="task" action="/tasks/{{#if task}}{{task._id}}{{else}}create{{/if}}"
+    method="{{#if task}}PUT{{else}}POST{{/if}}">
+    <div class="grid-x grid-margin-x grid-padding-x creTskGrdEl">
+        <div class="cell">
+            <div class="input-group">
+                <span class="input-group-label">Title</span>
+                <input class="input-group-field" type="text" name="title" id="taskTitleInput" value={{task.title}}>
+            </div>
+        </div>
+        <div class="cell">
+            <div class="input-group">
+                <span class="input-group-label">Description</span>
+                <input class="input-group-field" type="text" name="description" id="taskDescrInput"
+                    value="{{task.description}}">
+            </div>
+        </div>
+        <div class="cell">
+            <fieldset class="fieldset" id="taskPriorityFieldset">
+                <legend>Choose a Priority Level</legend>
+                <input id="priLvlVyLow" type="radio" name="priorityLvl" value="1" {{#if (equals task.priorityLvl 1)}}
+                    checked {{/if}}><label for="priLvlVyLow">Very
+                    Low</label>
+                <input id="priLvlLow" type="radio" name="priorityLvl" value="2" {{#if (equals task.priorityLvl 2)}}
+                    checked {{/if}}><label for="priLvlLow">Low</label>
+                <input id="priLvlMed" type="radio" name="priorityLvl" value="3" {{#if (equals task.priorityLvl 3)}}
+                    checked {{/if}}><label for="priLvlMed">Medium</label>
+                <input id="priLvlHigh" type="radio" name="priorityLvl" value="4" {{#if (equals task.priorityLvl 4)}}
+                    checked {{/if}}><label for="priLvlHigh">High</label>
+                <input id="priLvlUrg" type="radio" name="priorityLvl" value="5" {{#if (equals task.priorityLvl 5)}}
+                    checked {{/if}}><label for="priLvlUrg">Urgent</label>
+            </fieldset>
+        </div>
+        {{#unless task}}
+        <input type="hidden" id="dateTaskCreated" name="dateCreated"></input>
+        {{/unless}}
+        <div class="cell">
+            <button class="button large" type="submit" id="createTaskBtn">Create</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript" src="/js/task-page.build.js"></script>

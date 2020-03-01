@@ -5082,20 +5082,17 @@ html.is-reveal-open {
 .header {
   background-color: black;
   box-shadow: 0 0 10px 5px rgba(56, 59, 65, 0.5); }
-
-.subHeader {
-  background-color: #383b41; }
-
-.headerBtn {
-  color: black;
-  background-color: #BB2684;
-  border-radius: 2500px;
-  padding: 25px;
-  margin: 0 15px;
-  box-shadow: 7px 7px 9px rgba(0, 0, 0, 0.7) !important; }
-
-.headWelcome {
-  color: #E4E2EA !important; }
+  .header .subHeader {
+    background-color: #383b41; }
+    .header .subHeader .headerBtn {
+      color: black;
+      background-color: #BB2684;
+      border-radius: 2500px;
+      padding: 25px;
+      margin: 0 15px;
+      box-shadow: 7px 7px 9px rgba(0, 0, 0, 0.7) !important; }
+  .header .headWelcome {
+    color: #E4E2EA !important; }
 
 @-webkit-keyframes spin1 {
   0% {
@@ -5284,9 +5281,6 @@ html.is-reveal-open {
 
 .button {
   box-shadow: 2px 3px 5px 3px rgba(56, 59, 65, 0.5); }
-
-#completeTaskBtn {
-  color: black; }
 
 
 /*# sourceMappingURL=main.css.map*/

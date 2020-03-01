@@ -1,0 +1,193 @@
+$timer-outer-height: 400px;
+$timer-outer-width: 400px;
+
+$hand-background-color-hour: rgba(0, 0, 0, 0.3);
+$hand-border-color-hour: #BB2684;
+
+$hand-background-color-minute: rgba(0, 0, 0, 0.2);
+$hand-border-color-minute: #07BB9C;
+
+$hand-background-color-second: rgba(0, 0, 0, 0.1);
+$hand-border-color-second: #7D6DAD;
+
+$duration-hour: 3600s;
+$duration-minute: 60s;
+$duration-second: 1s;
+
+@keyframes spin1 {
+  0% {
+    transform: rotate(405deg);
+  }
+  50% {
+    transform: rotate(225deg);
+  }
+  100% {
+    transform: rotate(225deg);
+  }
+}
+
+@keyframes spin2 {
+  0% {
+    transform: rotate(405deg);
+  }
+  50% {
+    transform: rotate(405deg);
+  }
+  100% {
+    transform: rotate(225deg);
+  }
+}
+
+.timer-group {
+  height: $timer-outer-height;
+  margin: 0 auto;
+  position: relative;
+  width: $timer-outer-width;
+
+  .timer {
+    border-radius: 50%;
+    height: 100px;
+    overflow: hidden;
+    position: absolute;
+    width: 100px;
+    &:after {
+      background: #111;
+      border-radius: 50%;
+      content: '';
+      display: block;
+      height: 80px;
+      left: 10px;
+      position: absolute;
+      width: 80px;
+      top: 10px;
+    }
+    .hand {
+      float: left;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+      width: 50%;
+      &:first-child {
+        transform: rotate(180deg);
+        span {
+          animation-name: spin1;
+        }
+      }
+      &:last-child span {
+        animation-name: spin2;
+      }
+      span {
+        animation-timing-function: linear;
+        border-style: solid;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+        border-radius: 50%;
+        display: block;
+        height: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transform: rotate(225deg);
+        width: 0;
+      }
+    }
+    &.hour {
+      background: $hand-background-color-hour;
+      height: $timer-outer-height;
+      left: 0;
+      width: $timer-outer-width;
+      top: 0;
+      &:after {
+        height: 360px;
+        left: 20px;
+        width: 360px;
+        top: 20px;
+      }
+      .hand span {
+        animation-duration: $duration-hour;
+        border-top-color: $hand-border-color-hour;
+        border-right-color: $hand-border-color-hour;
+        border-width: 200px;
+      }
+    }
+    &.minute {
+      background: $hand-background-color-minute;
+      height: 350px;
+      left: 25px;
+      width: 350px;
+      top: 25px;
+      &:after {
+        height: 310px;
+        left: 20px;
+        width: 310px;
+        top: 20px;
+      }
+      .hand span {
+        //animation-iteration-count: 1;
+        //animation-duration: $duration-minute;
+        border-top-color: $hand-border-color-minute;
+        border-right-color: $hand-border-color-minute;
+        border-width: 175px;
+      }
+    }
+    &.second {
+      background: $hand-background-color-second;
+      height: 300px;
+      left: 50px;
+      width: 300px;
+      top: 50px;
+      &:after {
+        height: 296px;
+        left: 2px;
+        width: 296px;
+        top: 2px;
+      }
+      .hand span {
+        //animation-iteration-count: infinite;
+        //animation-duration: $duration-second;
+        border-top-color: $hand-border-color-second;
+        border-right-color: $hand-border-color-second;
+        border-width: 150px;
+      }
+    }
+  }
+
+  .face {
+    font-family: 'Yanone Kaffeesatz';
+    color: whitesmoke;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    height: 296px;
+    left: 52px;
+    padding: 165px 40px 0;
+    position: absolute;
+    width: 296px;
+    text-align: center;
+    top: 52px;
+    h2 {
+      font-family: 'Yanone Kaffeesatz' !important;
+      font-weight: 300;
+      margin-top: 38px;
+    }
+    p {
+      border-radius: 20px;
+      font-size: 76px;
+      font-weight: 400;
+      position: absolute;
+      top: 40px;
+      width: 260px;
+      left: 20px;
+    }
+  }
+}
+
+.timerCtrl {
+  padding: 30px 50px;
+  margin: 30px 0;
+  color: $black !important;
+
+}
+#timerCell {
+  margin-bottom: 30px;
+}
+

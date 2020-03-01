@@ -6,7 +6,7 @@ module.exports = {
   target: 'web',
   mode: 'development',
   devtool: 'sourcemap',
-  context: path.resolve(__dirname, './src'),
+  context: path.resolve(__dirname, './client'),
   plugins: [
     new webpack.ProgressPlugin(),
     new MiniCssExtractPlugin({
