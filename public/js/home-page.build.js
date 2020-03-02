@@ -28334,6 +28334,56 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./js/components/task.js":
+/*!*******************************!*\
+  !*** ./js/components/task.js ***!
+  \*******************************/
+/*! exports provided: initTaskList, initTaskCreate */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function($, moment) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initTaskList", function() { return initTaskList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initTaskCreate", function() { return initTaskCreate; });
+function setActiveTask(event) {
+  console.log(event);
+  $.ajax({
+    method: "PUT",
+    url: `/tasks/api/setactive/${event.currentTarget.dataset.taskId}`
+  }).done(task => {
+    console.log(task);
+    $(event.currentTarget).attr("disabled", true);
+    $("#activeTitleDisp").text(task.title);
+  });
+}
+
+;
+
+function completeTask(event) {
+  console.log(event);
+  $.ajax({
+    method: "PUT",
+    url: `/tasks/api/complete/${event.currentTarget.dataset.taskId}`
+  }).done(task => {
+    console.log(task);
+    $(`#${event.currentTarget.dataset.taskId}`).addClass("hide");
+  });
+}
+
+;
+function initTaskList() {
+  $(".markActiveBtn").on("click", setActiveTask);
+  $(".markComplBtn").on("click", completeTask);
+}
+;
+function initTaskCreate() {
+  document.getElementById("dateTaskCreated").value = moment().format('LLLL');
+}
+;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "../node_modules/jquery/dist/jquery.js"), __webpack_require__(/*! moment */ "../node_modules/moment/moment.js")))
+
+/***/ }),
+
 /***/ "./js/components/timer.js":
 /*!********************************!*\
   !*** ./js/components/timer.js ***!
@@ -28424,14 +28474,17 @@ function pauseTimer() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_timer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/timer */ "./js/components/timer.js");
+/* harmony import */ var _components_task__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/task */ "./js/components/task.js");
 /**
  * This file is where home-page set up is done. 
  * Anything that should exist and needs set up on the home page should be handled here.
  */
 
 
+
 function initPage(event) {
   Object(_components_timer__WEBPACK_IMPORTED_MODULE_0__["initTimer"])();
+  Object(_components_task__WEBPACK_IMPORTED_MODULE_1__["initTaskList"])();
   console.info('Page Loaded');
 }
 

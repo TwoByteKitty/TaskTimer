@@ -1,19 +1,18 @@
-{{ json this }}
-<div class="grid-x container-full align-center-middle text-center" id="currentTaskGrid">
+<div class="grid-x container-full align-center-middle text-center">
     <div class="cell small-12">
         <div class="card" style="width: 100%;">
             <div class="card-section">
                 <h4 class="text-center">Current Task:</h4>
             </div>
             <div class="card-divider text-center">
-                <h5 style="text-align: center; width: 100%;">Pet Fuzzy Kitties</h5>
+                <h5 id="activeTitleDisp" style="text-align: center; width: 100%;">{{activeTitle}}</h5>
             </div>
         </div>
     </div>
 
     <div class="cell small-12">
         <hr>
-        <div class="grid-x container-full align-center-middle text-center" id="pendingTasksGrid">
+        <div class="grid-x container-full align-center-middle text-center">
             <div class="cell small-12">
                 <h2>Pending Tasks</h2>
                 {{@exphbs.view}}
@@ -26,53 +25,36 @@
                 {{/if}}
                 <a href="/tasks/create" class="button large">Create Tasks</a>
             </div>
-            <div class="grid-x container-full align-center-middle" id="tasksContainer">
-                {{#each this}}
-                <div class="cell small-12">
-                    <div class="card {{ priorityLvl }}" style="width: 100%;">
-                        <div class="card-divider">
-                            <h5 class="text-center" id="taskTitle"> {{ title }} </h5>
-                        </div>
-                        <div class="card-section">
-                            <p id="taskStartDate"> {{ dateCreated }} </p>
-                        </div>
-                        <div class="card-section">
-                            <p id="taskDesc"> {{ description }} </p>
-                        </div>
-                        <div class="card-section">
+            {{!-- <div class="grid-x container-full align-center-middle"> --}}
+            {{#each tasks}}
+            <div id="{{_id}}" class="cell small-12">
+                <div class="card {{ priorityLvl }}" style="width: 100%;">
+                    <div class="card-divider">
+                        <h5 class="text-center"> {{ title }} </h5>
+                    </div>
+                    <div class="card-section">
+                        <p> {{ dateCreated }} </p>
+                    </div>
+                    <div class="card-section">
+                        <p> {{ description }} </p>
+                    </div>
+                    <div class="card-section">
+                        <div>
                             {{#if (equals @exphbs.view "home")}}
-                            <button class="button large" id="setTaskActive" type="button">Set As Active</button>
-                            <button class="button large" id="markTaskCompl" type="button">Mark Complete</button>
+                            <button class="button large markActiveBtn" type="button" {{#if active}} disabled {{/if}} data-task-id="{{_id}}">Set As
+                                Active</button>
+                            <button class="button large markComplBtn" type="button" data-task-id="{{_id}}">Mark
+                                Complete</button>
                             {{else}}
-                            <a href="/tasks/{{_id}}" class="button large" id="editTask">Edit</a>
+                            <a href="/tasks/{{_id}}" class="button large">Edit</a>
                             {{/if}}
                         </div>
                     </div>
                 </div>
-                {{/each}}
             </div>
-            {{!-- <div class="cell small-12">
-                <div class="card" style="width: 100%;">
-                    <div class="card-divider">
-                        <h5 class="text-center" id="taskTitle">Title: Existential Crisis No. 407</h5>
-                    </div>
-                    <div class="card-section">
-                        <p id="taskStartDate">Date Entered: 06/15/2019</p>
-                    </div>
-                    <div class="card-section">
-                        <p id="taskDesc">Contemplate the futility of contemplation</p>
-                    </div>
-                    <div class="card-section">
-                        <button class="button large" id="setTaskActive">Set As Active</button>
-                        <button class="button large" id="markTaskCompl">Mark Complete</button>
-                        <button class="button large" id="editTask">Edit</button>
-                    </div>
-                </div>
-            </div> --}}
+            {{/each}}
+            {{!-- </div> --}}
         </div>
     </div>
-    <div class="cell">
-        <!-- link/button to different page? just a section of this pg? searchable?-->
-        completed tasks
-    </div>
+
 </div>

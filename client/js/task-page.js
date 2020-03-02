@@ -1,9 +1,7 @@
-/**
- * This file is where task-page set up is done. 
- * Anything that should exist and needs set up on the task create/edit page should be handled here.
- */
+import {initTaskCreate} from "./components/task";
 
-function initPg(event) {
+function initPage(event) {
+  initTaskCreate();
   console.info('Page Loaded');
 }
 

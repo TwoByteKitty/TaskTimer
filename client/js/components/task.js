@@ -1,33 +1,28 @@
-
-
-//this should happen when create btn is clicked
-function generateNewTaskMarkup() {
-    const title = document.getElementById("taskTitleInput").value;
-    //get the current date when task is created
-    const date = moment().format('LLL');
-    const description = document.getElementById("taskDescrInput").value;
-    //get the priority level from fieldset. use it to apply a class to "card" div, used to style color
-    const priorityLvl = mediumPri;
-    //plug the above values into the template, render to taskList inside #tasksContainer.
-    const taskCardTemplate = ` 
-<div class="cell small-12">
-    <div class="card ${priorityLvl}" style="width: 100%;">
-        <div class="card-divider">
-            <h5 class="text-center" id="taskTitle"> ${title} </h5>
-        </div>
-        <div class="card-section">
-            <p id="taskStartDate"> ${date} </p>
-        </div>
-        <div class="card-section">
-            <p id="taskDesc"> ${description} </p>
-        </div>
-        <div class="card-section">
-            <button class="button large" id="setTaskActive">Set As Active</button>
-            <button class="button large" id="markTaskCompl">Mark Complete</button>
-            <button class="button large" id="editTask">Edit</button>
-        </div>
-    </div>
-</div>
-`
-return taskCardTemplate
+function setActiveTask(event) {
+    console.log(event);
+    $.ajax({method: "PUT", url: `/tasks/api/setactive/${event.currentTarget.dataset.taskId}`})
+    .done((task) => {
+        console.log(task);
+        $(event.currentTarget).attr("disabled", true);
+        $("#activeTitleDisp").text(task.title);
+    })
 };
+
+function completeTask(event) {
+    console.log(event);
+    $.ajax({method: "PUT", url: `/tasks/api/complete/${event.currentTarget.dataset.taskId}`})
+    .done((task) => {
+        console.log(task);
+        $(`#${event.currentTarget.dataset.taskId}`).addClass("hide")
+    })
+};
+
+export function initTaskList(){
+    $(".markActiveBtn").on("click", setActiveTask)
+    $(".markComplBtn").on("click", completeTask)
+};
+
+export function initTaskCreate() {
+document.getElementById("dateTaskCreated").value = moment().format('LLLL');
+};
+

@@ -7,13 +7,16 @@ router.get('/', function (req, res, next) {
   //Once passport is set up, the user will just be available
   req.user = { name: 'User McUserson' };
   tasksModel.find({}).lean().exec((err, foundTasks) => {
-    const foundTaskArr = Array.from(foundTasks);
-    res.render('tasks', { 
+    const activeTitle = foundTasks.find(task => task.active).title;
+    res.render('tasks', {
       user: req.user,
-      tasks: foundTaskArr
+      taskData: {
+        tasks: foundTasks,
+        activeTitle
+      }
     });
   })
-  
+
 });
 
 //Get Create View
@@ -60,6 +63,42 @@ router.put('/:id', function (req, res, next) {
       });
     }
     res.redirect('/');
+  });
+});
+
+//set task active
+router.put('/api/setactive/:id', function (req, res, next) {
+  tasksModel.findOneAndUpdate({ active: true }, { active: false }, { new: true }, (err, task) => {
+    if (err) {
+      return res.status(500).json({
+        message: 'Error when updating active status',
+        error: err
+      });
+    }
+    console.log(task)
+    tasksModel.findByIdAndUpdate(req.params.id, { active: true }, { new: true }, (err, task) => {
+      if (err) {
+        return res.status(500).json({
+          message: 'Error when setting to active',
+          error: err
+        });
+      }
+      res.json(task);
+    });
+  });
+
+});
+
+//mark task complete
+router.put('/api/complete/:id', function (req, res, next) {
+  tasksModel.findByIdAndUpdate(req.params.id, { completed: true }, { new: true }, (err, task) => {
+    if (err) {
+      return res.status(500).json({
+        message: 'Error when marking complete',
+        error: err
+      });
+    }
+    res.json(task);
   });
 });
 
