@@ -28388,28 +28388,47 @@ function initTaskCreate() {
 /*!********************************!*\
   !*** ./js/components/timer.js ***!
   \********************************/
-/*! exports provided: initTimer, startTimer, pauseTimer */
+/*! exports provided: startTimer, pauseTimer, initTimer, pauseTimer2, initTimer2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function($, moment) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initTimer", function() { return initTimer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startTimer", function() { return startTimer; });
+/* WEBPACK VAR INJECTION */(function($, moment) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startTimer", function() { return startTimer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pauseTimer", function() { return pauseTimer; });
-const PLAYBTN = document.getElementById("startTimerBtn");
-const PAUSEBTN = document.getElementById("pauseTimerBtn");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initTimer", function() { return initTimer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pauseTimer2", function() { return pauseTimer2; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initTimer2", function() { return initTimer2; });
+//#region 1st Timer
+const PLAYBTN = document.getElementById('startTimerBtn');
+const PAUSEBTN = document.getElementById('pauseTimerBtn');
 const $TIMER_MINUTES = $('.timer-group .timer.minute .hand span');
 const $TIMER_SECONDS = $('.timer-group .timer.second .hand span');
 const $FACE = $('#timeDisplay');
-const TIMER_TOGGLE = document.getElementById('workOrRest');
+const TIMER_TOGGLE = document.getElementById('workOrRest'); //#endregion
+//#region 2st Timer
+
+const PROGRESS_BAR = document.querySelector('.e-c-progress');
+const indicator = document.getElementById('e-indicator');
+const POINTER = document.getElementById('e-pointer');
+const LENGTH = Math.PI * 2 * 100;
+const DISPLAY_OUTPUT = document.querySelector('.display-remain-time');
+const PAUSE_BTN = document.getElementById('pause');
+const SETTER_BTNS = document.querySelectorAll('button[data-setter]'); //#endregion
+
 const DEFAULTS = {
   timer: undefined,
-  typeOfTimer: "work",
+  typeOfTimer: 'work',
   workTime: 2,
   breakTime: 1
 };
+let intervalTimer;
+let timeLeft;
+let wholeTime; // manage this to set the whole time
+
+let isPaused = false;
+let isStarted = false;
 let timerInterval = undefined;
-let settings = {};
+let settings = {}; //#region 1st Timer
 
 function runTimer() {
   settings.timer.subtract(1000, 'ms');
@@ -28424,21 +28443,6 @@ function runTimer() {
     ${settings.timer.seconds() < 10 ? '0' + settings.timer.seconds() : settings.timer.seconds()}`);
 }
 
-function initTimer(options = {}) {
-  let minutes;
-  settings = Object.assign(DEFAULTS, options);
-
-  if (settings.typeOfTimer === "work") {
-    minutes = settings.workTime;
-  } else {
-    minutes = settings.breakTime;
-  }
-
-  settings.timer = moment.duration(minutes, 'minutes');
-  PLAYBTN.addEventListener("click", startTimer);
-  PAUSEBTN.addEventListener("click", pauseTimer);
-}
-;
 function startTimer() {
   timerInterval = setInterval(runTimer, 1000);
   $TIMER_MINUTES.css({
@@ -28460,6 +28464,128 @@ function pauseTimer() {
     'animation-play-state': 'paused'
   });
 }
+function initTimer(options = {}) {
+  let minutes;
+  settings = Object.assign(DEFAULTS, options);
+
+  if (settings.typeOfTimer === 'work') {
+    minutes = settings.workTime;
+  } else {
+    minutes = settings.breakTime;
+  }
+
+  settings.timer = moment.duration(minutes, 'minutes');
+  PLAYBTN.addEventListener('click', startTimer);
+  PAUSEBTN.addEventListener('click', pauseTimer);
+} //#endregion
+//#region 2nd Timer
+
+function update(value, timePercent) {
+  var offset = -LENGTH - LENGTH * value / timePercent;
+  PROGRESS_BAR.style.strokeDashoffset = offset;
+  POINTER.style.transform = `rotate(${360 * value / timePercent}deg)`;
+}
+
+function changeWholeTime(seconds) {
+  if (wholeTime + seconds > 0) {
+    wholeTime += seconds;
+    update(wholeTime, wholeTime);
+  }
+}
+
+function runTimer2(seconds) {
+  //counts time, takes seconds
+  let remainTime = Date.now() + seconds * 1000;
+  displayTimeLeft(seconds);
+  intervalTimer = setInterval(function () {
+    //timeLeft = Math.round((remainTime - Date.now()) / 1000);
+    settings.timer.subtract(1000, 'ms');
+    timeLeft = settings.timer.asSeconds();
+
+    if (timeLeft < 0) {
+      clearInterval(intervalTimer);
+      isStarted = false;
+      SETTER_BTNS.forEach(function (btn) {
+        btn.disabled = false;
+        btn.style.opacity = 1;
+      });
+      displayTimeLeft(wholeTime);
+      PAUSE_BTN.classList.remove('pause');
+      PAUSE_BTN.classList.add('play');
+      return;
+    }
+
+    displayTimeLeft(timeLeft);
+  }, 1000);
+}
+
+function displayTimeLeft(timeLeft) {
+  //displays time on the input
+  let minutes = Math.floor(timeLeft / 60);
+  let seconds = timeLeft % 60;
+  let displayString = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  const displayString2 = `${settings.timer.minutes() > 0 ? settings.timer.minutes() + ' : ' : ''}
+  ${settings.timer.seconds() < 10 ? '0' + settings.timer.seconds() : settings.timer.seconds()}`;
+  DISPLAY_OUTPUT.textContent = displayString2;
+  update(timeLeft, wholeTime);
+}
+
+function pauseTimer2(event) {
+  if (isStarted === false) {
+    runTimer2(wholeTime);
+    isStarted = true;
+    this.classList.remove('play');
+    this.classList.add('pause');
+    SETTER_BTNS.forEach(function (btn) {
+      btn.disabled = true;
+      btn.style.opacity = 0.5;
+    });
+  } else if (isPaused) {
+    this.classList.remove('play');
+    this.classList.add('pause');
+    runTimer2(timeLeft);
+    isPaused = isPaused ? false : true;
+  } else {
+    this.classList.remove('pause');
+    this.classList.add('play');
+    clearInterval(intervalTimer);
+    isPaused = isPaused ? false : true;
+  }
+}
+function initTimer2(options = {}) {
+  PROGRESS_BAR.style.strokeDasharray = LENGTH;
+  wholeTime = settings.timer.asSeconds();
+  update(wholeTime, wholeTime); //refreshes progress bar
+
+  displayTimeLeft(wholeTime);
+  PAUSE_BTN.addEventListener('click', pauseTimer2);
+
+  for (var i = 0; i < SETTER_BTNS.length; i++) {
+    SETTER_BTNS[i].addEventListener('click', function (event) {
+      var param = this.dataset.setter;
+
+      switch (param) {
+        case 'minutes-plus':
+          changeWholeTime(1 * 60);
+          break;
+
+        case 'minutes-minus':
+          changeWholeTime(-1 * 60);
+          break;
+
+        case 'seconds-plus':
+          changeWholeTime(1);
+          break;
+
+        case 'seconds-minus':
+          changeWholeTime(-1);
+          break;
+      }
+
+      displayTimeLeft(wholeTime);
+    });
+  }
+} //#endregion
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "../node_modules/jquery/dist/jquery.js"), __webpack_require__(/*! moment */ "../node_modules/moment/moment.js")))
 
 /***/ }),
@@ -28476,7 +28602,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_timer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/timer */ "./js/components/timer.js");
 /* harmony import */ var _components_task__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/task */ "./js/components/task.js");
 /**
- * This file is where home-page set up is done. 
+ * This file is where home-page set up is done.
  * Anything that should exist and needs set up on the home page should be handled here.
  */
 
@@ -28484,11 +28610,11 @@ __webpack_require__.r(__webpack_exports__);
 
 function initPage(event) {
   Object(_components_timer__WEBPACK_IMPORTED_MODULE_0__["initTimer"])();
+  Object(_components_timer__WEBPACK_IMPORTED_MODULE_0__["initTimer2"])();
   Object(_components_task__WEBPACK_IMPORTED_MODULE_1__["initTaskList"])();
   console.info('Page Loaded');
 }
 
-;
 document.addEventListener('DOMContentLoaded', initPage);
 
 /***/ })

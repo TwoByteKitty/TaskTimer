@@ -25,6 +25,7 @@
                     <a href="/tasks/create" class="button large">Create Tasks</a>
                 </div>
                 {{!-- pending task cards template/rendering below --}}
+                {{#if tasks}}
                 {{#each tasks}}
                 <div id="{{_id}}" class="cell small-12">
                     <div class="card {{ priorityLvl }}">
@@ -53,6 +54,9 @@
                     </div>
                 </div>
                 {{/each}}
+                {{else}}
+                <h4>No Pending Tasks</h4>
+                {{/if}}
                 {{!-- end of pending tsk template --}}
             </div>
         </div>
