@@ -1,11 +1,11 @@
-<div class="grid-x container-full">
+<div class="grid-x align-center-middle text-center grid-padding-y">
     <div class="cell">
-        <button class="button large expanded">Create a New Task!</button>
+        <h1>Task Management</h1>
     </div>
     <div class="cell">
-        {{> taskList taskData }}
+        {{> taskList pendingTasks }}
     </div>
     <div class="cell">
-        {{> completedTasks }}
+        {{> completedTasks completedTasks }}
     </div>
 </div>

@@ -8,11 +8,16 @@ router.get('/', function (req, res, next) {
   req.user = { name: 'User McUserson' };
   tasksModel.find({}).lean().exec((err, foundTasks) => {
     const activeTitle = foundTasks.find(task => task.active).title;
+    const incompleteTasks = foundTasks.filter(task => !task.completed);
+    const completedTasks = foundTasks.filter(task => task.completed);
     res.render('tasks', {
       user: req.user,
-      taskData: {
-        tasks: foundTasks,
+      pendingTasks: {
+        tasks: incompleteTasks,
         activeTitle
+      },
+      completedTasks: {
+        tasks: completedTasks
       }
     });
   })
@@ -54,7 +59,7 @@ router.get('/:id', function (req, res, next) {
 });
 
 //Send updates back to server to be saved to db
-router.put('/:id', function (req, res, next) {
+router.post('/:id', function (req, res, next) {
   tasksModel.findByIdAndUpdate(req.params.id, { ...req.body }, (err, task) => {
     if (err) {
       return res.status(500).json({

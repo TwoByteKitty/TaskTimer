@@ -1,10 +1,10 @@
 <form class="creTskFrmEl" name="task" action="/tasks/{{#if task}}{{task._id}}{{else}}create{{/if}}"
-    method="{{#if task}}PUT{{else}}POST{{/if}}">
+    method="POST">
     <div class="grid-x grid-margin-x grid-padding-x creTskGrdEl">
         <div class="cell">
             <div class="input-group">
                 <span class="input-group-label">Title</span>
-                <input class="input-group-field" type="text" name="title" id="taskTitleInput" value={{task.title}}>
+                <input class="input-group-field" type="text" name="title" id="taskTitleInput" value="{{task.title}}">
             </div>
         </div>
         <div class="cell">

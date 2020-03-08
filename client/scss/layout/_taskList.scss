@@ -9,3 +9,15 @@
 .tasksBtnsCell {
     margin: 20px
 }
+
+.currentTskCard{
+    background-color: $dark-gray;
+    color: $light-gray;
+    border-color: $black;
+    padding-top: 15px;
+}
+.ctTskCdTitle {
+    background-color: $black;
+    padding: 30px 15px;
+
+}

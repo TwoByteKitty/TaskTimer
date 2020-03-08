@@ -2457,7 +2457,7 @@ a.button:hover, a.button:focus {
   text-decoration: none; }
 
 .button-group {
-  margin-bottom: 10rem;
+  margin-bottom: 3rem;
   display: -webkit-box;
   display: flex;
   flex-wrap: nowrap;
@@ -3071,10 +3071,10 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
   -webkit-box-flex: 1;
           flex-grow: 1;
   margin-bottom: 1rem;
-  border: 1px solid #E4E2EA;
+  border: 3px solid #E4E2EA;
   border-radius: 9px;
   background: #fefefe;
-  box-shadow: 10px 10px 7px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 3px 3px 7px 5px rgba(0, 0, 0, 0.5);
   overflow: hidden;
   color: black; }
   .card > :last-child {
@@ -4236,7 +4236,7 @@ a.thumbnail {
   transition: transform 0.5s ease, -webkit-transform 0.5s ease;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
-  background: #E4E2EA; }
+  background: #9A9EAB; }
   [data-whatinput='mouse'] .off-canvas {
     outline: 0; }
   .off-canvas.is-transition-push {
@@ -4260,7 +4260,7 @@ a.thumbnail {
   transition: transform 0.5s ease, -webkit-transform 0.5s ease;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
-  background: #E4E2EA; }
+  background: #9A9EAB; }
   [data-whatinput='mouse'] .off-canvas-absolute {
     outline: 0; }
   .off-canvas-absolute.is-transition-push {
@@ -5091,8 +5091,14 @@ html.is-reveal-open {
       padding: 25px;
       margin: 0 15px;
       box-shadow: 7px 7px 9px rgba(0, 0, 0, 0.7) !important; }
+    .header .subHeader #userNavBtn {
+      padding: 25px 40px; }
   .header .headWelcome {
-    color: #E4E2EA !important; }
+    color: #E4E2EA !important;
+    display: inline; }
+  .header .headWelcomeDate {
+    display: inline;
+    margin-left: 7px; }
 
 @-webkit-keyframes spin1 {
   0% {
@@ -5279,8 +5285,31 @@ html.is-reveal-open {
 .tasksBtnsCell {
   margin: 20px; }
 
+.currentTskCard {
+  background-color: #383b41;
+  color: #E4E2EA;
+  border-color: black;
+  padding-top: 15px; }
+
+.ctTskCdTitle {
+  background-color: black;
+  padding: 30px 15px; }
+
 .button {
   box-shadow: 2px 3px 5px 3px rgba(56, 59, 65, 0.5); }
+
+.offCvsDiv {
+  text-align: center;
+  padding: 50px 20px;
+  width: 30%; }
+
+.setgMenuLabel {
+  font-size: 18px;
+  font-weight: 600; }
+
+.setgMenuCell {
+  padding: 15px;
+  margin: 10px; }
 
 
 /*# sourceMappingURL=main.css.map*/
