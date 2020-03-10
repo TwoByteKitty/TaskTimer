@@ -2,13 +2,13 @@
   "name": "TaskTimer",
   "version": "0.0.0",
   "private": true,
-  "description": "An express API setup with handlebars as  view engine and sass for styling using the 7-1 architecture",
+  "description": "A Kitty Project",
   "scripts": {
     "watch-client": "webpack --watch --progress",
-    "watch-server": "nodemon --watch ./server/ ./bin/www",
-    "watch-dev": "set DEBUG=express-api:server & npm-run-all --parallel watch-server watch-client",
+    "watch-server": "set DEBUG=express-api:server& set NODE_ENV=development& browser-refresh ./server/app.js",
+    "watch-dev": "npm-run-all --parallel watch-server watch-client",
     "build-client": "webpack",
-    "start-server": "node ./bin/www"
+    "start-server": "node ./server/app.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.17",
@@ -41,6 +41,8 @@
     "babel-loader": "^8.0.6",
     "babel-preset-env": "^1.7.0",
     "babel-preset-es2015-ie": "^6.7.0",
+    "browser-refresh": "^1.7.3",
+    "browser-refresh-client": "^1.1.4",
     "css-loader": "^3.4.2",
     "file-loader": "^5.1.0",
     "mini-css-extract-plugin": "^0.9.0",
