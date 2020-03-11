@@ -54832,7 +54832,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../scss/main.scss */ "./scss/main.scss");
 /* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_scss_main_scss__WEBPACK_IMPORTED_MODULE_4__);
 /**
- * This file is where global set up is done. 
+ * This file is where global set up is done.
  * Anything that should exist and needs set up on all pages should be handled here.
  */
 
@@ -54848,7 +54848,6 @@ function initGlobals(event) {
   console.info('Globals Loaded');
 }
 
-;
 document.addEventListener('DOMContentLoaded', initGlobals);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "../node_modules/jquery/dist/jquery.js")))
 

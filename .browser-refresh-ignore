@@ -1,0 +1,7 @@
+node_modules/
+client/
+public/assets/
+package.json
+package-lock.json
+.gitignore
+*.md

@@ -65,18 +65,12 @@ app.use(function(err, req, res, next) {
 
 app.listen(PORT, err => {
   if (err) {
-    if (error.syscall !== 'listen') {
-      throw error;
-    }
     // handle specific listen errors with friendly messages
-    switch (error.code) {
-      case 'EADDRINUSE':
+    if(error.syscall === 'listen' && error.code === 'EADDRINUSE') {
         console.error(`Port: ${PORT} is already in use`);
         process.exit(1);
-        break;
-      default:
-        throw error;
     }
+    throw error;
   }
   debug(`Listening on port: ${PORT}`);
   debug(`Environment: ${process.env.NODE_ENV}`);
