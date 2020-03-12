@@ -278,17 +278,28 @@ button[data-setter]:hover { opacity: 0.5; }
 
 #pause:hover { opacity: 0.8; }
 
-.e-c-base {
-  fill: none;
+.face {
+  fill: $black;
   stroke: #B6B6B6;
-  stroke-width: 4px
+  &.minutes{
+    stroke-width: 17px;
+  }
+  &.seconds {
+    stroke-width: 3px;
+  }
 }
 
-.e-c-progress {
+.hand {
   fill: none;
-  stroke: #F7958E;
-  stroke-width: 4px;
   transition: stroke-dashoffset 0.7s;
+  &.minutes{
+    stroke-width: 17px;
+    stroke: map-get($foundation-palette, "primary" );
+  }
+  &.seconds {
+    stroke-width: 3px;
+    stroke: map-get($foundation-palette, "alert" );
+  }
 }
 
 .e-c-pointer {

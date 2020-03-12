@@ -8,10 +8,12 @@ const TIMER_TOGGLE = document.getElementById('workOrRest');
 //#endregion
 
 //#region 2st Timer
-const PROGRESS_BAR = document.querySelector('.e-c-progress');
+const MINS_PROGRESS_BAR = document.querySelector('.hand.minutes');
+const SECS_PROGRESS_BAR = document.querySelector('.hand.seconds');
 const indicator = document.getElementById('e-indicator');
 const POINTER = document.getElementById('e-pointer');
-const LENGTH = Math.PI * 2 * 100;
+const MINUTES_LENGTH = Math.PI * 2 * 110;
+const SECONDS_LENGTH = Math.PI * 2 * 100;
 const DISPLAY_OUTPUT = document.querySelector('.display-remain-time');
 const PAUSE_BTN = document.getElementById('pause');
 const SETTER_BTNS = document.querySelectorAll('button[data-setter]');
@@ -83,10 +85,17 @@ export function initTimer(options = {}) {
 //#endregion
 
 //#region 2nd Timer
-function update(value, timePercent) {
-  var offset = -LENGTH - (LENGTH * value) / timePercent;
-  PROGRESS_BAR.style.strokeDashoffset = offset;
-  //POINTER.style.transform = `rotate(${(360 * value) / timePercent}deg)`;
+function update(value, timeInitial) {
+  if (settings.typeOfTimer === 'work'){
+    timeInitial = moment.duration(settings.workTime, 'minutes')
+  } else {
+    timeInitial = monent.duration(settings.breakTime, 'minutes')
+  }
+  const minsOffset = -MINUTES_LENGTH - (MINUTES_LENGTH * value) / timeInitial.asSeconds();
+  const secsOffset = -SECONDS_LENGTH - (SECONDS_LENGTH * value) / timeInitial;
+  MINS_PROGRESS_BAR.style.strokeDashoffset = minsOffset;
+  SECS_PROGRESS_BAR.style.strokeDashoffset = secsOffset;
+  POINTER.style.transform = `rotate(${(360 * value) / timeInitial}deg)`;
 }
 function changeWholeTime(seconds) {
   if (wholeTime + seconds > 0) {
@@ -161,7 +170,8 @@ export function pauseTimer2(event) {
   }
 }
 export function initTimer2(options = {}) {
-  PROGRESS_BAR.style.strokeDasharray = LENGTH;
+  MINS_PROGRESS_BAR.style.strokeDasharray = MINUTES_LENGTH;
+  SECS_PROGRESS_BAR.style.strokeDasharray = SECONDS_LENGTH;
   wholeTime = settings.timer.asSeconds();
 
   update(wholeTime, wholeTime); //refreshes progress bar

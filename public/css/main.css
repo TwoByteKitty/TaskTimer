@@ -5355,17 +5355,24 @@ button[data-setter]:hover {
 #pause:hover {
   opacity: 0.8; }
 
-.e-c-base {
-  fill: none;
-  stroke: #B6B6B6;
-  stroke-width: 4px; }
+.face {
+  fill: black;
+  stroke: #B6B6B6; }
+  .face.minutes {
+    stroke-width: 17px; }
+  .face.seconds {
+    stroke-width: 3px; }
 
-.e-c-progress {
+.hand {
   fill: none;
-  stroke: #F7958E;
-  stroke-width: 4px;
   -webkit-transition: stroke-dashoffset 0.7s;
   transition: stroke-dashoffset 0.7s; }
+  .hand.minutes {
+    stroke-width: 17px;
+    stroke: #7D6DAD; }
+  .hand.seconds {
+    stroke-width: 3px;
+    stroke: #BB2684; }
 
 .e-c-pointer {
   fill: #FFF;
