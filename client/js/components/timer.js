@@ -15,7 +15,7 @@ const POINTER = document.getElementById('e-pointer');
 const MINUTES_LENGTH = Math.PI * 2 * 110;
 const SECONDS_LENGTH = Math.PI * 2 * 100;
 const DISPLAY_OUTPUT = document.querySelector('.display-remain-time');
-const PAUSE_BTN = document.getElementById('pause');
+//const PAUSE_BTN = document.getElementById('pause');
 const SETTER_BTNS = document.querySelectorAll('button[data-setter]');
 //#endregion
 
@@ -46,11 +46,11 @@ function runTimer() {
   }
   $FACE.text(`${
     settings.timer.minutes() > 0 ? settings.timer.minutes() + ' : ' : ''
-  }
+    }
     ${
-      settings.timer.seconds() < 10
-        ? '0' + settings.timer.seconds()
-        : settings.timer.seconds()
+    settings.timer.seconds() < 10
+      ? '0' + settings.timer.seconds()
+      : settings.timer.seconds()
     }`);
 }
 export function startTimer() {
@@ -86,7 +86,7 @@ export function initTimer(options = {}) {
 
 //#region 2nd Timer
 function update(value, timeInitial) {
-  if (settings.typeOfTimer === 'work'){
+  if (settings.typeOfTimer === 'work') {
     timeInitial = moment.duration(settings.workTime, 'minutes')
   } else {
     timeInitial = monent.duration(settings.breakTime, 'minutes')
@@ -108,14 +108,14 @@ function runTimer2(seconds) {
   let remainTime = Date.now() + seconds * 1000;
   displayTimeLeft(seconds);
 
-  intervalTimer = setInterval(function() {
+  intervalTimer = setInterval(function () {
     //timeLeft = Math.round((remainTime - Date.now()) / 1000);
     settings.timer.subtract(1000, 'ms');
     timeLeft = settings.timer.asSeconds();
     if (timeLeft < 0) {
       clearInterval(intervalTimer);
       isStarted = false;
-      SETTER_BTNS.forEach(function(btn) {
+      SETTER_BTNS.forEach(function (btn) {
         btn.disabled = false;
         btn.style.opacity = 1;
       });
@@ -133,42 +133,60 @@ function displayTimeLeft(timeLeft) {
   let seconds = timeLeft % 60;
   let displayString = `${minutes < 10 ? '0' : ''}${minutes}:${
     seconds < 10 ? '0' : ''
-  }${seconds}`;
+    }${seconds}`;
 
   const displayString2 = `${
     settings.timer.minutes() > 0 ? settings.timer.minutes() + ' : ' : ''
-  }
+    }
   ${
     settings.timer.seconds() < 10
       ? '0' + settings.timer.seconds()
       : settings.timer.seconds()
-  }`;
+    }`;
   DISPLAY_OUTPUT.textContent = displayString2;
   update(timeLeft, wholeTime);
 }
-export function pauseTimer2(event) {
+
+export function playTimer(event) {
   if (isStarted === false) {
     runTimer2(wholeTime);
     isStarted = true;
-    this.classList.remove('play');
-    this.classList.add('pause');
-
-    SETTER_BTNS.forEach(function(btn) {
-      btn.disabled = true;
-      btn.style.opacity = 0.5;
-    });
-  } else if (isPaused) {
-    this.classList.remove('play');
-    this.classList.add('pause');
+  } else if (isPaused === true) {
     runTimer2(timeLeft);
-    isPaused = isPaused ? false : true;
-  } else {
-    this.classList.remove('pause');
-    this.classList.add('play');
-    clearInterval(intervalTimer);
-    isPaused = isPaused ? false : true;
-  }
+    isPaused = false;
+  } 
 }
+
+export function pauseTimer2(event) {
+  if (isStarted === true) {
+    clearInterval(intervalTimer);
+    isPaused = true;
+  } 
+}
+
+// export function pauseTimer2(event) {
+//   if (isStarted === false) {
+//     runTimer2(wholeTime);
+//     isStarted = true;
+//     this.classList.remove('play');
+//     this.classList.add('pause');
+
+//     SETTER_BTNS.forEach(function(btn) {
+//       btn.disabled = true;
+//       btn.style.opacity = 0.5;
+//     });
+//   } else if (isPaused) {
+//     this.classList.remove('play');
+//     this.classList.add('pause');
+//     runTimer2(timeLeft);
+//     isPaused = isPaused ? false : true;
+//   } else {
+//     this.classList.remove('pause');
+//     this.classList.add('play');
+//     clearInterval(intervalTimer);
+//     isPaused = isPaused ? false : true;
+//   }
+// }
 export function initTimer2(options = {}) {
   MINS_PROGRESS_BAR.style.strokeDasharray = MINUTES_LENGTH;
   SECS_PROGRESS_BAR.style.strokeDasharray = SECONDS_LENGTH;
@@ -177,26 +195,31 @@ export function initTimer2(options = {}) {
   update(wholeTime, wholeTime); //refreshes progress bar
   displayTimeLeft(wholeTime);
 
-  PAUSE_BTN.addEventListener('click', pauseTimer2);
-  for (var i = 0; i < SETTER_BTNS.length; i++) {
-    SETTER_BTNS[i].addEventListener('click', function(event) {
-      var param = this.dataset.setter;
-      switch (param) {
-        case 'minutes-plus':
-          changeWholeTime(1 * 60);
-          break;
-        case 'minutes-minus':
-          changeWholeTime(-1 * 60);
-          break;
-        case 'seconds-plus':
-          changeWholeTime(1);
-          break;
-        case 'seconds-minus':
-          changeWholeTime(-1);
-          break;
-      }
-      displayTimeLeft(wholeTime);
-    });
-  }
+  PAUSEBTN.addEventListener('click', pauseTimer2);
+
+  PLAYBTN.addEventListener('click', playTimer);
+
+
+  // PAUSE_BTN.addEventListener('click', pauseTimer2);
+  // for (var i = 0; i < SETTER_BTNS.length; i++) {
+  //   SETTER_BTNS[i].addEventListener('click', function(event) {
+  //     var param = this.dataset.setter;
+  //     switch (param) {
+  //       case 'minutes-plus':
+  //         changeWholeTime(1 * 60);
+  //         break;
+  //       case 'minutes-minus':
+  //         changeWholeTime(-1 * 60);
+  //         break;
+  //       case 'seconds-plus':
+  //         changeWholeTime(1);
+  //         break;
+  //       case 'seconds-minus':
+  //         changeWholeTime(-1);
+  //         break;
+  //     }
+  //     displayTimeLeft(wholeTime);
+  //   });
+  // }
 }
 //#endregion
