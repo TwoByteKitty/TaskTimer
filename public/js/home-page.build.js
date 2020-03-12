@@ -28482,8 +28482,7 @@ function initTimer(options = {}) {
 
 function update(value, timePercent) {
   var offset = -LENGTH - LENGTH * value / timePercent;
-  PROGRESS_BAR.style.strokeDashoffset = offset;
-  POINTER.style.transform = `rotate(${360 * value / timePercent}deg)`;
+  PROGRESS_BAR.style.strokeDashoffset = offset; //POINTER.style.transform = `rotate(${(360 * value) / timePercent}deg)`;
 }
 
 function changeWholeTime(seconds) {

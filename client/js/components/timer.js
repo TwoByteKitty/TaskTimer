@@ -86,7 +86,7 @@ export function initTimer(options = {}) {
 function update(value, timePercent) {
   var offset = -LENGTH - (LENGTH * value) / timePercent;
   PROGRESS_BAR.style.strokeDashoffset = offset;
-  POINTER.style.transform = `rotate(${(360 * value) / timePercent}deg)`;
+  //POINTER.style.transform = `rotate(${(360 * value) / timePercent}deg)`;
 }
 function changeWholeTime(seconds) {
   if (wholeTime + seconds > 0) {
@@ -139,7 +139,7 @@ function displayTimeLeft(timeLeft) {
 }
 export function pauseTimer2(event) {
   if (isStarted === false) {
-    runTimer2(wholeTime); 
+    runTimer2(wholeTime);
     isStarted = true;
     this.classList.remove('play');
     this.classList.add('pause');

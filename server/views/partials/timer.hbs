@@ -58,13 +58,21 @@
           <button data-setter="seconds-minus">-</button>
         </div>
       </div>
-      <div class="circle"> <svg width="300" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
-          <g transform="translate(110,110)">
-            <circle r="100" class="e-c-base" />
+      <div class="circle">
+        <svg width="300" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(120,120)">
+            <circle r="110" class="e-c-base face minutes" />
+            <circle r="100" class="e-c-base face seconds" />
             <g transform="rotate(-90)">
-              <circle r="100" class="e-c-progress" />
+              <circle r="110" class="e-c-progress hand minutes" />
               <g id="e-pointer">
-                <circle cx="100" cy="0" r="8" class="e-c-pointer" />
+                <circle cx="110" cy="0" r="4" class="e-c-pointer" />
+              </g>
+            </g>
+            <g transform="rotate(-90)">
+              <circle r="100" class="e-c-progress hand second" />
+              <g id="e-pointer">
+                <circle cx="100" cy="0" r="4" class="e-c-pointer" />
               </g>
             </g>
           </g>
