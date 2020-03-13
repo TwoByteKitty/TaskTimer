@@ -28473,11 +28473,24 @@ function displayTimeLeft(timeLeft) {
 
 
 function resetTimer(event) {
+  let minutes;
+
   if (isStarted === true) {
     clearInterval(intervalTimer);
-    displayTimeLeft(wholeTime);
     isPaused = false;
     isStarted = false;
+
+    if (settings.typeOfTimer === 'work') {
+      minutes = settings.workTime;
+    } else {
+      minutes = settings.breakTime;
+    }
+
+    settings.timer = moment.duration(minutes, 'minutes');
+    PLAYBTN.disabled = false;
+    PAUSEBTN.disabled = true;
+    STOPBTN.disabled = true;
+    displayTimeLeft(wholeTime);
   }
 }
 function playTimer(event) {
