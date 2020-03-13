@@ -5209,8 +5209,8 @@ html.is-reveal-open {
       .timer-group .timer.hour .hand span {
         -webkit-animation-duration: 3600s;
                 animation-duration: 3600s;
-        border-top-color: #BB2684;
-        border-right-color: #BB2684;
+        border-top-color: #bb2684;
+        border-right-color: #bb2684;
         border-width: 200px; }
     .timer-group .timer.minute {
       background: rgba(0, 0, 0, 0.2);
@@ -5224,8 +5224,8 @@ html.is-reveal-open {
         width: 310px;
         top: 20px; }
       .timer-group .timer.minute .hand span {
-        border-top-color: #07BB9C;
-        border-right-color: #07BB9C;
+        border-top-color: #07bb9c;
+        border-right-color: #07bb9c;
         border-width: 175px; }
     .timer-group .timer.second {
       background: rgba(0, 0, 0, 0.1);
@@ -5239,8 +5239,8 @@ html.is-reveal-open {
         width: 296px;
         top: 2px; }
       .timer-group .timer.second .hand span {
-        border-top-color: #7D6DAD;
-        border-right-color: #7D6DAD;
+        border-top-color: #7d6dad;
+        border-right-color: #7d6dad;
         border-width: 150px; }
   .timer-group .face {
     font-family: 'Yanone Kaffeesatz';
@@ -5284,7 +5284,7 @@ button[data-setter] {
   font-size: 18px;
   width: 25px;
   height: 30px;
-  color: #F7958E;
+  color: #f7958e;
   cursor: pointer; }
 
 button[data-setter]:hover {
@@ -5318,7 +5318,7 @@ button[data-setter]:hover {
   font-family: 'Roboto';
   font-weight: 100;
   font-size: 65px;
-  color: #F7958E; }
+  color: #f7958e; }
 
 #pause {
   outline: none;
@@ -5331,16 +5331,16 @@ button[data-setter]:hover {
 
 .play::before {
   display: block;
-  content: "";
+  content: '';
   position: absolute;
   top: 8px;
   left: 16px;
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent;
-  border-left: 22px solid #F7958E; }
+  border-left: 22px solid #f7958e; }
 
 .pause::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 8px;
   left: 12px;
@@ -5348,7 +5348,7 @@ button[data-setter]:hover {
   height: 30px;
   background-color: transparent;
   border-radius: 1px;
-  border: 5px solid #F7958E;
+  border: 5px solid #f7958e;
   border-top: none;
   border-bottom: none; }
 
@@ -5357,16 +5357,14 @@ button[data-setter]:hover {
 
 .face {
   fill: black;
-  stroke: #B6B6B6; }
+  stroke: #b6b6b6; }
   .face.minutes {
     stroke-width: 17px; }
   .face.seconds {
     stroke-width: 3px; }
 
 .hand {
-  fill: none;
-  -webkit-transition: stroke-dashoffset 0.7s;
-  transition: stroke-dashoffset 0.7s; }
+  fill: none; }
   .hand.minutes {
     stroke-width: 17px;
     stroke: #7D6DAD; }
@@ -5375,8 +5373,8 @@ button[data-setter]:hover {
     stroke: #BB2684; }
 
 .e-c-pointer {
-  fill: #FFF;
-  stroke: #F7958E;
+  fill: #fff;
+  stroke: #f7958e;
   stroke-width: 2px; }
 
 #e-pointer {

@@ -24,42 +24,61 @@ const DEFAULTS = {
 };
 
 let intervalTimer;
+let secondsInterval;
 let timeLeft;
 let wholeTime; // manage this to set the whole time
 let isPaused = false;
 let isStarted = false;
 
-let timerInterval = undefined;
-
 let settings = {};
 
 //#region 2nd Timer
+
+function displayTimeLeft(timeLeft) {
+  const displayString = `${
+    settings.timer.minutes() > 0 ? settings.timer.minutes() + ' : ' : ''
+  }
+  ${
+    settings.timer.seconds() < 10
+      ? '0' + settings.timer.seconds()
+      : settings.timer.seconds()
+  }`;
+  DISPLAY_OUTPUT.textContent = displayString;
+  update(timeLeft);
+}
+
 function update(value) {
   let timeInitial;
   if (settings.typeOfTimer === 'work') {
-    timeInitial = moment.duration(settings.workTime, 'minutes')
+    timeInitial = moment.duration(settings.workTime, 'minutes');
   } else {
-    timeInitial = monent.duration(settings.breakTime, 'minutes')
+    timeInitial = monent.duration(settings.breakTime, 'minutes');
   }
-  const minsOffset = -MINUTES_LENGTH - (MINUTES_LENGTH * value) / timeInitial.asSeconds();
-  const secsOffset = -SECONDS_LENGTH - (SECONDS_LENGTH * value) / timeInitial.asSeconds();
+  const timeFraction = value / timeInitial.asSeconds();
+  const minsOffset = -MINUTES_LENGTH - MINUTES_LENGTH * timeFraction;
   MINS_PROGRESS_BAR.style.strokeDashoffset = minsOffset;
-  SECS_PROGRESS_BAR.style.strokeDashoffset = secsOffset;
-  console.log(value)
-  console.log(timeInitial.asSeconds())
-  console.log((360 * value) / timeInitial);
-  MINS_POINTER.style.transform = `rotate(${360 * value / timeInitial.asSeconds()}deg)`;
-  SECS_POINTER.style.transform = `rotate(${360 * value / timeInitial.asSeconds()}deg)`;
+  //MINS_POINTER.style.transform = `rotate(${360 * timeFraction}deg)`;
 }
 
 function runTimer(seconds) {
   displayTimeLeft(seconds);
+  let mSec = 1000;
 
-  intervalTimer = setInterval(function () {
+  secondsInterval = setInterval(function() {
+    const timeFraction = mSec / 1000;
+    const secsOffset = SECONDS_LENGTH - SECONDS_LENGTH * timeFraction;
+    SECS_PROGRESS_BAR.style.strokeDashoffset = secsOffset;
+    mSec = mSec - 100;
+  }, 100);
+
+  intervalTimer = setInterval(function() {
     settings.timer.subtract(1000, 'ms');
     timeLeft = settings.timer.asSeconds();
+
     if (timeLeft < 0) {
       clearInterval(intervalTimer);
+      clearInterval(secondsInterval);
+      SECS_PROGRESS_BAR.style.strokeDashoffset = 1000;
       isStarted = false;
       displayTimeLeft(wholeTime);
       return;
@@ -67,24 +86,15 @@ function runTimer(seconds) {
     displayTimeLeft(timeLeft);
   }, 1000);
 }
-function displayTimeLeft(timeLeft) {
-  const displayString = `${
-    settings.timer.minutes() > 0 ? settings.timer.minutes() + ' : ' : ''
-    }
-  ${
-    settings.timer.seconds() < 10
-      ? '0' + settings.timer.seconds()
-      : settings.timer.seconds()
-    }`;
-  DISPLAY_OUTPUT.textContent = displayString;
-  update(timeLeft);
-}
+
 //need to set up functionality of stop btn
 export function resetTimer(event) {
   let minutes;
 
   if (isStarted === true) {
     clearInterval(intervalTimer);
+    clearInterval(secondsInterval);
+    SECS_PROGRESS_BAR.style.strokeDashoffset = 0;
     isPaused = false;
     isStarted = false;
     if (settings.typeOfTimer === 'work') {
@@ -119,6 +129,8 @@ export function playTimer(event) {
 export function pauseTimer(event) {
   if (isStarted === true) {
     clearInterval(intervalTimer);
+    clearInterval(secondsInterval);
+    SECS_PROGRESS_BAR.style.strokeDashoffset = 0;
     isPaused = true;
     PLAYBTN.disabled = false;
     PAUSEBTN.disabled = true;
@@ -143,7 +155,6 @@ export function initTimer(options = {}) {
 
   PAUSEBTN.addEventListener('click', pauseTimer);
   PLAYBTN.addEventListener('click', playTimer);
-  STOPBTN.addEventListener('click', resetTimer)
-
+  STOPBTN.addEventListener('click', resetTimer);
 }
 //#endregion
