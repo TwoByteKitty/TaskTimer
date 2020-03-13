@@ -28388,34 +28388,29 @@ function initTaskCreate() {
 /*!********************************!*\
   !*** ./js/components/timer.js ***!
   \********************************/
-/*! exports provided: startTimer, pauseTimer, initTimer, pauseTimer2, initTimer2 */
+/*! exports provided: resetTimer, playTimer, pauseTimer, initTimer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function($, moment) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startTimer", function() { return startTimer; });
+/* WEBPACK VAR INJECTION */(function(moment) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetTimer", function() { return resetTimer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "playTimer", function() { return playTimer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pauseTimer", function() { return pauseTimer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initTimer", function() { return initTimer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pauseTimer2", function() { return pauseTimer2; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initTimer2", function() { return initTimer2; });
 //#region 1st Timer
 const PLAYBTN = document.getElementById('startTimerBtn');
 const PAUSEBTN = document.getElementById('pauseTimerBtn');
-const $TIMER_MINUTES = $('.timer-group .timer.minute .hand span');
-const $TIMER_SECONDS = $('.timer-group .timer.second .hand span');
-const $FACE = $('#timeDisplay');
+const STOPBTN = document.getElementById('resetTimerBtn');
 const TIMER_TOGGLE = document.getElementById('workOrRest'); //#endregion
 //#region 2st Timer
 
 const MINS_PROGRESS_BAR = document.querySelector('.hand.minutes');
 const SECS_PROGRESS_BAR = document.querySelector('.hand.seconds');
-const indicator = document.getElementById('e-indicator');
-const POINTER = document.getElementById('e-pointer');
+const MINS_POINTER = document.getElementById('mins-pointer');
+const SECS_POINTER = document.getElementById('secs-pointer');
 const MINUTES_LENGTH = Math.PI * 2 * 110;
 const SECONDS_LENGTH = Math.PI * 2 * 100;
-const DISPLAY_OUTPUT = document.querySelector('.display-remain-time');
-const PAUSE_BTN = document.getElementById('pause');
-const SETTER_BTNS = document.querySelectorAll('button[data-setter]'); //#endregion
+const DISPLAY_OUTPUT = document.querySelector('.display-remain-time'); //#endregion
 
 const DEFAULTS = {
   timer: undefined,
@@ -28430,41 +28425,85 @@ let wholeTime; // manage this to set the whole time
 let isPaused = false;
 let isStarted = false;
 let timerInterval = undefined;
-let settings = {}; //#region 1st Timer
+let settings = {}; //#region 2nd Timer
 
-function runTimer() {
-  settings.timer.subtract(1000, 'ms');
+function update(value) {
+  let timeInitial;
 
-  if (settings.timer.asMilliseconds() < 1) {
-    clearInterval(timerInterval);
-    $FACE.text(`Time's Up!!`);
-    return;
+  if (settings.typeOfTimer === 'work') {
+    timeInitial = moment.duration(settings.workTime, 'minutes');
+  } else {
+    timeInitial = monent.duration(settings.breakTime, 'minutes');
   }
 
-  $FACE.text(`${settings.timer.minutes() > 0 ? settings.timer.minutes() + ' : ' : ''}
-    ${settings.timer.seconds() < 10 ? '0' + settings.timer.seconds() : settings.timer.seconds()}`);
+  const minsOffset = -MINUTES_LENGTH - MINUTES_LENGTH * value / timeInitial.asSeconds();
+  const secsOffset = -SECONDS_LENGTH - SECONDS_LENGTH * value / timeInitial.asSeconds();
+  MINS_PROGRESS_BAR.style.strokeDashoffset = minsOffset;
+  SECS_PROGRESS_BAR.style.strokeDashoffset = secsOffset;
+  console.log(value);
+  console.log(timeInitial.asSeconds());
+  console.log(360 * value / timeInitial);
+  MINS_POINTER.style.transform = `rotate(${360 * value / timeInitial.asSeconds()}deg)`;
+  SECS_POINTER.style.transform = `rotate(${360 * value / timeInitial.asSeconds()}deg)`;
 }
 
-function startTimer() {
-  timerInterval = setInterval(runTimer, 1000);
-  $TIMER_MINUTES.css({
-    'animation-duration': `${settings.timer.asSeconds()}s`,
-    'animation-play-state': 'running'
-  });
-  $TIMER_SECONDS.css({
-    'animation-iteration-count': `${settings.timer.asSeconds()}`,
-    'animation-duration': '1000ms',
-    'animation-play-state': 'running'
-  });
+function runTimer(seconds) {
+  displayTimeLeft(seconds);
+  intervalTimer = setInterval(function () {
+    settings.timer.subtract(1000, 'ms');
+    timeLeft = settings.timer.asSeconds();
+
+    if (timeLeft < 0) {
+      clearInterval(intervalTimer);
+      isStarted = false;
+      displayTimeLeft(wholeTime);
+      return;
+    }
+
+    displayTimeLeft(timeLeft);
+  }, 1000);
 }
-function pauseTimer() {
-  clearInterval(timerInterval);
-  $TIMER_MINUTES.css({
-    'animation-play-state': 'paused'
-  });
-  $TIMER_SECONDS.css({
-    'animation-play-state': 'paused'
-  });
+
+function displayTimeLeft(timeLeft) {
+  const displayString = `${settings.timer.minutes() > 0 ? settings.timer.minutes() + ' : ' : ''}
+  ${settings.timer.seconds() < 10 ? '0' + settings.timer.seconds() : settings.timer.seconds()}`;
+  DISPLAY_OUTPUT.textContent = displayString;
+  update(timeLeft);
+} //need to set up functionality of stop btn
+
+
+function resetTimer(event) {
+  if (isStarted === true) {
+    clearInterval(intervalTimer);
+    displayTimeLeft(wholeTime);
+    isPaused = false;
+    isStarted = false;
+  }
+}
+function playTimer(event) {
+  if (isStarted === false) {
+    runTimer(wholeTime);
+    isStarted = true;
+    PLAYBTN.disabled = true;
+    PAUSEBTN.disabled = false;
+    STOPBTN.disabled = false;
+  } else if (isPaused === true) {
+    runTimer(timeLeft);
+    isPaused = false;
+    PLAYBTN.disabled = true;
+    PAUSEBTN.disabled = false;
+    STOPBTN.disabled = false;
+  }
+} //add saving time to task
+
+function pauseTimer(event) {
+  if (isStarted === true) {
+    clearInterval(intervalTimer);
+    isPaused = true;
+    PLAYBTN.disabled = false;
+    PAUSEBTN.disabled = true;
+    STOPBTN.disabled = true;
+  }
 }
 function initTimer(options = {}) {
   let minutes;
@@ -28477,127 +28516,15 @@ function initTimer(options = {}) {
   }
 
   settings.timer = moment.duration(minutes, 'minutes');
-  PLAYBTN.addEventListener('click', startTimer);
-  PAUSEBTN.addEventListener('click', pauseTimer);
-} //#endregion
-//#region 2nd Timer
-
-function update(value, timeInitial) {
-  if (settings.typeOfTimer === 'work') {
-    timeInitial = moment.duration(settings.workTime, 'minutes');
-  } else {
-    timeInitial = monent.duration(settings.breakTime, 'minutes');
-  }
-
-  const minsOffset = -MINUTES_LENGTH - MINUTES_LENGTH * value / timeInitial.asSeconds();
-  const secsOffset = -SECONDS_LENGTH - SECONDS_LENGTH * value / timeInitial;
-  MINS_PROGRESS_BAR.style.strokeDashoffset = minsOffset;
-  SECS_PROGRESS_BAR.style.strokeDashoffset = secsOffset;
-  POINTER.style.transform = `rotate(${360 * value / timeInitial}deg)`;
-}
-
-function changeWholeTime(seconds) {
-  if (wholeTime + seconds > 0) {
-    wholeTime += seconds;
-    update(wholeTime, wholeTime);
-  }
-}
-
-function runTimer2(seconds) {
-  //counts time, takes seconds
-  let remainTime = Date.now() + seconds * 1000;
-  displayTimeLeft(seconds);
-  intervalTimer = setInterval(function () {
-    //timeLeft = Math.round((remainTime - Date.now()) / 1000);
-    settings.timer.subtract(1000, 'ms');
-    timeLeft = settings.timer.asSeconds();
-
-    if (timeLeft < 0) {
-      clearInterval(intervalTimer);
-      isStarted = false;
-      SETTER_BTNS.forEach(function (btn) {
-        btn.disabled = false;
-        btn.style.opacity = 1;
-      });
-      displayTimeLeft(wholeTime);
-      PAUSE_BTN.classList.remove('pause');
-      PAUSE_BTN.classList.add('play');
-      return;
-    }
-
-    displayTimeLeft(timeLeft);
-  }, 1000);
-}
-
-function displayTimeLeft(timeLeft) {
-  //displays time on the input
-  let minutes = Math.floor(timeLeft / 60);
-  let seconds = timeLeft % 60;
-  let displayString = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-  const displayString2 = `${settings.timer.minutes() > 0 ? settings.timer.minutes() + ' : ' : ''}
-  ${settings.timer.seconds() < 10 ? '0' + settings.timer.seconds() : settings.timer.seconds()}`;
-  DISPLAY_OUTPUT.textContent = displayString2;
-  update(timeLeft, wholeTime);
-}
-
-function pauseTimer2(event) {
-  if (isStarted === false) {
-    runTimer2(wholeTime);
-    isStarted = true;
-    this.classList.remove('play');
-    this.classList.add('pause');
-    SETTER_BTNS.forEach(function (btn) {
-      btn.disabled = true;
-      btn.style.opacity = 0.5;
-    });
-  } else if (isPaused) {
-    this.classList.remove('play');
-    this.classList.add('pause');
-    runTimer2(timeLeft);
-    isPaused = isPaused ? false : true;
-  } else {
-    this.classList.remove('pause');
-    this.classList.add('play');
-    clearInterval(intervalTimer);
-    isPaused = isPaused ? false : true;
-  }
-}
-function initTimer2(options = {}) {
   MINS_PROGRESS_BAR.style.strokeDasharray = MINUTES_LENGTH;
   SECS_PROGRESS_BAR.style.strokeDasharray = SECONDS_LENGTH;
   wholeTime = settings.timer.asSeconds();
-  update(wholeTime, wholeTime); //refreshes progress bar
-
   displayTimeLeft(wholeTime);
-  PAUSE_BTN.addEventListener('click', pauseTimer2);
-
-  for (var i = 0; i < SETTER_BTNS.length; i++) {
-    SETTER_BTNS[i].addEventListener('click', function (event) {
-      var param = this.dataset.setter;
-
-      switch (param) {
-        case 'minutes-plus':
-          changeWholeTime(1 * 60);
-          break;
-
-        case 'minutes-minus':
-          changeWholeTime(-1 * 60);
-          break;
-
-        case 'seconds-plus':
-          changeWholeTime(1);
-          break;
-
-        case 'seconds-minus':
-          changeWholeTime(-1);
-          break;
-      }
-
-      displayTimeLeft(wholeTime);
-    });
-  }
+  PAUSEBTN.addEventListener('click', pauseTimer);
+  PLAYBTN.addEventListener('click', playTimer);
+  STOPBTN.addEventListener('click', resetTimer);
 } //#endregion
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "../node_modules/jquery/dist/jquery.js"), __webpack_require__(/*! moment */ "../node_modules/moment/moment.js")))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! moment */ "../node_modules/moment/moment.js")))
 
 /***/ }),
 
@@ -28621,7 +28548,6 @@ __webpack_require__.r(__webpack_exports__);
 
 function initPage(event) {
   Object(_components_timer__WEBPACK_IMPORTED_MODULE_0__["initTimer"])();
-  Object(_components_timer__WEBPACK_IMPORTED_MODULE_0__["initTimer2"])();
   Object(_components_task__WEBPACK_IMPORTED_MODULE_1__["initTaskList"])();
   console.info('Page Loaded');
 }

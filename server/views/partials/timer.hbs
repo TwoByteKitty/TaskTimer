@@ -49,13 +49,13 @@
             <circle r="100" class="e-c-base face seconds" />
             <g transform="rotate(-90)">
               <circle r="110" class="e-c-progress hand minutes" />
-              <g id="e-pointer">
+              <g id="mins-pointer">
                 <circle cx="110" cy="0" r="4" class="e-c-pointer" />
               </g>
             </g>
             <g transform="rotate(-90)">
               <circle r="100" class="e-c-progress hand seconds" />
-              <g id="e-pointer">
+              <g id="secs-pointer">
                 <circle cx="100" cy="0" r="4" class="e-c-pointer" />
               </g>
             </g>
@@ -73,13 +73,13 @@
       <div class="cell small-12">
         <div class="large button-group align-center btnGroupTimer">
           <button type="button" class="alert button large timerCtrl" id="resetTimerBtn" data-tooltip tabindex="1"
-            title="Click here to clear and reset the timer." data-position="top" data-alignment="left"><i
+            title="Click here to clear and reset the timer." data-position="top" data-alignment="left" disabled><i
               class="fas fa-undo fa-2x"></i></button>
           <button type="button" class="success button large timerCtrl" id="startTimerBtn" data-tooltip tabindex="1"
             title="Starts the timer." data-position="bottom" data-alignment="left"><i
               class="fas fa-play fa-2x"></i></button>
           <button type="button" class="primary button large timerCtrl" id="pauseTimerBtn" data-tooltip tabindex="1"
-            title="Pause your timer in the event of interuptions." data-position="bottom" data-alignment="right"><i
+            title="Pause your timer in the event of interuptions." data-position="bottom" data-alignment="right" disabled><i
               class="fas fa-pause fa-2x"></i></button>
         </div>
       </div>
