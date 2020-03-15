@@ -1,20 +1,14 @@
-//#region 1st Timer
+
 const PLAYBTN = document.getElementById('startTimerBtn');
 const PAUSEBTN = document.getElementById('pauseTimerBtn');
 const STOPBTN = document.getElementById('resetTimerBtn');
-
 const TIMER_TOGGLE = document.getElementById('workOrRest');
-//#endregion
 
-//#region 2st Timer
 const MINS_PROGRESS_BAR = document.querySelector('.hand.minutes');
 const SECS_PROGRESS_BAR = document.querySelector('.hand.seconds');
-const MINS_POINTER = document.getElementById('mins-pointer');
-const SECS_POINTER = document.getElementById('secs-pointer');
 const MINUTES_LENGTH = Math.PI * 2 * 110;
 const SECONDS_LENGTH = Math.PI * 2 * 100;
 const DISPLAY_OUTPUT = document.querySelector('.display-remain-time');
-//#endregion
 
 const DEFAULTS = {
   timer: undefined,
@@ -57,7 +51,6 @@ function update(value) {
   const timeFraction = value / timeInitial.asSeconds();
   const minsOffset = -MINUTES_LENGTH - MINUTES_LENGTH * timeFraction;
   MINS_PROGRESS_BAR.style.strokeDashoffset = minsOffset;
-  //MINS_POINTER.style.transform = `rotate(${360 * timeFraction}deg)`;
 }
 
 function runTimer(seconds) {
@@ -87,11 +80,10 @@ function runTimer(seconds) {
   }, 1000);
 }
 
-//need to set up functionality of stop btn
-export function resetTimer(event) {
-  let minutes;
 
-  if (isStarted === true) {
+function resetTimer(event, toggle) {
+  let minutes;
+  if (isStarted === true || toggle) {
     clearInterval(intervalTimer);
     clearInterval(secondsInterval);
     SECS_PROGRESS_BAR.style.strokeDashoffset = 0;
@@ -110,7 +102,7 @@ export function resetTimer(event) {
   }
 }
 
-export function playTimer(event) {
+function playTimer(event) {
   if (isStarted === false) {
     runTimer(wholeTime);
     isStarted = true;
@@ -125,8 +117,9 @@ export function playTimer(event) {
     STOPBTN.disabled = false;
   }
 }
+
 //add saving time to task
-export function pauseTimer(event) {
+function pauseTimer(event) {
   if (isStarted === true) {
     clearInterval(intervalTimer);
     clearInterval(secondsInterval);
@@ -137,6 +130,16 @@ export function pauseTimer(event) {
     STOPBTN.disabled = true;
   }
 }
+
+function toggleTimer (event) {
+  if (TIMER_TOGGLE.checked === true) {
+    settings.typeOfTimer = 'work';
+  } else {
+    settings.typeOfTimer = 'rest';
+  };
+  resetTimer(null, true);
+}
+
 
 export function initTimer(options = {}) {
   let minutes;
@@ -156,5 +159,6 @@ export function initTimer(options = {}) {
   PAUSEBTN.addEventListener('click', pauseTimer);
   PLAYBTN.addEventListener('click', playTimer);
   STOPBTN.addEventListener('click', resetTimer);
+  TIMER_TOGGLE.addEventListener('click', toggleTimer);
 }
 //#endregion

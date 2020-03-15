@@ -1,7 +1,8 @@
+{{!-- Toggle --}}
 <div class="grid-x">
   <div class="cell small-12">
     <div class="switch large">
-      <input class="switch-input" id="workOrRest" type="checkbox" name="workRestSwitch">
+      <input class="switch-input" id="workOrRest" type="checkbox" name="workRestSwitch" checked>
       <label class="switch-paddle" for="workOrRest">
         <span class="show-for-sr">Select work with active or rest with inactive</span>
         <span class="switch-active" aria-hidden="true" id="switchWork">Work</span>
@@ -9,39 +10,10 @@
       </label>
     </div>
   </div>
-  {{!-- <div class="cell small-12" >
-    <div class="timer-group">
-      <div class="timer hour">
-    <div class="hand"><span></span></div>
-    <div class="hand"><span></span></div>
-  </div> 
-      <div class="timer minute">
-        <div class="hand"><span></span></div>
-        <div class="hand"><span></span></div>
-      </div>
-      <div class="timer second">
-        <div class="hand"><span></span></div>
-        <div class="hand"><span></span></div>
-      </div>
-      <div class="face">
-        <h2>Work Timer</h2>
-        <p id="timeDisplay">00:00</p>
-      </div>
-    </div>
-  </div> --}}
 
+{{!-- Timer --}}
   <div class="cell small-12" id="timerCell">
     <div class="container timer-group">
-      <div class="setters">
-        {{!-- <div class="minutes-set">
-          <button data-setter="minutes-plus">+</button>
-          <button data-setter="minutes-minus">-</button>
-        </div>
-        <div class="seconds-set">
-          <button data-setter="seconds-plus">+</button>
-          <button data-setter="seconds-minus">-</button>
-        </div> --}}
-      </div>
       <div class="circle">
         <svg width="300" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
           <g transform="translate(120,120)">
@@ -63,11 +35,11 @@
         </svg> </div>
       <div class="controlls">
         <div class="display-remain-time">00:30</div>
-        {{!-- <button class="play" id="pause"></button> --}}
       </div>
     </div>
   </div>
 
+{{!-- Controls --}}
   <div class="cell small-12">
     <div class="grid-x align-center-middle">
       <div class="cell small-12">
