@@ -40,15 +40,12 @@
                         </div>
                         <div class="card-section">
                             <div>
-                                {{#if (equals @exphbs.view "home")}}
                                 <button class="button large markActiveBtn" type="button" {{#if active}} disabled {{/if}}
                                     data-task-id="{{_id}}">Set As
                                     Active</button>
                                 <button class="button large markComplBtn" type="button" data-task-id="{{_id}}">Mark
                                     Complete</button>
-                                {{else}}
                                 <a href="/tasks/{{_id}}" class="button large">Edit</a>
-                                {{/if}}
                             </div>
                         </div>
                     </div>

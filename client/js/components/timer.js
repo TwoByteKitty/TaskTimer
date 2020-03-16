@@ -39,7 +39,7 @@ function displayTimeLeft(timeLeft) {
   }`;
   DISPLAY_OUTPUT.textContent = displayString;
   update(timeLeft);
-}
+};
 
 function update(value) {
   let timeInitial;
@@ -51,7 +51,7 @@ function update(value) {
   const timeFraction = value / timeInitial.asSeconds();
   const minsOffset = -MINUTES_LENGTH - MINUTES_LENGTH * timeFraction;
   MINS_PROGRESS_BAR.style.strokeDashoffset = minsOffset;
-}
+};
 
 function runTimer(seconds) {
   displayTimeLeft(seconds);
@@ -78,7 +78,7 @@ function runTimer(seconds) {
     }
     displayTimeLeft(timeLeft);
   }, 1000);
-}
+};
 
 
 function resetTimer(event, toggle) {
@@ -100,7 +100,7 @@ function resetTimer(event, toggle) {
     STOPBTN.disabled = true;
     displayTimeLeft(wholeTime);
   }
-}
+};
 
 function playTimer(event) {
   if (isStarted === false) {
@@ -116,7 +116,7 @@ function playTimer(event) {
     PAUSEBTN.disabled = false;
     STOPBTN.disabled = false;
   }
-}
+};
 
 //add saving time to task
 function pauseTimer(event) {
@@ -129,7 +129,7 @@ function pauseTimer(event) {
     PAUSEBTN.disabled = true;
     STOPBTN.disabled = true;
   }
-}
+};
 
 function toggleTimer (event) {
   if (TIMER_TOGGLE.checked === true) {
@@ -138,7 +138,7 @@ function toggleTimer (event) {
     settings.typeOfTimer = 'rest';
   };
   resetTimer(null, true);
-}
+};
 
 
 export function initTimer(options = {}) {
@@ -160,5 +160,5 @@ export function initTimer(options = {}) {
   PLAYBTN.addEventListener('click', playTimer);
   STOPBTN.addEventListener('click', resetTimer);
   TIMER_TOGGLE.addEventListener('click', toggleTimer);
-}
+};
 //#endregion

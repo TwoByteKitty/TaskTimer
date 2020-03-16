@@ -28352,8 +28352,9 @@ function setActiveTask(event) {
     url: `/tasks/api/setactive/${event.currentTarget.dataset.taskId}`
   }).done(task => {
     console.log(task);
+    $(".markActiveBtn").removeAttr("disabled");
     $(event.currentTarget).attr("disabled", true);
-    $("#activeTitleDisp").text(task.title);
+    $(".activeTitleDisp").text(task.title);
   });
 }
 
@@ -28425,6 +28426,8 @@ function displayTimeLeft(timeLeft) {
   update(timeLeft);
 }
 
+;
+
 function update(value) {
   let timeInitial;
 
@@ -28438,6 +28441,8 @@ function update(value) {
   const minsOffset = -MINUTES_LENGTH - MINUTES_LENGTH * timeFraction;
   MINS_PROGRESS_BAR.style.strokeDashoffset = minsOffset;
 }
+
+;
 
 function runTimer(seconds) {
   displayTimeLeft(seconds);
@@ -28465,6 +28470,8 @@ function runTimer(seconds) {
   }, 1000);
 }
 
+;
+
 function resetTimer(event, toggle) {
   let minutes;
 
@@ -28489,6 +28496,8 @@ function resetTimer(event, toggle) {
   }
 }
 
+;
+
 function playTimer(event) {
   if (isStarted === false) {
     runTimer(wholeTime);
@@ -28503,8 +28512,9 @@ function playTimer(event) {
     PAUSEBTN.disabled = false;
     STOPBTN.disabled = false;
   }
-} //add saving time to task
+}
 
+; //add saving time to task
 
 function pauseTimer(event) {
   if (isStarted === true) {
@@ -28518,6 +28528,8 @@ function pauseTimer(event) {
   }
 }
 
+;
+
 function toggleTimer(event) {
   if (TIMER_TOGGLE.checked === true) {
     settings.typeOfTimer = 'work';
@@ -28529,6 +28541,7 @@ function toggleTimer(event) {
   resetTimer(null, true);
 }
 
+;
 function initTimer(options = {}) {
   let minutes;
   settings = Object.assign(DEFAULTS, options);
@@ -28548,7 +28561,8 @@ function initTimer(options = {}) {
   PLAYBTN.addEventListener('click', playTimer);
   STOPBTN.addEventListener('click', resetTimer);
   TIMER_TOGGLE.addEventListener('click', toggleTimer);
-} //#endregion
+}
+; //#endregion
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! moment */ "../node_modules/moment/moment.js")))
 
 /***/ }),

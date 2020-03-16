@@ -28352,8 +28352,9 @@ function setActiveTask(event) {
     url: `/tasks/api/setactive/${event.currentTarget.dataset.taskId}`
   }).done(task => {
     console.log(task);
+    $(".markActiveBtn").removeAttr("disabled");
     $(event.currentTarget).attr("disabled", true);
-    $("#activeTitleDisp").text(task.title);
+    $(".activeTitleDisp").text(task.title);
   });
 }
 

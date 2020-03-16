@@ -54773,6 +54773,40 @@ function initHeader(user) {
 
 /***/ }),
 
+/***/ "./js/components/settings.js":
+/*!***********************************!*\
+  !*** ./js/components/settings.js ***!
+  \***********************************/
+/*! exports provided: initSettingsForm */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initSettingsForm", function() { return initSettingsForm; });
+const SETTINGS_FORM = document.settings;
+const SETTINGS_BTN = document.getElementById('saveSettingsBtn');
+
+function saveSettings(event) {
+  console.log(SETTINGS_FORM);
+  const formData = new FormData(SETTINGS_FORM);
+  $.post('/user/settings', formData).then((err, data) => {
+    if (err) {
+      console.log(err);
+    }
+
+    console.log(data);
+  });
+}
+
+;
+function initSettingsForm() {
+  SETTINGS_BTN.addEventListener('click', saveSettings);
+}
+;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "../node_modules/jquery/dist/jquery.js")))
+
+/***/ }),
+
 /***/ "./js/configs/fontawesome.js":
 /*!***********************************!*\
   !*** ./js/configs/fontawesome.js ***!
@@ -54829,8 +54863,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var foundation_sites__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! foundation-sites */ "../node_modules/foundation-sites/dist/js/foundation.esm.js");
 /* harmony import */ var _configs_fontawesome__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./configs/fontawesome */ "./js/configs/fontawesome.js");
 /* harmony import */ var _components_header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/header */ "./js/components/header.js");
-/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../scss/main.scss */ "./scss/main.scss");
-/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_scss_main_scss__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_settings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/settings */ "./js/components/settings.js");
+/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../scss/main.scss */ "./scss/main.scss");
+/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_scss_main_scss__WEBPACK_IMPORTED_MODULE_5__);
 /**
  * This file is where global set up is done.
  * Anything that should exist and needs set up on all pages should be handled here.
@@ -54841,9 +54876,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 function initGlobals(event) {
   _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["dom"].watch();
   Object(_components_header__WEBPACK_IMPORTED_MODULE_3__["initHeader"])();
+  Object(_components_settings__WEBPACK_IMPORTED_MODULE_4__["initSettingsForm"])();
   $(document).foundation();
   console.info('Globals Loaded');
 }

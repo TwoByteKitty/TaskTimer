@@ -744,12 +744,12 @@ $reveal-overlay-background: rgba($black, 0.45);
 
 $slider-width-vertical: 0.5rem;
 $slider-transition: all 0.2s ease-in-out;
-$slider-height: 0.5rem;
-$slider-background: $light-gray;
-$slider-fill-background: $medium-gray;
-$slider-handle-height: 1.4rem;
-$slider-handle-width: 1.4rem;
-$slider-handle-background: $primary-color;
+$slider-height: 1.5rem;
+$slider-background: $white;
+$slider-fill-background: $alert-color;
+$slider-handle-height: 2.5rem;
+$slider-handle-width: 1.25rem;
+$slider-handle-background: $dark-gray;
 $slider-opacity-disabled: 0.25;
 $slider-radius: $global-radius;
 

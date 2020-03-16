@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
       };
       if (foundTasks.length > 0) {
         taskData.activeTitle = foundTasks.find(task => task.active).title;
-        taskData.task = foundTasks;
+        taskData.tasks = foundTasks;
       }
       //Once passport is set up, the user will just be available
       req.user = { name: 'User McUserson' };
