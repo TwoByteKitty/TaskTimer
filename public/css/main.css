@@ -173,7 +173,7 @@ body {
   margin: 0;
   padding: 0;
   background: #fefefe;
-  font-family: Helvetica, Roboto, Arial, sans-serif;
+  font-family: Helvetica, sans-serif;
   font-weight: normal;
   line-height: 1.5;
   color: black;
@@ -540,7 +540,7 @@ h3, .h3,
 h4, .h4,
 h5, .h5,
 h6, .h6 {
-  font-family: Helvetica, Roboto, Arial, sans-serif;
+  font-family: Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   color: inherit;
@@ -5110,128 +5110,55 @@ body {
 
 .switchWrap {
   border-radius: 5000px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   padding: 15px;
   margin-top: 15px; }
-
-.switch {
-  margin-bottom: 0px; }
+  .switchWrap .switch {
+    margin-bottom: 0px; }
 
 .timerCtrlWrap {
   border-radius: 25px;
   background-color: rgba(0, 0, 0, 0.6);
   padding: 20px 30px; }
-
-.button-group .button {
-  margin-bottom: 0px; }
-
-.timerCtrl {
-  padding: 30px 50px;
-  margin: 30px 0;
-  color: black !important; }
+  .timerCtrlWrap .timerCtrl {
+    padding: 30px 50px;
+    margin: 10px;
+    color: black !important; }
 
 #timerCell {
   margin-bottom: 30px; }
-
-.timerWrap {
-  fill: rgba(0, 0, 0, 0.6); }
-
-button[data-setter] {
-  outline: none;
-  background: transparent;
-  border: none;
-  font-family: 'Roboto';
-  font-weight: 300;
-  font-size: 18px;
-  width: 25px;
-  height: 30px;
-  color: #f7958e;
-  cursor: pointer; }
-
-button[data-setter]:hover {
-  opacity: 0.5; }
-
-.container {
-  position: relative;
-  top: 30px;
-  width: 300px;
-  margin: 10px auto 0px auto; }
-
-.setters {
-  position: absolute;
-  left: 85px;
-  top: 75px; }
-
-.minutes-set {
-  float: left;
-  margin-right: 28px; }
-
-.seconds-set {
-  float: right; }
-
-.controlls {
-  position: absolute;
-  left: 75px;
-  top: 105px;
-  text-align: center; }
-
-.display-remain-time {
-  font-family: 'Roboto';
-  font-weight: 100;
-  font-size: 65px;
-  color: #E4E2EA; }
-
-#pause {
-  outline: none;
-  background: transparent;
-  border: none;
-  margin-top: 10px;
-  width: 50px;
-  height: 50px;
-  position: relative; }
-
-.play::before {
-  display: block;
-  content: '';
-  position: absolute;
-  top: 8px;
-  left: 16px;
-  border-top: 15px solid transparent;
-  border-bottom: 15px solid transparent;
-  border-left: 22px solid #f7958e; }
-
-.pause::after {
-  content: '';
-  position: absolute;
-  top: 8px;
-  left: 12px;
-  width: 15px;
-  height: 30px;
-  background-color: transparent;
-  border-radius: 1px;
-  border: 5px solid #f7958e;
-  border-top: none;
-  border-bottom: none; }
-
-#pause:hover {
-  opacity: 0.8; }
-
-.face {
-  fill: black;
-  stroke: #b6b6b6; }
-  .face.minutes {
-    stroke-width: 17px; }
-  .face.seconds {
-    stroke-width: 3px; }
-
-.hand {
-  fill: none; }
-  .hand.minutes {
-    stroke-width: 17px;
-    stroke: #07BB9C; }
-  .hand.seconds {
-    stroke-width: 3px;
-    stroke: #BB2684; }
+  #timerCell .timer-group {
+    position: relative;
+    top: 30px;
+    width: 300px;
+    margin: 10px auto 0px auto; }
+    #timerCell .timer-group .timerWrap {
+      fill: rgba(0, 0, 0, 0.6); }
+    #timerCell .timer-group .face {
+      fill: black;
+      stroke: #b6b6b6; }
+      #timerCell .timer-group .face.minutes {
+        stroke-width: 17px; }
+      #timerCell .timer-group .face.seconds {
+        stroke-width: 3px; }
+    #timerCell .timer-group .hand {
+      fill: none; }
+      #timerCell .timer-group .hand.minutes {
+        stroke-width: 17px;
+        stroke: #07BB9C; }
+      #timerCell .timer-group .hand.seconds {
+        stroke-width: 3px;
+        stroke: #BB2684; }
+    #timerCell .timer-group .timerDisplay {
+      position: absolute;
+      left: 75px;
+      top: 105px;
+      text-align: center; }
+      #timerCell .timer-group .timerDisplay .display-remain-time {
+        font-family: 'Baumans', cursive;
+        font-weight: 100;
+        font-size: 65px;
+        color: #E4E2EA; }
 
 #currentTaskGrid {
   margin-bottom: 30px; }
@@ -5274,12 +5201,11 @@ button[data-setter]:hover {
   .regCard .regLabel {
     font-size: 15px;
     font-weight: 600; }
+    .regCard .regLabel input {
+      margin-bottom: 0rem; }
   .regCard .card-section {
     padding: 8px 15px;
     margin: 0px 15px; }
-
-.regLabel input {
-  margin-bottom: 0rem; }
 
 
 /*# sourceMappingURL=main.css.map*/

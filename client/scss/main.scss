@@ -28,20 +28,18 @@
 }
 
 .regCard {
-    padding: 12px 20px;
+  padding: 12px 20px;
 
   .regLabel {
     font-size: 15px;
     font-weight: 600;
+    input {
+      margin-bottom: 0rem;
+    }
   }
 
   .card-section {
     padding: 8px 15px;
     margin: 0px 15px;
   }
-
-}
-
-.regLabel input {
-    margin-bottom: 0rem;
 }

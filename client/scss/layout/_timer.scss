@@ -1,164 +1,82 @@
-$timer-outer-height: 400px;
-$timer-outer-width: 400px;
-
-$hand-background-color-hour: rgba(0, 0, 0, 0.3);
-$hand-border-color-hour: #bb2684;
-
-$hand-background-color-minute: rgba(0, 0, 0, 0.2);
-$hand-border-color-minute: #07bb9c;
-
-$hand-background-color-second: rgba(0, 0, 0, 0.1);
-$hand-border-color-second: #7d6dad;
-
-$duration-hour: 3600s;
-$duration-minute: 60s;
-$duration-second: 1s;
+$success: map-get($foundation-palette, 'success');
+$alert: map-get($foundation-palette, 'alert');
+$wrapper-bg-color: rgba(0, 0, 0, 0.6);
 
 
 .switchWrap{
   border-radius: 5000px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: $wrapper-bg-color;
   padding: 15px;
   margin-top: 15px;
+  .switch {
+    margin-bottom: 0px;
+  }
 }
-.switch {
-  margin-bottom: 0px;
-}
+
 
 .timerCtrlWrap {
   border-radius: 25px;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: $wrapper-bg-color;
   padding: 20px 30px;
-}
-.button-group .button {
-  margin-bottom: 0px;
+
+  .timerCtrl {
+    padding: 30px 50px;
+    margin: 10px;
+    color: $black !important;
+  }
 }
 
-.timerCtrl {
-  padding: 30px 50px;
-  margin: 30px 0;
-  color: $black !important;
-}
 #timerCell {
   margin-bottom: 30px;
-}
 
-.timerWrap {
-  fill: rgba(0, 0, 0, 0.6);
-}
+  .timer-group {
+    position: relative;
+    top: 30px;
+    width: 300px;
+    margin: 10px auto 0px auto;
 
-//New Timer
-button[data-setter] {
-  outline: none;
-  background: transparent;
-  border: none;
-  font-family: 'Roboto';
-  font-weight: 300;
-  font-size: 18px;
-  width: 25px;
-  height: 30px;
-  color: #f7958e;
-  cursor: pointer;
-}
+    .timerWrap {
+      fill: $wrapper-bg-color;
+    }
 
-button[data-setter]:hover {
-  opacity: 0.5;
-}
+    .face {
+      fill: $black;
+      stroke: #b6b6b6;
+      &.minutes {
+        stroke-width: 17px;
+      }
+      &.seconds {
+        stroke-width: 3px;
+      }
+    }
+    
+    .hand {
+      fill: none;
+      &.minutes {
+        stroke-width: 17px;
+        stroke: $success;
+      }
+      &.seconds {
+        stroke-width: 3px;
+        stroke: $alert;
+      }
+    }
 
-.container {
-  position: relative;
-  top: 30px;
-  width: 300px;
-  margin: 10px auto 0px auto;
-}
-
-.setters {
-  position: absolute;
-  left: 85px;
-  top: 75px;
-}
-
-.minutes-set {
-  float: left;
-  margin-right: 28px;
-}
-
-.seconds-set {
-  float: right;
-}
-
-.controlls {
-  position: absolute;
-  left: 75px;
-  top: 105px;
-  text-align: center;
-}
-
-.display-remain-time {
-  font-family: 'Roboto';
-  font-weight: 100;
-  font-size: 65px;
-  color: $light-gray;
-}
-
-#pause {
-  outline: none;
-  background: transparent;
-  border: none;
-  margin-top: 10px;
-  width: 50px;
-  height: 50px;
-  position: relative;
-}
-
-.play::before {
-  display: block;
-  content: '';
-  position: absolute;
-  top: 8px;
-  left: 16px;
-  border-top: 15px solid transparent;
-  border-bottom: 15px solid transparent;
-  border-left: 22px solid #f7958e;
-}
-
-.pause::after {
-  content: '';
-  position: absolute;
-  top: 8px;
-  left: 12px;
-  width: 15px;
-  height: 30px;
-  background-color: transparent;
-  border-radius: 1px;
-  border: 5px solid #f7958e;
-  border-top: none;
-  border-bottom: none;
-}
-
-#pause:hover {
-  opacity: 0.8;
-}
-
-.face {
-  fill: $black;
-  stroke: #b6b6b6;
-  &.minutes {
-    stroke-width: 17px;
-  }
-  &.seconds {
-    stroke-width: 3px;
+    .timerDisplay {
+      position: absolute;
+      left: 75px;
+      top: 105px;
+      text-align: center;
+      .display-remain-time {
+        font-family: 'Baumans', cursive;
+        font-weight: 100;
+        font-size: 65px;
+        color: $light-gray;
+      }
+    }
   }
 }
 
-.hand {
-  fill: none;
-  &.minutes {
-    stroke-width: 17px;
-    stroke: map-get($foundation-palette, 'success');
-  }
-  &.seconds {
-    stroke-width: 3px;
-    stroke: map-get($foundation-palette, 'alert');
-  }
-}
+
+
+

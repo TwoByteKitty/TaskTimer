@@ -1,5 +1,5 @@
-{{!-- Toggle --}}
 <div class="grid-x">
+  {{!-- Toggle --}}
   <div class="cell small-12 flex-container align-center-middle">
     <div class="switchWrap flex-child-shrink">
       <div class="switch large">
@@ -15,22 +15,21 @@
 
   {{!-- Timer --}}
   <div class="cell small-12" id="timerCell">
-    <div class="container timer-group">
-      <div class="circle">
-        <svg width="400" viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg">
-          <g transform="translate(150,150)">
-             <circle r="135" class="timerWrap" />
-            <circle r="110" class="e-c-base face minutes" />
-            <circle r="100" class="e-c-base face seconds" />
-            <g transform="rotate(-90)">
-              <circle r="110" class="e-c-progress hand minutes" />
-            </g>
-            <g transform="rotate(-90)">
-              <circle r="100" class="e-c-progress hand seconds" />
-            </g>
+    <div class="timer-group">
+      <svg width="400" viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(150,150)">
+          <circle r="135" class="timerWrap" />
+          <circle r="110" class="face minutes" />
+          <circle r="100" class="face seconds" />
+          <g transform="rotate(-90)">
+            <circle r="110" class="hand minutes" />
           </g>
-        </svg> </div>
-      <div class="controlls">
+          <g transform="rotate(-90)">
+            <circle r="100" class="hand seconds" />
+          </g>
+        </g>
+      </svg>
+      <div class="timerDisplay">
         <div class="display-remain-time">00:30</div>
       </div>
     </div>
