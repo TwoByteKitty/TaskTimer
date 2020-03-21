@@ -1,6 +1,4 @@
-#currentTaskGrid {
-    margin-bottom: 30px;
-}
+
 #pendingTasksGrid {
     margin-top: 30px;
     margin-bottom: 30px;
@@ -15,9 +13,12 @@
     color: $light-gray;
     border-color: $black;
     padding-top: 15px;
-}
-.ctTskCdTitle {
-    background-color: $black;
-    padding: 30px 15px;
-
+    .currentTitle {
+        background-color: $black;
+        padding: 30px 15px;
+    .activeTitleDisp {
+        text-align: center; 
+        width: 100%;
+    }
+    }
 }

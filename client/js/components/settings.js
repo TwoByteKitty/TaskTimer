@@ -5,8 +5,8 @@ const SETTINGS_BTN = document.getElementById('saveSettingsBtn');
 
 function saveSettings(event) {
     console.log(SETTINGS_FORM);
-    const formData = new FormData(SETTINGS_FORM);
-    $.post('/user/settings', formData).then((err, data) => {
+    const settingsData = new FormData(SETTINGS_FORM);
+    $.post('/user/settings', settingsData).then((err, data) => {
         if (err) {
             console.log(err);
         } 

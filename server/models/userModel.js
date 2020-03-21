@@ -8,7 +8,7 @@ var userSchema = new Schema({
     settings : {
         workTime: {type: Number, default: 30},
         breakTime: {type: Number, default: 5},
-        volume: Number,
+        volume: {type: Number, default: 50},
         alarm: String
     }
 

@@ -8,8 +8,7 @@ router.get('/', function (req, res, next) {
 });
 //This will be hit via AJAX [/user/settings]
 router.post('/settings', function (req, res, next) {
-  //Get user Model and Updates Accordingly. Example on Task.
-  res.send('respond with a resource');
+  console.log(req.body);
 });
 
 

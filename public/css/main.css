@@ -5160,9 +5160,6 @@ body {
         font-size: 65px;
         color: #E4E2EA; }
 
-#currentTaskGrid {
-  margin-bottom: 30px; }
-
 #pendingTasksGrid {
   margin-top: 30px;
   margin-bottom: 30px; }
@@ -5175,10 +5172,12 @@ body {
   color: #E4E2EA;
   border-color: black;
   padding-top: 15px; }
-
-.ctTskCdTitle {
-  background-color: black;
-  padding: 30px 15px; }
+  .currentTskCard .currentTitle {
+    background-color: black;
+    padding: 30px 15px; }
+    .currentTskCard .currentTitle .activeTitleDisp {
+      text-align: center;
+      width: 100%; }
 
 .button {
   box-shadow: 2px 3px 5px 3px rgba(56, 59, 65, 0.5); }

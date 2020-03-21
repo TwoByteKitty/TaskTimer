@@ -5,14 +5,14 @@
         </div>
         <div class="cell small-12 setgMenuCell">
             <label class="setgMenuLabel">Work Timer
-                <input type="number" name="workTime" aria-describedby="workTimerHelpText" min="10" max="120">
+                <input type="number" name="workTime" aria-describedby="workTimerHelpText" min="10" max="120" value="{{settings.workTime}}">
             </label>
             <p class="help-text" id="workTimerHelpText">Choose a duration for your work timer in minutes. Minimum 10
                 minutes, maximum 120 minutes.</p>
         </div>
         <div class="cell small-12 setgMenuCell">
             <label class="setgMenuLabel">Rest Timer
-                <input type="number" name="restTime" aria-describedby="restTimerHelpText" min="5" max="30">
+                <input type="number" name="restTime" aria-describedby="restTimerHelpText" min="5" max="30" value="{{settings.breakTime}}">
             </label>
             <p class="help-text" id="restTimerHelpText">Choose a duration for your rest timer in minutes. Minimum 5
                 minutes, maximum 30 minutes.</p>
@@ -22,7 +22,7 @@
                 <div class="slider" data-slider data-initial-start="50" data-end="100" id="volSlider">
                     <span class="slider-handle" data-slider-handle role="slider" tabindex="1"></span>
                     <span class="slider-fill secondary" data-slider-fill></span>
-                    <input name="volume" type="hidden" id="volSliderInput">
+                    <input name="volume" type="hidden" id="volSliderInput" value="{{settings.volume}}">
                 </div>
             </label>
         </div>
