@@ -61,7 +61,7 @@
 //  56. Xy Grid
 
 @import '~foundation-sites/scss/util/util';
-@import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400);
+@import url('https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400');
 
 // 1. Global
 // ---------
@@ -82,6 +82,7 @@ $dark-gray: rgb(56, 59, 65);
 $black: rgb(0, 0, 0);
 $white: #fefefe;
 $body-background: $white;
+$body-background-img: url('/assets/hubble1.png');
 $body-font-color: $black;
 $body-font-family: Helvetica, Roboto, Arial, sans-serif;
 $body-antialiased: true;
@@ -327,10 +328,10 @@ $callout-link-tint: 30%;
 // 14. Card
 // --------
 
-$card-background: $white;
-$card-font-color: $body-font-color;
-$card-divider-background: $light-gray;
-$card-border: 3px solid $light-gray;
+$card-background: $medium-gray;
+$card-font-color: $light-gray;
+$card-divider-background: $dark-gray;
+$card-border: 3px solid $dark-gray;
 $card-shadow: 3px 3px 7px 5px rgba($black, 0.5);
 $card-border-radius: $global-radius;
 $card-padding: $global-padding;

@@ -6,6 +6,11 @@
 <body>
     {{>unAHeader}}
     {{{body}}}
+
+    <script src="/js/global.build.js"></script>
+    {{#if (equals settings.env 'development')}}
+    <script src={{refresh}}></script>
+    {{/if}}
 </body>
 
 </html>

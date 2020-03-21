@@ -24,6 +24,9 @@
         display: inline;
         margin-left: 7px;
     }
+    .regWelcome {
+        color:  map-get($foundation-palette, "warning");
+    }
 }
 
 

@@ -18,7 +18,7 @@
                 </div>
                 <div class="cell tasksBtnsCell">
                     {{#if (equals @exphbs.view "home")}}
-                    <a href="/tasks" class="button large">Task Management</a>
+                    <a href="/tasks" class="button large">Task Search</a>
                     {{else}}
                     <a href="/" class="button large">Timer Dashboard</a>
                     {{/if}}
@@ -41,11 +41,9 @@
                         <div class="card-section">
                             <div>
                                 <button class="button large markActiveBtn" type="button" {{#if active}} disabled {{/if}}
-                                    data-task-id="{{_id}}">Set As
-                                    Active</button>
-                                <button class="button large markComplBtn" type="button" data-task-id="{{_id}}">Mark
-                                    Complete</button>
-                                <a href="/tasks/{{_id}}" class="button large">Edit</a>
+                                    data-task-id="{{_id}}">Set As Active</button>
+                                <button class="button large markComplBtn success" type="button" data-task-id="{{_id}}">Mark Complete</button>
+                                <a href="/tasks/{{_id}}" class="button large editBtn alert">Edit</a>
                             </div>
                         </div>
                     </div>

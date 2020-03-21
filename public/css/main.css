@@ -3071,12 +3071,12 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
   -webkit-box-flex: 1;
           flex-grow: 1;
   margin-bottom: 1rem;
-  border: 3px solid #E4E2EA;
+  border: 3px solid #383b41;
   border-radius: 9px;
-  background: #fefefe;
+  background: #9A9EAB;
   box-shadow: 3px 3px 7px 5px rgba(0, 0, 0, 0.5);
   overflow: hidden;
-  color: black; }
+  color: #E4E2EA; }
   .card > :last-child {
     margin-bottom: 0; }
 
@@ -3086,7 +3086,7 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
   -webkit-box-flex: 0;
           flex: 0 1 auto;
   padding: 1rem;
-  background: #E4E2EA; }
+  background: #383b41; }
   .card-divider > :last-child {
     margin-bottom: 0; }
 
@@ -5079,6 +5079,12 @@ html.is-reveal-open {
     .show-for-portrait {
       display: block !important; } }
 
+body {
+  background-image: url("/assets/hubble1.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; }
+
 .header {
   background-color: black;
   box-shadow: 0 0 10px 5px rgba(56, 59, 65, 0.5); }
@@ -5099,173 +5105,25 @@ html.is-reveal-open {
   .header .headWelcomeDate {
     display: inline;
     margin-left: 7px; }
+  .header .regWelcome {
+    color: #EFDCF9; }
 
-@-webkit-keyframes spin1 {
-  0% {
-    -webkit-transform: rotate(405deg);
-            transform: rotate(405deg); }
-  50% {
-    -webkit-transform: rotate(225deg);
-            transform: rotate(225deg); }
-  100% {
-    -webkit-transform: rotate(225deg);
-            transform: rotate(225deg); } }
+.switchWrap {
+  border-radius: 5000px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 15px;
+  margin-top: 15px; }
 
-@keyframes spin1 {
-  0% {
-    -webkit-transform: rotate(405deg);
-            transform: rotate(405deg); }
-  50% {
-    -webkit-transform: rotate(225deg);
-            transform: rotate(225deg); }
-  100% {
-    -webkit-transform: rotate(225deg);
-            transform: rotate(225deg); } }
+.switch {
+  margin-bottom: 0px; }
 
-@-webkit-keyframes spin2 {
-  0% {
-    -webkit-transform: rotate(405deg);
-            transform: rotate(405deg); }
-  50% {
-    -webkit-transform: rotate(405deg);
-            transform: rotate(405deg); }
-  100% {
-    -webkit-transform: rotate(225deg);
-            transform: rotate(225deg); } }
+.timerCtrlWrap {
+  border-radius: 25px;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px 30px; }
 
-@keyframes spin2 {
-  0% {
-    -webkit-transform: rotate(405deg);
-            transform: rotate(405deg); }
-  50% {
-    -webkit-transform: rotate(405deg);
-            transform: rotate(405deg); }
-  100% {
-    -webkit-transform: rotate(225deg);
-            transform: rotate(225deg); } }
-
-.timer-group {
-  height: 400px;
-  margin: 0 auto;
-  position: relative;
-  width: 400px; }
-  .timer-group .timer {
-    border-radius: 50%;
-    height: 100px;
-    overflow: hidden;
-    position: absolute;
-    width: 100px; }
-    .timer-group .timer:after {
-      background: #111;
-      border-radius: 50%;
-      content: '';
-      display: block;
-      height: 80px;
-      left: 10px;
-      position: absolute;
-      width: 80px;
-      top: 10px; }
-    .timer-group .timer .hand {
-      float: left;
-      height: 100%;
-      overflow: hidden;
-      position: relative;
-      width: 50%; }
-      .timer-group .timer .hand:first-child {
-        -webkit-transform: rotate(180deg);
-                transform: rotate(180deg); }
-        .timer-group .timer .hand:first-child span {
-          -webkit-animation-name: spin1;
-                  animation-name: spin1; }
-      .timer-group .timer .hand:last-child span {
-        -webkit-animation-name: spin2;
-                animation-name: spin2; }
-      .timer-group .timer .hand span {
-        -webkit-animation-timing-function: linear;
-                animation-timing-function: linear;
-        border-style: solid;
-        border-bottom-color: transparent;
-        border-left-color: transparent;
-        border-radius: 50%;
-        display: block;
-        height: 0;
-        position: absolute;
-        right: 0;
-        top: 0;
-        -webkit-transform: rotate(225deg);
-                transform: rotate(225deg);
-        width: 0; }
-    .timer-group .timer.hour {
-      background: rgba(0, 0, 0, 0.3);
-      height: 400px;
-      left: 0;
-      width: 400px;
-      top: 0; }
-      .timer-group .timer.hour:after {
-        height: 360px;
-        left: 20px;
-        width: 360px;
-        top: 20px; }
-      .timer-group .timer.hour .hand span {
-        -webkit-animation-duration: 3600s;
-                animation-duration: 3600s;
-        border-top-color: #bb2684;
-        border-right-color: #bb2684;
-        border-width: 200px; }
-    .timer-group .timer.minute {
-      background: rgba(0, 0, 0, 0.2);
-      height: 350px;
-      left: 25px;
-      width: 350px;
-      top: 25px; }
-      .timer-group .timer.minute:after {
-        height: 310px;
-        left: 20px;
-        width: 310px;
-        top: 20px; }
-      .timer-group .timer.minute .hand span {
-        border-top-color: #07bb9c;
-        border-right-color: #07bb9c;
-        border-width: 175px; }
-    .timer-group .timer.second {
-      background: rgba(0, 0, 0, 0.1);
-      height: 300px;
-      left: 50px;
-      width: 300px;
-      top: 50px; }
-      .timer-group .timer.second:after {
-        height: 296px;
-        left: 2px;
-        width: 296px;
-        top: 2px; }
-      .timer-group .timer.second .hand span {
-        border-top-color: #7d6dad;
-        border-right-color: #7d6dad;
-        border-width: 150px; }
-  .timer-group .face {
-    font-family: 'Yanone Kaffeesatz';
-    color: whitesmoke;
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-    height: 296px;
-    left: 52px;
-    padding: 165px 40px 0;
-    position: absolute;
-    width: 296px;
-    text-align: center;
-    top: 52px; }
-    .timer-group .face h2 {
-      font-family: 'Yanone Kaffeesatz' !important;
-      font-weight: 300;
-      margin-top: 38px; }
-    .timer-group .face p {
-      border-radius: 20px;
-      font-size: 76px;
-      font-weight: 400;
-      position: absolute;
-      top: 40px;
-      width: 260px;
-      left: 20px; }
+.button-group .button {
+  margin-bottom: 0px; }
 
 .timerCtrl {
   padding: 30px 50px;
@@ -5274,6 +5132,9 @@ html.is-reveal-open {
 
 #timerCell {
   margin-bottom: 30px; }
+
+.timerWrap {
+  fill: rgba(0, 0, 0, 0.6); }
 
 button[data-setter] {
   outline: none;
@@ -5294,7 +5155,7 @@ button[data-setter]:hover {
   position: relative;
   top: 30px;
   width: 300px;
-  margin: 0 auto; }
+  margin: 10px auto 0px auto; }
 
 .setters {
   position: absolute;
@@ -5318,7 +5179,7 @@ button[data-setter]:hover {
   font-family: 'Roboto';
   font-weight: 100;
   font-size: 65px;
-  color: #f7958e; }
+  color: #E4E2EA; }
 
 #pause {
   outline: none;
@@ -5367,21 +5228,10 @@ button[data-setter]:hover {
   fill: none; }
   .hand.minutes {
     stroke-width: 17px;
-    stroke: #7D6DAD; }
+    stroke: #07BB9C; }
   .hand.seconds {
     stroke-width: 3px;
     stroke: #BB2684; }
-
-.e-c-pointer {
-  fill: #fff;
-  stroke: #f7958e;
-  stroke-width: 2px; }
-
-#e-pointer {
-  -webkit-transition: -webkit-transform 0.7s;
-  transition: -webkit-transform 0.7s;
-  transition: transform 0.7s;
-  transition: transform 0.7s, -webkit-transform 0.7s; }
 
 #currentTaskGrid {
   margin-bottom: 30px; }
