@@ -5269,5 +5269,17 @@ button[data-setter]:hover {
   padding: 15px;
   margin: 10px; }
 
+.regCard {
+  padding: 12px 20px; }
+  .regCard .regLabel {
+    font-size: 15px;
+    font-weight: 600; }
+  .regCard .card-section {
+    padding: 8px 15px;
+    margin: 0px 15px; }
+
+.regLabel input {
+  margin-bottom: 0rem; }
+
 
 /*# sourceMappingURL=main.css.map*/

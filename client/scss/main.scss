@@ -1,28 +1,47 @@
-@import 'base/base';
-@import 'layout/overrides';
+@import "base/base";
+@import "layout/overrides";
 
-@import 'layout/header';
+@import "layout/header";
 
-@import 'layout/timer';
+@import "layout/timer";
 
-@import 'layout/taskList';
+@import "layout/taskList";
 
 .button {
-    box-shadow: 2px 3px 5px 3px rgba($dark-gray, 0.5);
+  box-shadow: 2px 3px 5px 3px rgba($dark-gray, 0.5);
 }
 
 .offCvsDiv {
-    text-align: center;
-    padding: 50px 20px;
-    width: 30%;
+  text-align: center;
+  padding: 50px 20px;
+  width: 30%;
 }
 
 .setgMenuLabel {
-    font-size: 18px;
-    font-weight: 600;
+  font-size: 18px;
+  font-weight: 600;
 }
 
-.setgMenuCell{
-    padding: 15px;
-    margin: 10px;
+.setgMenuCell {
+  padding: 15px;
+  margin: 10px;
+}
+
+.regCard {
+    padding: 12px 20px;
+
+  .regLabel {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .card-section {
+    padding: 8px 15px;
+    margin: 0px 15px;
+  }
+
+}
+
+.regLabel input {
+    margin-bottom: 0rem;
 }
