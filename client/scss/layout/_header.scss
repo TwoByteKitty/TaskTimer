@@ -19,13 +19,16 @@
     .headWelcome {
         color: $light-gray !important;
         display: inline;
+        font-family: 'Advent Pro', sans-serif;
     }
     .headWelcomeDate {
         display: inline;
         margin-left: 7px;
+        font-family: 'Bellota Text', sans-serif;
     }
     .regWelcome {
         color:  map-get($foundation-palette, "warning");
+        font-family: 'Advent Pro', sans-serif;
     }
 }
 

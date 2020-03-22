@@ -8,12 +8,29 @@ router.get('/', function (req, res, next) {
 });
 //This will be hit via AJAX [/user/settings]
 router.post('/settings', function (req, res, next) {
-  console.log(req.body);
+  req.user = {
+    _id: "5e757dd0a02a924a34b08754",
+    settings: {
+      workTime: 30,
+      breakTime: 5,
+      volume: 50
+    },
+    name: "Allie Payne",
+  };
+  userModel.findByIdAndUpdate(req.user._id, { ...req.user, settings: { ...req.body } }, (err, user) => {
+    if (err) {
+      return res.status(500).json({
+        message: 'Error when updating settings',
+        error: err
+      });
+    }
+    res.json(user);
+  });
 });
 
 
 router.get('/register', function (req, res, next) {
-  res.render('registration', {layout: 'unauth.hbs'});
+  res.render('registration', { layout: 'unauth.hbs' });
 });
 
 

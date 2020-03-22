@@ -5,12 +5,13 @@ const SETTINGS_BTN = document.getElementById('saveSettingsBtn');
 
 function saveSettings(event) {
     console.log(SETTINGS_FORM);
-    const settingsData = new FormData(SETTINGS_FORM);
-    $.post('/user/settings', settingsData).then((err, data) => {
+    const settingsData = $(SETTINGS_FORM).serialize();
+    console.log(settingsData);
+    $.post('/user/settings', settingsData).then((err, user) => {
         if (err) {
             console.log(err);
         } 
-        console.log(data);
+        console.log(user);
     });
 
 };
