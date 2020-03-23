@@ -12,6 +12,7 @@ router.get('/', function (req, res, next) {
     const completedTasks = foundTasks.filter(task => task.completed);
     res.render('tasks', {
       user: req.user,
+      title: "Task Search",
       pendingTasks: {
         tasks: incompleteTasks,
         activeTitle
@@ -28,7 +29,10 @@ router.get('/', function (req, res, next) {
 router.get('/create', function (req, res, next) {
   //Once passport is set up, the user will just be available
   req.user = { name: 'User McUserson' };
-  res.render('createOrEditTask', { user: req.user });
+  res.render('createOrEditTask', {
+    user: req.user,
+    title: "Create New Task",
+  });
 });
 
 //Send New Task to be created in db
@@ -53,6 +57,7 @@ router.get('/:id', function (req, res, next) {
   tasksModel.findOne({ _id: req.params.id }, (err, foundTask) => {
     res.render('createOrEditTask', {
       user: req.user,
+      title: "Edit Your Task",
       task: foundTask.toObject()
     });
   });

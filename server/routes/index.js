@@ -29,6 +29,7 @@ router.get('/', function(req, res, next) {
 
       res.render('home', {
         user: req.user,
+        title: "TaskTimer",
         taskData
       });
     });

@@ -36,21 +36,26 @@
     }
   }
 }
-.pendingHeading{
-    font-size: 45px;
-    font-weight: 500;
-    color: $light-gray;
-    text-shadow: 3px 4px 8px black;
+.pendingHeading {
+  font-size: 45px;
+  font-weight: 500;
+  color: $light-gray;
+  text-shadow: 3px 4px 8px black;
 }
 
-.taskCardTitle {
-  font-size: 30px;
-  padding-left: 10px;
-  margin-left: 10px;
-  margin-bottom: 0px;
-  font-family: "Merienda", cursive;
-}
+.taskCard {
+  .taskCardTitle {
+    font-size: 30px;
+    padding-left: 10px;
+    margin-left: 10px;
+    margin-bottom: 0px;
+    font-family: "Merienda", cursive;
+  }
 
-.editBtn {
-  padding: 12px 10px 20px 20px;
+  .editBtn {
+    padding: 12px 10px 20px 20px;
+    box-shadow: 3px 4px 5px black, 
+      inset -1px -2px 2px rgba(255, 255, 255, 0.3),
+      inset 3px 4px 5px rgba(255, 255, 255, 0.5);
+  }
 }
