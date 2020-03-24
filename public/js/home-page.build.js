@@ -28420,7 +28420,7 @@ let isStarted = false;
 let settings = {}; //#region 2nd Timer
 
 function displayTimeLeft(timeLeft) {
-  const displayString = `${settings.timer.minutes() > 0 ? settings.timer.minutes() + ' : ' : ''}
+  const displayString = `${settings.timer.minutes() < 10 ? '0' + settings.timer.minutes() : settings.timer.minutes()}:
   ${settings.timer.seconds() < 10 ? '0' + settings.timer.seconds() : settings.timer.seconds()}`;
   DISPLAY_OUTPUT.textContent = displayString;
   update(timeLeft);

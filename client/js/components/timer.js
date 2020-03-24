@@ -30,8 +30,10 @@ let settings = {};
 
 function displayTimeLeft(timeLeft) {
   const displayString = `${
-    settings.timer.minutes() > 0 ? settings.timer.minutes() + ' : ' : ''
-  }
+    settings.timer.minutes() < 10
+    ? '0' + settings.timer.minutes()
+    : settings.timer.minutes()
+  }:
   ${
     settings.timer.seconds() < 10
       ? '0' + settings.timer.seconds()

@@ -1,40 +1,44 @@
-<form class="creTskFrmEl" name="task" action="/tasks/{{#if task}}{{task._id}}{{else}}create{{/if}}"
-    method="POST">
-    <div class="grid-x grid-margin-x grid-padding-x creTskGrdEl">
+<form class="creTskFrmEl" name="task" action="/tasks/{{#if task}}{{task._id}}{{else}}create{{/if}}" method="POST">
+    <div class="grid-x grid-margin-x grid-padding-x align-center-middle createTskGrd">
         <div class="cell">
             <div class="input-group">
-                <span class="input-group-label">Title</span>
+                <span class="input-group-label titleInputLbl">&nbsp;Title</span>
                 <input class="input-group-field" type="text" name="title" id="taskTitleInput" value="{{task.title}}">
             </div>
         </div>
         <div class="cell">
             <div class="input-group">
                 <span class="input-group-label">Description</span>
-                <input class="input-group-field" type="text" name="description" id="taskDescrInput"
-                    value="{{task.description}}">
+                <textarea class="input-group-field" rows="5" type="text" name="description" id="taskDescrInput"
+                    value="{{task.description}}"></textarea>
             </div>
         </div>
-        <div class="cell">
+        <div class="cell priorityCell">
             <fieldset class="fieldset" id="taskPriorityFieldset">
                 <legend>Choose a Priority Level</legend>
-                <input id="priLvlVyLow" type="radio" name="priorityLvl" value="1" {{#if (equals task.priorityLvl 1)}}
-                    checked {{/if}}><label for="priLvlVyLow">Very
+                <input class="fieldsetInput" id="priLvlVyLow" type="radio" name="priorityLvl" value="1"
+                    {{#if (equals task.priorityLvl 1)}} checked {{/if}}><label class="fieldsetInputLbl"
+                    for="priLvlVyLow">Very
                     Low</label>
-                <input id="priLvlLow" type="radio" name="priorityLvl" value="2" {{#if (equals task.priorityLvl 2)}}
-                    checked {{/if}}><label for="priLvlLow">Low</label>
-                <input id="priLvlMed" type="radio" name="priorityLvl" value="3" {{#if (equals task.priorityLvl 3)}}
-                    checked {{/if}}><label for="priLvlMed">Medium</label>
-                <input id="priLvlHigh" type="radio" name="priorityLvl" value="4" {{#if (equals task.priorityLvl 4)}}
-                    checked {{/if}}><label for="priLvlHigh">High</label>
-                <input id="priLvlUrg" type="radio" name="priorityLvl" value="5" {{#if (equals task.priorityLvl 5)}}
-                    checked {{/if}}><label for="priLvlUrg">Urgent</label>
+                <input class="fieldsetInput" id="priLvlLow" type="radio" name="priorityLvl" value="2"
+                    {{#if (equals task.priorityLvl 2)}} checked {{/if}}><label class="fieldsetInputLbl"
+                    for="priLvlLow">Low</label>
+                <input class="fieldsetInput" id="priLvlMed" type="radio" name="priorityLvl" value="3"
+                    {{#if (equals task.priorityLvl 3)}} checked {{/if}}><label class="fieldsetInputLbl"
+                    for="priLvlMed">Medium</label>
+                <input class="fieldsetInput" id="priLvlHigh" type="radio" name="priorityLvl" value="4"
+                    {{#if (equals task.priorityLvl 4)}} checked {{/if}}><label class="fieldsetInputLbl"
+                    for="priLvlHigh">High</label>
+                <input class="fieldsetInput" id="priLvlUrg" type="radio" name="priorityLvl" value="5"
+                    {{#if (equals task.priorityLvl 5)}} checked {{/if}}><label class="fieldsetInputLbl"
+                    for="priLvlUrg">Urgent</label>
             </fieldset>
         </div>
         {{#unless task}}
         <input type="hidden" id="dateTaskCreated" name="dateCreated"></input>
         {{/unless}}
-        <div class="cell">
-            <button class="button large" type="submit" id="createTaskBtn">Create</button>
+        <div class="cell flex-container align-center-middle">
+            <button class="button large expanded" type="submit" id="createTaskBtn">Create</button>
         </div>
     </div>
 </form>

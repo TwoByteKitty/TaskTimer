@@ -5091,7 +5091,8 @@ p {
 
 .header {
   background-color: black;
-  box-shadow: 0 0 10px 5px rgba(56, 59, 65, 0.5); }
+  box-shadow: 0 0 10px 5px rgba(56, 59, 65, 0.5);
+  margin-bottom: 30px; }
   .header .subHeader {
     background-color: #383b41; }
     .header .subHeader .headerBtn {
@@ -5227,6 +5228,8 @@ p {
 
 .button {
   box-shadow: 2px 3px 5px 3px rgba(0, 0, 0, 0.5), inset -1px -1px 2px rgba(255, 255, 255, 0.3), inset 3px 4px 5px rgba(255, 255, 255, 0.5); }
+  .button.success {
+    box-shadow: 2px 3px 5px 3px rgba(0, 0, 0, 0.5), inset -1px -1px 3px rgba(240, 252, 254, 0.8), inset 3px 4px 6px rgba(240, 252, 254, 0.9); }
 
 .offCvsDiv {
   text-align: center;
@@ -5243,14 +5246,36 @@ p {
 
 .regCard {
   padding: 12px 20px; }
+  .regCard .fa-dragon {
+    margin: 20px 25px 15px 25px; }
   .regCard .regLabel {
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 600; }
     .regCard .regLabel input {
       margin-bottom: 0rem; }
   .regCard .card-section {
     padding: 8px 15px;
     margin: 0px 15px; }
+  .regCard .bottomCell {
+    margin-bottom: 30px; }
+
+.createTskGrd {
+  width: 75%;
+  margin: 50px auto;
+  font-weight: 600; }
+  .createTskGrd .titleInputLbl {
+    padding: 0 3.5rem 0 1rem; }
+  .createTskGrd .priorityCell {
+    background-color: #E4E2EA;
+    margin-bottom: 30px;
+    width: 96%;
+    border-radius: 8px; }
+    .createTskGrd .priorityCell .fieldsetInput {
+      margin-left: 35px; }
+    .createTskGrd .priorityCell .fieldsetInputLbl {
+      font-size: 22px; }
+  .createTskGrd .button {
+    font-size: 30px; }
 
 
 /*# sourceMappingURL=main.css.map*/

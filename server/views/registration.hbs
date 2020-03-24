@@ -1,7 +1,10 @@
 <form name="user" action="/user/register" method="POST" style="margin-top: 45px;">
     <div class="grid-container">
-        <div class="card regCard grid-x grid-padding-x grid-margin-x text-left">
-            <i class="fas fa-dragon"></i>
+        <div class="card regCard grid-x grid-padding-x grid-margin-x text-left align-center-middle">
+            <div class="cell flex-container align-center-middle">
+                <i class="fas fa-dragon"></i><i class="fas fa-dragon"></i><i class="fas fa-dragon"></i>
+            </div>
+
             <div class="cell card-section">
                 <label for="name" class="middle regLabel">Your Name
                     <input name="name" type="text" id="name" placeholder="Jane Doe">
@@ -26,12 +29,16 @@
                 </label>
             </div>
 
-            <div class="cell card-section">
+            <div class="cell card-section bottomCell">
                 <label for="confirmPassword" class="middle regLabel">Confirm Password
                     <input name="confirmPassword" type="password" id="confirmPassword" placeholder="">
                 </label>
             </div>
-            <i class="fas fa-dragon fa-flip-horizontal"></i>
+            <div class="cell flex-container align-center-middle">
+                <i class="fas fa-dragon fa-flip-horizontal"></i><i class="fas fa-dragon fa-flip-horizontal"></i><i
+                    class="fas fa-dragon fa-flip-horizontal"></i>
+            </div>
+
         </div>
         <button class="button large expanded" type="submit">Submit</button>
     </div>

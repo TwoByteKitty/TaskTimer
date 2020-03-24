@@ -5,6 +5,7 @@ $warning: map-get($foundation-palette, "warning");
 .header {
     background-color: $black;
     box-shadow: 0 0 10px 5px rgba($dark-gray, 0.5);
+    margin-bottom: 30px;
     .subHeader {
         background-color: $dark-gray;
         .headerBtn {
