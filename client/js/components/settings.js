@@ -1,24 +1,19 @@
 const SETTINGS_FORM = document.settings;
 const SETTINGS_BTN = document.getElementById('saveSettingsBtn');
 
-
-
 function saveSettings(event) {
-    console.log(SETTINGS_FORM);
-    const settingsData = $(SETTINGS_FORM).serialize();
-    console.log(settingsData);
-    $.post('/user/settings', settingsData).then((err, user) => {
-        if (err) {
-            console.log(err);
-        } 
-        console.log(user);
-    });
-
-};
-
+  console.log(SETTINGS_FORM);
+  const settingsData = $(SETTINGS_FORM).serialize();
+  console.log(settingsData);
+  $.post('/user/settings', settingsData).then((err, user) => {
+    if (err) {
+      console.log(err);
+    }
+    console.log(user);
+    //Emit custom event passing user setting as data.
+  });
+}
 
 export function initSettingsForm() {
-
-
-    SETTINGS_BTN.addEventListener('click', saveSettings);
-};
+  SETTINGS_BTN.addEventListener('click', saveSettings);
+}

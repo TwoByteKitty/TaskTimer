@@ -1,4 +1,3 @@
-
 const PLAYBTN = document.getElementById('startTimerBtn');
 const PAUSEBTN = document.getElementById('pauseTimerBtn');
 const STOPBTN = document.getElementById('resetTimerBtn');
@@ -31,8 +30,8 @@ let settings = {};
 function displayTimeLeft(timeLeft) {
   const displayString = `${
     settings.timer.minutes() < 10
-    ? '0' + settings.timer.minutes()
-    : settings.timer.minutes()
+      ? '0' + settings.timer.minutes()
+      : settings.timer.minutes()
   }:
   ${
     settings.timer.seconds() < 10
@@ -41,7 +40,7 @@ function displayTimeLeft(timeLeft) {
   }`;
   DISPLAY_OUTPUT.textContent = displayString;
   update(timeLeft);
-};
+}
 
 function update(value) {
   let timeInitial;
@@ -53,7 +52,7 @@ function update(value) {
   const timeFraction = value / timeInitial.asSeconds();
   const minsOffset = -MINUTES_LENGTH - MINUTES_LENGTH * timeFraction;
   MINS_PROGRESS_BAR.style.strokeDashoffset = minsOffset;
-};
+}
 
 function runTimer(seconds) {
   displayTimeLeft(seconds);
@@ -80,8 +79,7 @@ function runTimer(seconds) {
     }
     displayTimeLeft(timeLeft);
   }, 1000);
-};
-
+}
 
 function resetTimer(event, toggle) {
   let minutes;
@@ -102,7 +100,7 @@ function resetTimer(event, toggle) {
     STOPBTN.disabled = true;
     displayTimeLeft(wholeTime);
   }
-};
+}
 
 function playTimer(event) {
   if (isStarted === false) {
@@ -118,7 +116,7 @@ function playTimer(event) {
     PAUSEBTN.disabled = false;
     STOPBTN.disabled = false;
   }
-};
+}
 
 //add saving time to task
 function pauseTimer(event) {
@@ -131,17 +129,20 @@ function pauseTimer(event) {
     PAUSEBTN.disabled = true;
     STOPBTN.disabled = true;
   }
-};
+}
 
-function toggleTimer (event) {
+function toggleTimer(event) {
   if (TIMER_TOGGLE.checked === true) {
     settings.typeOfTimer = 'work';
   } else {
     settings.typeOfTimer = 'rest';
-  };
+  }
   resetTimer(null, true);
-};
+}
 
+export function updateTimerSettings(options) {
+  //Need to update settings here, similar but not identical to how we initialize them in initTimer
+}
 
 export function initTimer(options = {}) {
   let minutes;
@@ -162,5 +163,5 @@ export function initTimer(options = {}) {
   PLAYBTN.addEventListener('click', playTimer);
   STOPBTN.addEventListener('click', resetTimer);
   TIMER_TOGGLE.addEventListener('click', toggleTimer);
-};
+}
 //#endregion

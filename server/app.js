@@ -44,6 +44,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.use('/', indexRouter);
+//Need new Router/Routes. I would call the file authRoutes and the reference, authRouter
+//It should have /login and /logout routes and placed here.
 app.use('/user', userRouter);
 app.use('/tasks', tasksRouter);
 
@@ -66,9 +68,9 @@ app.use(function(err, req, res, next) {
 app.listen(PORT, err => {
   if (err) {
     // handle specific listen errors with friendly messages
-    if(error.syscall === 'listen' && error.code === 'EADDRINUSE') {
-        console.error(`Port: ${PORT} is already in use`);
-        process.exit(1);
+    if (error.syscall === 'listen' && error.code === 'EADDRINUSE') {
+      console.error(`Port: ${PORT} is already in use`);
+      process.exit(1);
     }
     throw error;
   }
