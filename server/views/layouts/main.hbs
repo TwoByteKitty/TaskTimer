@@ -12,12 +12,12 @@
                 <span aria-hidden="true">&times;</span>
             </button>
             <!-- Menu -->
-            <ul class="vertical menu">
-                <li><a href="#">Account</a></li>
-                <li><a href="#">Manage Tasks</a></li>
-                <li><a href="#">Something Else</a></li>
-                <li><a href="#">Log Out</a></li>
-            </ul>
+            <div class="vertical menu grid-x grid-margin-x grid-padding-x align-center-middle text-center">
+                {{!-- <div class="cell navMenuLinks acct"><a href="#">Account</a></div> --}}
+                <div class="cell navMenuLinks dash"><a href="/"><i class="fas fa-stopwatch fa-lg"></i> &nbsp; Dashboard</a></div>
+                <div class="cell navMenuLinks sear"><a href="/tasks"><i class="fas fa-search fa-lg"></i> &nbsp; Search Tasks</a></div>
+                <div class="cell navMenuLinks logt"><a href="#"><i class="fas fa-sign-out-alt fa-lg"></i> &nbsp; Log Out</a></div>
+            </div>
         </div>
 
         <!--Settings off-canvas -->

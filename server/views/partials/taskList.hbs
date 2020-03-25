@@ -1,60 +1,62 @@
-<div class="grid-x align-center-middle text-center currentTaskGrid">
+<div class="grid-container">
     <div class="cell small-12">
-        <div class="card currentTskCard">
-            <div class="card-section">
-                <h3 class="text-center currentTaskLabel">Current Task:</h3>
+        <hr>
+        <div class="grid-x grid-margin-x grid-padding-x align-center-middle text-center">
+            {{#if (equals @exphbs.view "home")}}
+            <div class="cell small-12">
+                <h4 class="pendingHeading">Pending Tasks</h4>
             </div>
-            <div class="card-divider text-center currentTitle">
-                <h3 class="activeTitleDisp ">{{activeTitle}}</h3>
+            {{/if}}
+            <div class="cell tasksBtnsCell">
+                {{#if (equals @exphbs.view "home")}}
+                <a href="/tasks" class="button large">Task Search</a>
+                {{else}}
+                <a href="/" class="button large">Timer Dashboard</a>
+                {{/if}}
+                <a href="/tasks/create" class="button large">Create Tasks</a>
             </div>
-        </div>
-    </div>
-    <div class="grid-container">
-        <div class="cell small-12">
-            <hr>
-            <div class="grid-x grid-margin-x grid-padding-x align-center-middle text-center">
-                <div class="cell small-12">
-                    <h4 class="pendingHeading">Pending Tasks</h4>
-                </div>
-                <div class="cell tasksBtnsCell">
-                    {{#if (equals @exphbs.view "home")}}
-                    <a href="/tasks" class="button large">Task Search</a>
-                    {{else}}
-                    <a href="/" class="button large">Timer Dashboard</a>
-                    {{/if}}
-                    <a href="/tasks/create" class="button large">Create Tasks</a>
-                </div>
-                {{!-- pending task cards template/rendering below --}}
-                {{#if tasks}}
-                {{#each tasks}}
-                <div id="{{_id}}" class="cell small-12">
-                    <div class="card taskCard {{ priorityLvl }}">
-                        <div class="card-divider flex-container align-justify align-middle">
-                            <h4 class="text-center taskCardTitle"> {{ title }} </h4>
-                            <a href="/tasks/{{_id}}" class="button large editBtn alert"><i class="fas fa-edit fa-lg"></i></a>
-                        </div>
-                        <div class="card-section">
-                            <p> {{ dateCreated }} </p>
-                        </div>
-                        <div class="card-section">
-                            <p> {{ description }} </p>
-                        </div>
-                        <div class="card-section">
-                            <div>
-                                <button class="button large markActiveBtn" type="button" {{#if active}} disabled {{/if}}
-                                    data-task-id="{{_id}}">Set As Active</button>
-                                <button class="button large markComplBtn success" type="button" data-task-id="{{_id}}">Mark Complete</button>
-                                
-                            </div>
+            {{!-- pending task cards template/rendering below --}}
+            {{#if tasks}}
+            {{#each tasks}}
+            <div id="{{_id}}" class="cell small-12">
+                <div class="card taskCard {{ priorityLvl }}">
+                    <div class="card-divider flex-container align-justify align-middle">
+                        <h4 class="text-center taskCardTitle"> {{ title }} </h4>
+                        {{#if completed}}
+                            <h4><small>Completed! &nbsp;</small><i class="far fa-check-square"></i></h4>
+                        {{else}}
+                        <a href="/tasks/{{_id}}" class="button large editBtn alert"><i
+                                class="fas fa-edit fa-lg"></i></a>
+                        {{/if}}
+                    </div>
+                    <div class="card-section">
+                        <h6 class="taskDates">Date Created: {{ dateCreated }} </h6>
+                        {{#if completed}}
+                        <h6 class="taskDates">Date Completed: {{ dateCompleted }}</h6>
+                        {{/if}}
+                    </div>
+                    <div class="card-section">
+                        <p> {{ description }} </p>
+                    </div>
+                    {{#unless completed}}
+                    <div class="card-section">
+                        <div>
+                            <button class="button large markActiveBtn" type="button" {{#if active}} disabled {{/if}}
+                                data-task-id="{{_id}}">Set As Active</button>
+
+                            <button class="button large markComplBtn success" type="button" data-task-id="{{_id}}">Mark
+                                Complete</button>
+
                         </div>
                     </div>
+                    {{/unless}}
                 </div>
-                {{/each}}
-                {{else}}
-                <h4>No Pending Tasks</h4>
-                {{/if}}
-                {{!-- end of pending tsk template --}}
             </div>
+            {{/each}}
+            {{else}}
+            <h4>No Pending Tasks</h4>
+            {{/if}}
+            {{!-- end of pending tsk template --}}
         </div>
     </div>
 </div>

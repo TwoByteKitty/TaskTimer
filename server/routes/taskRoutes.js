@@ -8,18 +8,15 @@ router.get('/', function (req, res, next) {
   req.user = { name: 'User McUserson' };
   tasksModel.find({}).lean().exec((err, foundTasks) => {
     const activeTitle = foundTasks.find(task => task.active).title;
-    const incompleteTasks = foundTasks.filter(task => !task.completed);
-    const completedTasks = foundTasks.filter(task => task.completed);
+
     res.render('tasks', {
       user: req.user,
       title: "Task Search",
-      pendingTasks: {
-        tasks: incompleteTasks,
+      tasks: {
+        tasks: foundTasks,
         activeTitle
       },
-      completedTasks: {
-        tasks: completedTasks
-      }
+
     });
   })
 
@@ -101,7 +98,7 @@ router.put('/api/setactive/:id', function (req, res, next) {
 
 //mark task complete
 router.put('/api/complete/:id', function (req, res, next) {
-  tasksModel.findByIdAndUpdate(req.params.id, { completed: true }, { new: true }, (err, task) => {
+  tasksModel.findByIdAndUpdate(req.params.id, { completed: true, dateCompleted: req.query.dateCompleted }, { new: true }, (err, task) => {
     if (err) {
       return res.status(500).json({
         message: 'Error when marking complete',

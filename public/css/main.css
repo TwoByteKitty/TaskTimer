@@ -5226,8 +5226,12 @@ p {
   padding: 12px 10px 20px 20px;
   box-shadow: 3px 4px 5px black, inset -1px -2px 2px rgba(255, 255, 255, 0.3), inset 3px 4px 5px rgba(255, 255, 255, 0.5); }
 
+.taskCard .taskDates {
+  font-size: 22px; }
+
 .button {
-  box-shadow: 2px 3px 5px 3px rgba(0, 0, 0, 0.5), inset -1px -1px 2px rgba(255, 255, 255, 0.3), inset 3px 4px 5px rgba(255, 255, 255, 0.5); }
+  box-shadow: 2px 3px 5px 3px rgba(0, 0, 0, 0.5), inset -1px -1px 2px rgba(255, 255, 255, 0.3), inset 3px 4px 5px rgba(255, 255, 255, 0.5);
+  font-size: 30px !important; }
   .button.success {
     box-shadow: 2px 3px 5px 3px rgba(0, 0, 0, 0.5), inset -1px -1px 3px rgba(240, 252, 254, 0.8), inset 3px 4px 6px rgba(240, 252, 254, 0.9); }
 
@@ -5244,9 +5248,31 @@ p {
   padding: 15px;
   margin: 10px; }
 
+#offCanvasNavL .navMenuLinks {
+  text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
+  font-size: 30px;
+  padding: 25px;
+  margin: 25px;
+  border-radius: 12px; }
+  #offCanvasNavL .navMenuLinks a {
+    color: black;
+    font-family: "Baumans", sans-serif; }
+  #offCanvasNavL .navMenuLinks.acct {
+    background-color: #7D6DAD;
+    box-shadow: 2px 3px 5px 3px rgba(0, 0, 0, 0.5), inset -1px -1px 2px rgba(255, 255, 255, 0.15), inset 3px 4px 5px rgba(255, 255, 255, 0.25); }
+  #offCanvasNavL .navMenuLinks.dash {
+    background-color: #BB2684;
+    box-shadow: 2px 3px 5px 3px rgba(0, 0, 0, 0.5), inset -1px -1px 3px rgba(255, 255, 255, 0.4), inset 3px 4px 6px rgba(255, 255, 255, 0.6); }
+  #offCanvasNavL .navMenuLinks.sear {
+    background-color: #07BB9C;
+    box-shadow: 2px 3px 5px 3px rgba(0, 0, 0, 0.4), inset -1px -1px 3px rgba(255, 255, 255, 0.5), inset 3px 4px 6px rgba(255, 255, 255, 0.6); }
+  #offCanvasNavL .navMenuLinks.logt {
+    background-color: #7D6DAD;
+    box-shadow: 2px 3px 5px 3px rgba(0, 0, 0, 0.5), inset -1px -1px 2px rgba(255, 255, 255, 0.15), inset 3px 4px 5px rgba(255, 255, 255, 0.25); }
+
 .regCard {
   padding: 12px 20px; }
-  .regCard .fa-dragon {
+  .regCard .fa-bahai {
     margin: 20px 25px 15px 25px; }
   .regCard .regLabel {
     font-size: 18px;
@@ -5258,6 +5284,9 @@ p {
     margin: 0px 15px; }
   .regCard .bottomCell {
     margin-bottom: 30px; }
+
+.regBtn {
+  font-size: 30px; }
 
 .createTskGrd {
   width: 75%;

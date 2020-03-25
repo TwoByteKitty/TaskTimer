@@ -54795,15 +54795,13 @@ function saveSettings(event) {
       console.log(err);
     }
 
-    console.log(user);
+    console.log(user); //Emit custom event passing user setting as data.
   });
 }
 
-;
 function initSettingsForm() {
   SETTINGS_BTN.addEventListener('click', saveSettings);
 }
-;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "../node_modules/jquery/dist/jquery.js")))
 
 /***/ }),

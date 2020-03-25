@@ -28364,7 +28364,7 @@ function completeTask(event) {
   console.log(event);
   $.ajax({
     method: "PUT",
-    url: `/tasks/api/complete/${event.currentTarget.dataset.taskId}`
+    url: `/tasks/api/complete/${event.currentTarget.dataset.taskId}?dateCompleted=${moment().format('LLLL')}`
   }).done(task => {
     console.log(task);
     $(`#${event.currentTarget.dataset.taskId}`).addClass("hide");

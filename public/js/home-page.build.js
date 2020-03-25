@@ -28364,7 +28364,7 @@ function completeTask(event) {
   console.log(event);
   $.ajax({
     method: "PUT",
-    url: `/tasks/api/complete/${event.currentTarget.dataset.taskId}`
+    url: `/tasks/api/complete/${event.currentTarget.dataset.taskId}?dateCompleted=${moment().format('LLLL')}`
   }).done(task => {
     console.log(task);
     $(`#${event.currentTarget.dataset.taskId}`).addClass("hide");
@@ -28389,12 +28389,13 @@ function initTaskCreate() {
 /*!********************************!*\
   !*** ./js/components/timer.js ***!
   \********************************/
-/*! exports provided: initTimer */
+/*! exports provided: updateTimerSettings, initTimer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(moment) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initTimer", function() { return initTimer; });
+/* WEBPACK VAR INJECTION */(function(moment) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTimerSettings", function() { return updateTimerSettings; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initTimer", function() { return initTimer; });
 const PLAYBTN = document.getElementById('startTimerBtn');
 const PAUSEBTN = document.getElementById('pauseTimerBtn');
 const STOPBTN = document.getElementById('resetTimerBtn');
@@ -28426,8 +28427,6 @@ function displayTimeLeft(timeLeft) {
   update(timeLeft);
 }
 
-;
-
 function update(value) {
   let timeInitial;
 
@@ -28441,8 +28440,6 @@ function update(value) {
   const minsOffset = -MINUTES_LENGTH - MINUTES_LENGTH * timeFraction;
   MINS_PROGRESS_BAR.style.strokeDashoffset = minsOffset;
 }
-
-;
 
 function runTimer(seconds) {
   displayTimeLeft(seconds);
@@ -28470,8 +28467,6 @@ function runTimer(seconds) {
   }, 1000);
 }
 
-;
-
 function resetTimer(event, toggle) {
   let minutes;
 
@@ -28496,8 +28491,6 @@ function resetTimer(event, toggle) {
   }
 }
 
-;
-
 function playTimer(event) {
   if (isStarted === false) {
     runTimer(wholeTime);
@@ -28512,9 +28505,8 @@ function playTimer(event) {
     PAUSEBTN.disabled = false;
     STOPBTN.disabled = false;
   }
-}
+} //add saving time to task
 
-; //add saving time to task
 
 function pauseTimer(event) {
   if (isStarted === true) {
@@ -28528,8 +28520,6 @@ function pauseTimer(event) {
   }
 }
 
-;
-
 function toggleTimer(event) {
   if (TIMER_TOGGLE.checked === true) {
     settings.typeOfTimer = 'work';
@@ -28537,11 +28527,11 @@ function toggleTimer(event) {
     settings.typeOfTimer = 'rest';
   }
 
-  ;
   resetTimer(null, true);
 }
 
-;
+function updateTimerSettings(options) {//Need to update settings here, similar but not identical to how we initialize them in initTimer
+}
 function initTimer(options = {}) {
   let minutes;
   settings = Object.assign(DEFAULTS, options);
@@ -28561,8 +28551,7 @@ function initTimer(options = {}) {
   PLAYBTN.addEventListener('click', playTimer);
   STOPBTN.addEventListener('click', resetTimer);
   TIMER_TOGGLE.addEventListener('click', toggleTimer);
-}
-; //#endregion
+} //#endregion
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! moment */ "../node_modules/moment/moment.js")))
 
 /***/ }),
@@ -28586,9 +28575,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function initPage(event) {
-  Object(_components_timer__WEBPACK_IMPORTED_MODULE_0__["initTimer"])();
+  //Need to get user setting and pass to initTimer
+  let settings = {}; //use ajax to get and then assign settings
+
+  Object(_components_timer__WEBPACK_IMPORTED_MODULE_0__["initTimer"])(settings);
   Object(_components_task__WEBPACK_IMPORTED_MODULE_1__["initTaskList"])();
-  console.info('Page Loaded');
+  console.info('Page Loaded'); //Need to setup a listener for the custom event from settings update and call updateTimerSettings with the new settings from event.
 }
 
 document.addEventListener('DOMContentLoaded', initPage);
