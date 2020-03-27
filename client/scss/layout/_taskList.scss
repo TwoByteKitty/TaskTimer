@@ -36,6 +36,49 @@
     }
   }
 }
+.taskSortGrid {
+  background-color: $medium-gray;
+  margin: 15px auto 20px auto;
+  width: 96%;
+  border-radius: 8px;
+  border: 1px solid $dark-gray;
+  box-shadow: 2px 3px 6px rgba($black, 0.7);
+
+  .searchCell {
+    padding: 10px 5px;
+    margin: 10px;
+
+    .searchLbl {
+      color: white;
+      font-size: 20px;
+      font-weight: 600;
+      text-shadow: 2px 2px 5px rgba($black, 0.7);
+    }
+
+    .searchBtn {
+      box-shadow: 2px 3px 3px rgba($black, 0.7),
+        inset -1px -2px 2px rgba(255, 255, 255, 0.2),
+        inset 3px 4px 5px rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  .sortCell {
+    padding: 10px 5px;
+    margin: 10px;
+
+    .sortLbl {
+      color: white;
+      font-size: 20px;
+      font-weight: 600;
+      text-shadow: 2px 2px 5px black;
+    }
+
+    .sortDropDown {
+      font-size: 22px;
+    }
+  }
+}
+
 .pendingHeading {
   font-size: 45px;
   font-weight: 500;
@@ -44,6 +87,22 @@
 }
 
 .taskCard {
+  .priorityCircle {
+    border-radius: 5000px;
+    border: none;
+    background: rgb(30, 194, 87);
+    background: linear-gradient(
+      151deg,
+      rgba(30, 194, 87, 1) 7%,
+      rgba(3, 96, 41, 1) 99%
+    );
+    padding: 40px;
+    margin: 0 10px;
+    box-shadow: 3px 4px 6px rgba($black, 0.8),
+      inset -2px -2px 3px 2px rgba($black, 0.6),
+      inset 3px 4px 5px rgba(255, 255, 255, 0.6);
+  }
+
   .taskCardTitle {
     font-size: 30px;
     padding-left: 10px;
@@ -54,8 +113,7 @@
 
   .editBtn {
     padding: 12px 10px 20px 20px;
-    box-shadow: 3px 4px 5px black, 
-      inset -1px -2px 2px rgba(255, 255, 255, 0.3),
+    box-shadow: 3px 4px 5px black, inset -1px -2px 2px rgba(255, 255, 255, 0.3),
       inset 3px 4px 5px rgba(255, 255, 255, 0.5);
   }
 

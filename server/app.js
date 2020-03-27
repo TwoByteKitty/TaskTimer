@@ -7,7 +7,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 
-const indexRouter = require('./routes/index');
+//const authRouter = require('./routes/authRoutes');
+const homeRouter = require('./routes/homeRoutes');
 const userRouter = require('./routes/userRoutes');
 const tasksRouter = require('./routes/taskRoutes');
 
@@ -43,9 +44,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 
-app.use('/', indexRouter);
+app.use('/', homeRouter);
 //Need new Router/Routes. I would call the file authRoutes and the reference, authRouter
 //It should have /login and /logout routes and placed here.
+//app.use('/', authRouter);
+
 app.use('/user', userRouter);
 app.use('/tasks', tasksRouter);
 
