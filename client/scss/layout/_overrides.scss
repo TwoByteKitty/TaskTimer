@@ -1,11 +1,22 @@
 body {
-    background-image: $body-background-img;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+  background-image: $body-background-img;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 p {
-    font-family: "Bellota Text", sans-serif;
-    font-size: 20px;
+  font-family: "Bellota Text", sans-serif;
+  font-size: 20px;
+}
+
+input:checked ~ .switch-paddle {
+  background: rgb(196, 45, 140);
+  background: linear-gradient(
+    133deg,
+    rgba(112, 53, 90, 1) 0%,
+    rgba(191, 46, 137, 1) 30%,
+    rgba(196, 45, 140, 1) 68%,
+    rgba(217, 94, 171, 1) 100%
+  );
 }

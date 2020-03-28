@@ -28423,6 +28423,7 @@ let settings = {}; //#region 2nd Timer
 function displayTimeLeft(timeLeft) {
   const displayString = `${settings.timer.minutes() < 10 ? '0' + settings.timer.minutes() : settings.timer.minutes()}:
   ${settings.timer.seconds() < 10 ? '0' + settings.timer.seconds() : settings.timer.seconds()}`;
+  console.log(displayString);
   DISPLAY_OUTPUT.textContent = displayString;
   update(timeLeft);
 }
@@ -28433,7 +28434,7 @@ function update(value) {
   if (settings.typeOfTimer === 'work') {
     timeInitial = moment.duration(settings.workTime, 'minutes');
   } else {
-    timeInitial = monent.duration(settings.breakTime, 'minutes');
+    timeInitial = moment.duration(settings.breakTime, 'minutes');
   }
 
   const timeFraction = value / timeInitial.asSeconds();
@@ -28487,6 +28488,7 @@ function resetTimer(event, toggle) {
     PLAYBTN.disabled = false;
     PAUSEBTN.disabled = true;
     STOPBTN.disabled = true;
+    wholeTime = settings.timer.asSeconds();
     displayTimeLeft(wholeTime);
   }
 }
@@ -28530,8 +28532,16 @@ function toggleTimer(event) {
   resetTimer(null, true);
 }
 
-function updateTimerSettings(options) {//Need to update settings here, similar but not identical to how we initialize them in initTimer
+function updateTimerSettings(event) {
+  console.log(event.detail);
+  settings = Object.assign(settings, event.detail);
+
+  if (isStarted || isPaused) {//open modal, call reset timer on modal button click accordingly.
+  } else {
+    resetTimer(null, true);
+  }
 }
+;
 function initTimer(options = {}) {
   let minutes;
   settings = Object.assign(DEFAULTS, options);
@@ -28550,7 +28560,9 @@ function initTimer(options = {}) {
   PAUSEBTN.addEventListener('click', pauseTimer);
   PLAYBTN.addEventListener('click', playTimer);
   STOPBTN.addEventListener('click', resetTimer);
-  TIMER_TOGGLE.addEventListener('click', toggleTimer);
+  TIMER_TOGGLE.addEventListener('click', toggleTimer); //You will need to get teh button you create in the modal and attach an eventlistener
+
+  document.addEventListener('settings.updated', updateTimerSettings);
 } //#endregion
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! moment */ "../node_modules/moment/moment.js")))
 

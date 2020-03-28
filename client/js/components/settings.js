@@ -2,15 +2,16 @@ const SETTINGS_FORM = document.settings;
 const SETTINGS_BTN = document.getElementById('saveSettingsBtn');
 
 function saveSettings(event) {
-  console.log(SETTINGS_FORM);
   const settingsData = $(SETTINGS_FORM).serialize();
   console.log(settingsData);
-  $.post('/user/settings', settingsData).then((err, user) => {
-    if (err) {
-      console.log(err);
-    }
-    console.log(user);
-    //Emit custom event passing user setting as data.
+  $.post('/user/settings', settingsData).then((user) => {
+    const updateSettings = new CustomEvent('settings.updated', { bubbles: true, detail: user.settings });
+    //Show success message, use foundation hide
+
+    //CloseDrawer need to look at foundation api
+
+    //Dispatch event to timer
+    SETTINGS_FORM.dispatchEvent(updateSettings);
   });
 }
 

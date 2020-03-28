@@ -32,12 +32,13 @@ function displayTimeLeft(timeLeft) {
     settings.timer.minutes() < 10
       ? '0' + settings.timer.minutes()
       : settings.timer.minutes()
-  }:
+    }:
   ${
     settings.timer.seconds() < 10
       ? '0' + settings.timer.seconds()
       : settings.timer.seconds()
-  }`;
+    }`;
+  console.log(displayString)
   DISPLAY_OUTPUT.textContent = displayString;
   update(timeLeft);
 }
@@ -47,7 +48,7 @@ function update(value) {
   if (settings.typeOfTimer === 'work') {
     timeInitial = moment.duration(settings.workTime, 'minutes');
   } else {
-    timeInitial = monent.duration(settings.breakTime, 'minutes');
+    timeInitial = moment.duration(settings.breakTime, 'minutes');
   }
   const timeFraction = value / timeInitial.asSeconds();
   const minsOffset = -MINUTES_LENGTH - MINUTES_LENGTH * timeFraction;
@@ -58,14 +59,14 @@ function runTimer(seconds) {
   displayTimeLeft(seconds);
   let mSec = 1000;
 
-  secondsInterval = setInterval(function() {
+  secondsInterval = setInterval(function () {
     const timeFraction = mSec / 1000;
     const secsOffset = SECONDS_LENGTH - SECONDS_LENGTH * timeFraction;
     SECS_PROGRESS_BAR.style.strokeDashoffset = secsOffset;
     mSec = mSec - 100;
   }, 100);
 
-  intervalTimer = setInterval(function() {
+  intervalTimer = setInterval(function () {
     settings.timer.subtract(1000, 'ms');
     timeLeft = settings.timer.asSeconds();
 
@@ -98,6 +99,7 @@ function resetTimer(event, toggle) {
     PLAYBTN.disabled = false;
     PAUSEBTN.disabled = true;
     STOPBTN.disabled = true;
+    wholeTime = settings.timer.asSeconds();
     displayTimeLeft(wholeTime);
   }
 }
@@ -140,9 +142,15 @@ function toggleTimer(event) {
   resetTimer(null, true);
 }
 
-export function updateTimerSettings(options) {
-  //Need to update settings here, similar but not identical to how we initialize them in initTimer
-}
+export function updateTimerSettings(event) {
+  console.log(event.detail);
+  settings = Object.assign(settings, event.detail);
+  if(isStarted || isPaused){
+     //open modal, call reset timer on modal button click accordingly.
+  }else{
+    resetTimer(null, true);
+  }
+};
 
 export function initTimer(options = {}) {
   let minutes;
@@ -163,5 +171,7 @@ export function initTimer(options = {}) {
   PLAYBTN.addEventListener('click', playTimer);
   STOPBTN.addEventListener('click', resetTimer);
   TIMER_TOGGLE.addEventListener('click', toggleTimer);
+  //You will need to get teh button you create in the modal and attach an eventlistener
+  document.addEventListener('settings.updated', updateTimerSettings);
 }
 //#endregion

@@ -17,7 +17,7 @@ router.post('/settings', function (req, res, next) {
     },
     name: "Allie Payne",
   };
-  userModel.findByIdAndUpdate(req.user._id, { ...req.user, settings: { ...req.body } }, (err, user) => {
+  userModel.findByIdAndUpdate(req.user._id, { ...req.user, settings: { ...req.body } }, { new: true }, (err, user) => {
     if (err) {
       return res.status(500).json({
         message: 'Error when updating settings',

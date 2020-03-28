@@ -5089,6 +5089,10 @@ p {
   font-family: "Bellota Text", sans-serif;
   font-size: 20px; }
 
+input:checked ~ .switch-paddle {
+  background: #c42d8c;
+  background: linear-gradient(133deg, #70355a 0%, #bf2e89 30%, #c42d8c 68%, #d95eab 100%); }
+
 .header {
   background-color: black;
   box-shadow: 1px 2px 10px 5px rgba(0, 0, 0, 0.7);
@@ -5097,13 +5101,14 @@ p {
     background-color: #383b41; }
     .header .subHeader .headerBtn {
       color: black;
-      background-color: #BB2684;
+      background: #e696c8;
+      background: linear-gradient(137deg, #e696c8 0%, #c42d8c 27%, rgba(176, 44, 127, 0.95) 70%, rgba(92, 44, 74, 0.9) 100%);
       border-radius: 2500px;
       padding: 25px;
       margin: 0 15px;
-      box-shadow: 7px 7px 9px rgba(0, 0, 0, 0.7), inset -1px -2px 2px rgba(255, 255, 255, 0.3), inset 3px 4px 5px rgba(255, 255, 255, 0.5); }
+      box-shadow: 7px 7px 9px rgba(0, 0, 0, 0.7), inset -3px -3px 5px rgba(0, 0, 0, 0.5), inset 3px 4px 5px rgba(255, 255, 255, 0.55); }
     .header .subHeader #userNavBtn {
-      padding: 25px 40px; }
+      padding: 24px 42px; }
     .header .subHeader .pageTitle {
       color: #EFDCF9;
       text-shadow: 2px 3px 6px black;
@@ -5111,21 +5116,21 @@ p {
   .header .headWelcome {
     color: #E4E2EA !important;
     display: inline;
-    font-family: 'Advent Pro', sans-serif; }
+    font-family: "Advent Pro", sans-serif; }
   .header .headWelcomeDate {
     display: inline;
     margin-left: 7px;
-    font-family: 'Bellota Text', sans-serif; }
+    font-family: "Bellota Text", sans-serif; }
   .header .regWelcome {
     color: #EFDCF9;
-    font-family: 'Advent Pro', sans-serif; }
+    font-family: "Advent Pro", sans-serif; }
 
 .switchWrap {
   border-radius: 5000px;
   background-color: rgba(0, 0, 0, 0.6);
   padding: 10px;
   margin-top: 15px;
-  box-shadow: 1px 2px 7px 5px rgba(0, 0, 0, 0.4), inset -1px -1px 1px rgba(255, 255, 255, 0.1), inset 1px 2px 2px rgba(255, 255, 255, 0.2); }
+  box-shadow: 1px 2px 7px 5px rgba(0, 0, 0, 0.4), inset -1px -1px 2px rgba(0, 0, 0, 0.3), inset 1px 2px 2px rgba(255, 255, 255, 0.2); }
   .switchWrap .switch {
     margin-bottom: 0px;
     font-family: "Bellota Text", sans-serif;
@@ -5133,9 +5138,9 @@ p {
     border-radius: 5000px; }
     .switchWrap .switch .switch-paddle {
       border-radius: 5000px;
-      box-shadow: 7px 7px 9px rgba(0, 0, 0, 0.7), inset 1px 2px 2px rgba(255, 255, 255, 0.3), inset -2px -3px 4px rgba(255, 255, 255, 0.5); }
+      box-shadow: 3px 2px 3px rgba(254, 254, 254, 0.3), inset 4px 4px 4px rgba(0, 0, 0, 0.6), inset -4px -2px 4px rgba(255, 255, 255, 0.3); }
       .switchWrap .switch .switch-paddle:after {
-        box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.7); }
+        box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.7); }
 
 .timerCtrlWrap {
   border-radius: 25px;
@@ -5269,10 +5274,11 @@ p {
   font-size: 22px; }
 
 .button {
-  box-shadow: 2px 3px 5px 3px rgba(0, 0, 0, 0.5), inset -1px -1px 2px rgba(255, 255, 255, 0.3), inset 3px 4px 5px rgba(255, 255, 255, 0.5);
-  font-size: 30px !important; }
+  box-shadow: 7px 7px 9px rgba(0, 0, 0, 0.7), inset -3px -3px 5px rgba(0, 0, 0, 0.6), inset 3px 4px 5px rgba(255, 255, 255, 0.6);
+  font-size: 30px !important;
+  border: none; }
   .button.success {
-    box-shadow: 2px 3px 5px 3px rgba(0, 0, 0, 0.5), inset -1px -1px 3px rgba(240, 252, 254, 0.8), inset 3px 4px 6px rgba(240, 252, 254, 0.9); }
+    box-shadow: 2px 3px 5px 3px rgba(0, 0, 0, 0.5), inset -1px -1px 3px rgba(0, 0, 0, 0.8), inset 3px 4px 6px rgba(240, 252, 254, 0.9); }
 
 .offCvsDiv {
   text-align: center;
