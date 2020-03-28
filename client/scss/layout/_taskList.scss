@@ -1,10 +1,16 @@
-#pendingTasksGrid {
-  margin-top: 30px;
-  margin-bottom: 30px;
+
+.pendingHeading {
+  font-size: 45px;
+  font-weight: 500;
+  color: $light-gray;
+  text-shadow: 3px 4px 8px black;
 }
 
 .tasksBtnsCell {
-  margin: 20px;
+  margin: 15px auto 20px auto;
+  .button {
+    margin: 0px 15px 15px 15px
+  }
 }
 
 .currentTaskGrid {
@@ -79,12 +85,6 @@
   }
 }
 
-.pendingHeading {
-  font-size: 45px;
-  font-weight: 500;
-  color: $light-gray;
-  text-shadow: 3px 4px 8px black;
-}
 
 .taskCard {
   .priorityCircle {

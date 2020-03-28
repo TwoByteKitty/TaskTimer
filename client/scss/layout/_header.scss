@@ -28,9 +28,9 @@ $warning: map-get($foundation-palette, "warning");
       padding: 24px 42px;
     }
     .pageTitle {
-      color: $warning;
+      color: $light-gray;
       text-shadow: 2px 3px 6px black;
-      font-size: 45px;
+      font-size: 50px;
     }
   }
 
@@ -48,4 +48,5 @@ $warning: map-get($foundation-palette, "warning");
     color: $warning;
     font-family: "Advent Pro", sans-serif;
   }
+
 }

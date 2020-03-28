@@ -1,7 +1,48 @@
-<div class="grid-x">
+<div class="grid-x timerGrid align-center-middle">
+  {{!-- Settings Update Success Msg --}}
+  <div class="cell small-8 hide saveSuccessMsg">
+    <div class="callout success" data-closable>
+      <h5>Save Successful!</h5>
+      <p>Your new settings were saved successfully!</p>
+      <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+
+  {{!-- Modal --}}
+  <div class="reveal" id="timerModal" data-reveal>
+    <div class="grid-x align-center-middle text-center">
+      <div class="cell">
+        <h4>Would you like to reset your timer now?</h4>
+      </div>
+      <div class="cell">
+        <p class="lead">You currently have a timer in progress. </p>
+      </div>
+      <div class="cell">
+        <p>Would you like to reset the timer with your new settings, or continue running your current timer?</p>
+      </div>
+      <div class="cell">
+        <div class="grid-x align-justify align-middle">
+          <div class="cell small-5">
+            <button class="button" id="yesResetTimer">YES, reset the timer with my new settings.</button>
+          </div>
+          <div class="cell small-5">
+            <button class="button" id="noResetTimer">NO, I want to keep my current timer.</button>
+          </div>
+        </div>
+      </div>
+      <button class="close-button" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+
+ <p><button class="button primary" data-open="timerModal" style="margin: auto;" >Click for modal</button></p>
+
   {{!-- Toggle --}}
   <div class="cell small-12 flex-container align-center-middle">
-    <div class="switchWrap flex-child-shrink">
+    <div class="flex-child-shrink switchWrap">
       <div class="switch large">
         <input class="switch-input" id="workOrRest" type="checkbox" name="workRestSwitch" checked>
         <label class="switch-paddle" for="workOrRest">
@@ -39,7 +80,7 @@
   <div class="cell small-12">
     <div class="grid-x align-center-middle">
       <div class="cell small-12 flex-container align-center-middle">
-        <div class="large button-group align-center timerCtrlWrap flex-child-shrink">
+        <div class="large button-group align-center flex-child-shrink timerCtrlWrap">
           <button type="button" class="alert button large timerCtrl" id="resetTimerBtn" data-tooltip tabindex="1"
             title="Click here to clear and reset the timer." data-position="top" data-alignment="left" disabled><i
               class="fas fa-undo fa-2x"></i></button>

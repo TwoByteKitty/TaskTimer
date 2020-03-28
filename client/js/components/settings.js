@@ -1,3 +1,5 @@
+import "foundation-sites";
+
 const SETTINGS_FORM = document.settings;
 const SETTINGS_BTN = document.getElementById('saveSettingsBtn');
 
@@ -9,7 +11,7 @@ function saveSettings(event) {
     //Show success message, use foundation hide
 
     //CloseDrawer need to look at foundation api
-
+    $("#offCanvasSettingsR").foundation("close");
     //Dispatch event to timer
     SETTINGS_FORM.dispatchEvent(updateSettings);
   });

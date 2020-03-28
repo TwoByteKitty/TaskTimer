@@ -70,11 +70,11 @@ $global-font-size: 110%;
 $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
 $foundation-palette: (
-  primary: #856dad,
-  secondary: rgb(103, 96, 124),
+  primary: rgb(133,109,173),
+  secondary: rgb(107, 101, 124),
   success: #07BB9C,
-  warning: #EFDCF9,
-  alert: #BB2684,
+  warning: rgb(240, 232, 127),
+  alert: rgb(196,45,140),
 );
 $light-gray: #E4E2EA;
 $medium-gray: #9A9EAB;
@@ -731,14 +731,14 @@ $responsive-embed-ratios: (
 // 47. Reveal
 // ----------
 
-$reveal-background: $white;
-$reveal-width: 600px;
+$reveal-background: $dark-gray;
+$reveal-width: 80%;
 $reveal-max-width: $global-width;
-$reveal-padding: $global-padding;
+$reveal-padding: 30px;
 $reveal-border: 1px solid $medium-gray;
 $reveal-radius: $global-radius;
 $reveal-zindex: 1005;
-$reveal-overlay-background: rgba($black, 0.45);
+$reveal-overlay-background: rgba($black, 0.4);
 
 // 48. Slider
 // ----------

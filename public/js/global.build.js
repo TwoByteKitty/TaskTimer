@@ -54783,6 +54783,8 @@ function initHeader(user) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function($) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initSettingsForm", function() { return initSettingsForm; });
+/* harmony import */ var foundation_sites__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! foundation-sites */ "../node_modules/foundation-sites/dist/js/foundation.esm.js");
+
 const SETTINGS_FORM = document.settings;
 const SETTINGS_BTN = document.getElementById('saveSettingsBtn');
 
@@ -54795,7 +54797,8 @@ function saveSettings(event) {
       detail: user.settings
     }); //Show success message, use foundation hide
     //CloseDrawer need to look at foundation api
-    //Dispatch event to timer
+
+    $("#offCanvasSettingsR").foundation("close"); //Dispatch event to timer
 
     SETTINGS_FORM.dispatchEvent(updateSettings);
   });

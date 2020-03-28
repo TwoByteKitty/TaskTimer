@@ -1,3 +1,5 @@
+import "foundation-sites";
+
 const PLAYBTN = document.getElementById('startTimerBtn');
 const PAUSEBTN = document.getElementById('pauseTimerBtn');
 const STOPBTN = document.getElementById('resetTimerBtn');
@@ -145,9 +147,10 @@ function toggleTimer(event) {
 export function updateTimerSettings(event) {
   console.log(event.detail);
   settings = Object.assign(settings, event.detail);
-  if(isStarted || isPaused){
-     //open modal, call reset timer on modal button click accordingly.
-  }else{
+  if (isStarted === true) {
+    //open modal, call reset timer on modal button click accordingly.
+    $('#timerModal').foundation('open');
+  } else {
     resetTimer(null, true);
   }
 };
@@ -167,6 +170,7 @@ export function initTimer(options = {}) {
 
   displayTimeLeft(wholeTime);
 
+  //$('#timerModal').foundation();
   PAUSEBTN.addEventListener('click', pauseTimer);
   PLAYBTN.addEventListener('click', playTimer);
   STOPBTN.addEventListener('click', resetTimer);
