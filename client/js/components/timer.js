@@ -1,9 +1,12 @@
-import "foundation-sites";
+import { Reveal } from 'foundation-sites';
 
 const PLAYBTN = document.getElementById('startTimerBtn');
 const PAUSEBTN = document.getElementById('pauseTimerBtn');
 const STOPBTN = document.getElementById('resetTimerBtn');
 const TIMER_TOGGLE = document.getElementById('workOrRest');
+
+const MODAL_RESET_TIMER = document.getElementById('yesResetTimer');
+const MODAL_NO_RESET_TIMER = document.getElementById('noResetTimer');
 
 const MINS_PROGRESS_BAR = document.querySelector('.hand.minutes');
 const SECS_PROGRESS_BAR = document.querySelector('.hand.seconds');
@@ -26,21 +29,22 @@ let isPaused = false;
 let isStarted = false;
 
 let settings = {};
+let timerModal;
 
 //#region 2nd Timer
 
 function displayTimeLeft(timeLeft) {
-  const displayString = `${
+  const minutesDisp = `${
     settings.timer.minutes() < 10
       ? '0' + settings.timer.minutes()
       : settings.timer.minutes()
-    }:
-  ${
+  }`;
+  const secondsDisp = `${
     settings.timer.seconds() < 10
       ? '0' + settings.timer.seconds()
       : settings.timer.seconds()
-    }`;
-  console.log(displayString)
+  }`;
+  const displayString = `${minutesDisp}:${secondsDisp}`;
   DISPLAY_OUTPUT.textContent = displayString;
   update(timeLeft);
 }
@@ -61,14 +65,14 @@ function runTimer(seconds) {
   displayTimeLeft(seconds);
   let mSec = 1000;
 
-  secondsInterval = setInterval(function () {
+  secondsInterval = setInterval(function() {
     const timeFraction = mSec / 1000;
     const secsOffset = SECONDS_LENGTH - SECONDS_LENGTH * timeFraction;
     SECS_PROGRESS_BAR.style.strokeDashoffset = secsOffset;
     mSec = mSec - 100;
   }, 100);
 
-  intervalTimer = setInterval(function () {
+  intervalTimer = setInterval(function() {
     settings.timer.subtract(1000, 'ms');
     timeLeft = settings.timer.asSeconds();
 
@@ -148,12 +152,11 @@ export function updateTimerSettings(event) {
   console.log(event.detail);
   settings = Object.assign(settings, event.detail);
   if (isStarted === true) {
-    //open modal, call reset timer on modal button click accordingly.
-    $('#timerModal').foundation('open');
+    timerModal.open();
   } else {
     resetTimer(null, true);
   }
-};
+}
 
 export function initTimer(options = {}) {
   let minutes;
@@ -170,12 +173,20 @@ export function initTimer(options = {}) {
 
   displayTimeLeft(wholeTime);
 
-  //$('#timerModal').foundation();
+  timerModal = new Reveal($('#timerModal'));
   PAUSEBTN.addEventListener('click', pauseTimer);
   PLAYBTN.addEventListener('click', playTimer);
   STOPBTN.addEventListener('click', resetTimer);
   TIMER_TOGGLE.addEventListener('click', toggleTimer);
-  //You will need to get teh button you create in the modal and attach an eventlistener
+
+  MODAL_RESET_TIMER.addEventListener('click', event => {
+    resetTimer(event);
+    timerModal.close();
+  });
+  MODAL_NO_RESET_TIMER.addEventListener('click', event => {
+    timerModal.close();
+  });
+
   document.addEventListener('settings.updated', updateTimerSettings);
 }
 //#endregion

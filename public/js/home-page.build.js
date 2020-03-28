@@ -40904,6 +40904,8 @@ const PLAYBTN = document.getElementById('startTimerBtn');
 const PAUSEBTN = document.getElementById('pauseTimerBtn');
 const STOPBTN = document.getElementById('resetTimerBtn');
 const TIMER_TOGGLE = document.getElementById('workOrRest');
+const MODAL_RESET_TIMER = document.getElementById('yesResetTimer');
+const MODAL_NO_RESET_TIMER = document.getElementById('noResetTimer');
 const MINS_PROGRESS_BAR = document.querySelector('.hand.minutes');
 const SECS_PROGRESS_BAR = document.querySelector('.hand.seconds');
 const MINUTES_LENGTH = Math.PI * 2 * 110;
@@ -40922,12 +40924,13 @@ let wholeTime; // manage this to set the whole time
 
 let isPaused = false;
 let isStarted = false;
-let settings = {}; //#region 2nd Timer
+let settings = {};
+let timerModal; //#region 2nd Timer
 
 function displayTimeLeft(timeLeft) {
-  const displayString = `${settings.timer.minutes() < 10 ? '0' + settings.timer.minutes() : settings.timer.minutes()}:
-  ${settings.timer.seconds() < 10 ? '0' + settings.timer.seconds() : settings.timer.seconds()}`;
-  console.log(displayString);
+  const minutesDisp = `${settings.timer.minutes() < 10 ? '0' + settings.timer.minutes() : settings.timer.minutes()}`;
+  const secondsDisp = `${settings.timer.seconds() < 10 ? '0' + settings.timer.seconds() : settings.timer.seconds()}`;
+  const displayString = `${minutesDisp}:${secondsDisp}`;
   DISPLAY_OUTPUT.textContent = displayString;
   update(timeLeft);
 }
@@ -41041,13 +41044,11 @@ function updateTimerSettings(event) {
   settings = Object.assign(settings, event.detail);
 
   if (isStarted === true) {
-    //open modal, call reset timer on modal button click accordingly.
-    $('#timerModal').foundation('open');
+    timerModal.open();
   } else {
     resetTimer(null, true);
   }
 }
-;
 function initTimer(options = {}) {
   let minutes;
   settings = Object.assign(DEFAULTS, options);
@@ -41062,13 +41063,19 @@ function initTimer(options = {}) {
   MINS_PROGRESS_BAR.style.strokeDasharray = MINUTES_LENGTH;
   SECS_PROGRESS_BAR.style.strokeDasharray = SECONDS_LENGTH;
   wholeTime = settings.timer.asSeconds();
-  displayTimeLeft(wholeTime); //$('#timerModal').foundation();
-
+  displayTimeLeft(wholeTime);
+  timerModal = new foundation_sites__WEBPACK_IMPORTED_MODULE_0__["Reveal"]($('#timerModal'));
   PAUSEBTN.addEventListener('click', pauseTimer);
   PLAYBTN.addEventListener('click', playTimer);
   STOPBTN.addEventListener('click', resetTimer);
-  TIMER_TOGGLE.addEventListener('click', toggleTimer); //You will need to get teh button you create in the modal and attach an eventlistener
-
+  TIMER_TOGGLE.addEventListener('click', toggleTimer);
+  MODAL_RESET_TIMER.addEventListener('click', event => {
+    resetTimer(event);
+    timerModal.close();
+  });
+  MODAL_NO_RESET_TIMER.addEventListener('click', event => {
+    timerModal.close();
+  });
   document.addEventListener('settings.updated', updateTimerSettings);
 } //#endregion
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! moment */ "../node_modules/moment/moment.js"), __webpack_require__(/*! jquery */ "../node_modules/jquery/dist/jquery.js")))
