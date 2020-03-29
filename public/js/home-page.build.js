@@ -40899,6 +40899,9 @@ __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(moment, $) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTimerSettings", function() { return updateTimerSettings; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initTimer", function() { return initTimer; });
 /* harmony import */ var foundation_sites__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! foundation-sites */ "../node_modules/foundation-sites/dist/js/foundation.esm.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "../node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+
 
 const PLAYBTN = document.getElementById('startTimerBtn');
 const PAUSEBTN = document.getElementById('pauseTimerBtn');
@@ -40908,49 +40911,56 @@ const MODAL_RESET_TIMER = document.getElementById('yesResetTimer');
 const MODAL_NO_RESET_TIMER = document.getElementById('noResetTimer');
 const MINS_PROGRESS_BAR = document.querySelector('.hand.minutes');
 const SECS_PROGRESS_BAR = document.querySelector('.hand.seconds');
+const DISPLAY_OUTPUT = document.querySelector('.display-remain-time');
 const MINUTES_LENGTH = Math.PI * 2 * 110;
 const SECONDS_LENGTH = Math.PI * 2 * 100;
-const DISPLAY_OUTPUT = document.querySelector('.display-remain-time');
 const DEFAULTS = {
   timer: undefined,
   typeOfTimer: 'work',
-  workTime: 2,
-  breakTime: 1
+  workTime: 30,
+  breakTime: 5,
+  volume: 50
 };
-let intervalTimer;
-let secondsInterval;
-let timeLeft;
-let wholeTime; // manage this to set the whole time
-
 let isPaused = false;
 let isStarted = false;
 let settings = {};
-let timerModal; //#region 2nd Timer
+let intervalTimer;
+let secondsInterval;
+let timerModal;
+let currrentTimerTotalTime; //Called by displayTimeLeft
 
-function displayTimeLeft(timeLeft) {
-  const minutesDisp = `${settings.timer.minutes() < 10 ? '0' + settings.timer.minutes() : settings.timer.minutes()}`;
-  const secondsDisp = `${settings.timer.seconds() < 10 ? '0' + settings.timer.seconds() : settings.timer.seconds()}`;
-  const displayString = `${minutesDisp}:${secondsDisp}`;
-  DISPLAY_OUTPUT.textContent = displayString;
-  update(timeLeft);
-}
-
-function update(value) {
+function updateSvg() {
   let timeInitial;
 
   if (settings.typeOfTimer === 'work') {
-    timeInitial = moment.duration(settings.workTime, 'minutes');
+    timeInitial = moment.duration(currrentTimerTotalTime, 'minutes');
   } else {
-    timeInitial = moment.duration(settings.breakTime, 'minutes');
+    timeInitial = moment.duration(currrentTimerTotalTime, 'minutes');
   }
 
-  const timeFraction = value / timeInitial.asSeconds();
+  const timeFraction = settings.timer.asSeconds() / timeInitial.asSeconds();
   const minsOffset = -MINUTES_LENGTH - MINUTES_LENGTH * timeFraction;
   MINS_PROGRESS_BAR.style.strokeDashoffset = minsOffset;
 }
 
-function runTimer(seconds) {
-  displayTimeLeft(seconds);
+function displayTimeLeft() {
+  let minAccumualtor = settings.timer.minutes();
+
+  if (settings.timer.hours() > 0) {
+    minAccumualtor += settings.timer.hours() * 60;
+  }
+
+  const minutesDisp = `${minAccumualtor < 10 ? '0' + minAccumualtor : minAccumualtor}`;
+  const secondsDisp = `${settings.timer.seconds() < 10 ? '0' + settings.timer.seconds() : settings.timer.seconds()}`;
+  console.log('Log from displayTimeLeft', settings.timer.hours());
+  console.log('Log from displayTimeLeft', minutesDisp);
+  const displayString = `${minutesDisp}:${secondsDisp}`;
+  DISPLAY_OUTPUT.textContent = displayString;
+  updateSvg();
+} //Starts Timer Intervals
+
+
+function runTimer() {
   let mSec = 1000;
   secondsInterval = setInterval(function () {
     const timeFraction = mSec / 1000;
@@ -40960,20 +40970,19 @@ function runTimer(seconds) {
   }, 100);
   intervalTimer = setInterval(function () {
     settings.timer.subtract(1000, 'ms');
-    timeLeft = settings.timer.asSeconds();
+    const timeLeft = settings.timer.asSeconds();
 
     if (timeLeft < 0) {
       clearInterval(intervalTimer);
       clearInterval(secondsInterval);
       SECS_PROGRESS_BAR.style.strokeDashoffset = 1000;
       isStarted = false;
-      displayTimeLeft(wholeTime);
-      return;
     }
 
-    displayTimeLeft(timeLeft);
+    displayTimeLeft();
   }, 1000);
-}
+} //#region Event Handlers
+
 
 function resetTimer(event, toggle) {
   let minutes;
@@ -40991,30 +41000,32 @@ function resetTimer(event, toggle) {
       minutes = settings.breakTime;
     }
 
+    console.log('Log from reset', minutes);
     settings.timer = moment.duration(minutes, 'minutes');
+    currrentTimerTotalTime = minutes;
+    console.log('Log from reset', currrentTimerTotalTime);
     PLAYBTN.disabled = false;
     PAUSEBTN.disabled = true;
     STOPBTN.disabled = true;
-    wholeTime = settings.timer.asSeconds();
-    displayTimeLeft(wholeTime);
+    displayTimeLeft();
   }
 }
 
 function playTimer(event) {
   if (isStarted === false) {
-    runTimer(wholeTime);
     isStarted = true;
     PLAYBTN.disabled = true;
     PAUSEBTN.disabled = false;
     STOPBTN.disabled = false;
   } else if (isPaused === true) {
-    runTimer(timeLeft);
     isPaused = false;
     PLAYBTN.disabled = true;
     PAUSEBTN.disabled = false;
     STOPBTN.disabled = false;
   }
-} //add saving time to task
+
+  runTimer();
+} //TODO: add saving time to task
 
 
 function pauseTimer(event) {
@@ -41042,13 +41053,15 @@ function toggleTimer(event) {
 function updateTimerSettings(event) {
   console.log(event.detail);
   settings = Object.assign(settings, event.detail);
+  console.log(settings);
 
   if (isStarted === true) {
     timerModal.open();
   } else {
     resetTimer(null, true);
   }
-}
+} //#endregion
+
 function initTimer(options = {}) {
   let minutes;
   settings = Object.assign(DEFAULTS, options);
@@ -41060,10 +41073,10 @@ function initTimer(options = {}) {
   }
 
   settings.timer = moment.duration(minutes, 'minutes');
+  currrentTimerTotalTime = minutes;
   MINS_PROGRESS_BAR.style.strokeDasharray = MINUTES_LENGTH;
   SECS_PROGRESS_BAR.style.strokeDasharray = SECONDS_LENGTH;
-  wholeTime = settings.timer.asSeconds();
-  displayTimeLeft(wholeTime);
+  displayTimeLeft();
   timerModal = new foundation_sites__WEBPACK_IMPORTED_MODULE_0__["Reveal"]($('#timerModal'));
   PAUSEBTN.addEventListener('click', pauseTimer);
   PLAYBTN.addEventListener('click', playTimer);
@@ -41077,7 +41090,7 @@ function initTimer(options = {}) {
     timerModal.close();
   });
   document.addEventListener('settings.updated', updateTimerSettings);
-} //#endregion
+}
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! moment */ "../node_modules/moment/moment.js"), __webpack_require__(/*! jquery */ "../node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
