@@ -11,7 +11,8 @@ router.get('/', function(req, res, next) {
     settings: {
       workTime: 30,
       breakTime: 5,
-      volume: 50
+      volume: 50,
+      alarm: 'air_raid'
     },
     name: 'Allie Payne'
   };

@@ -10,7 +10,8 @@
     </div>
   </div>
 
-  {{!-- Modal --}}
+  {{!-- Modals --}}
+  {{!-- Timer Settings Modal --}}
   <div class="reveal" id="timerModal" data-reveal data-overlay="false">
     <div class="grid-x align-center-middle text-center">
       <div class="cell">
@@ -32,13 +33,58 @@
           </div>
         </div>
       </div>
-      <button class="close-button" data-close aria-label="Close modal" type="button">
-        <span aria-hidden="true">&times;</span>
-      </button>
+    </div>
+  </div>
+  {{!-- Work Alarm Modal --}}
+  <div class="reveal" id="workAlarmModal" data-reveal data-overlay="false">
+    <div class="grid-x align-center-middle text-center" >
+      <div class="cell">
+        <h4>Good Work! Your timer is done.</h4>
+      </div>
+      <div class="cell">
+        <p class="lead">You can take a break now! </p>
+      </div>
+      <div class="cell">
+        <p>Would you like to start resting? You can reset the work timer to start a new working period instead.</p>
+      </div>
+      <div class="cell">
+        <div class="grid-x align-justify align-middle">
+          <div class="cell small-5">
+            <button class="button" id="beginRest">YES, kill the alarm and start resting now.</button>
+          </div>
+          <div class="cell small-5">
+            <button class="button" id="killWorkAlarm">NO, kill the alarm and reset. I want to keep working.</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  {{!-- <p><button class="button primary" data-open="timerModal" style="margin: auto;">Click for modal</button></p> --}}
+  {{!-- Rest Alarm Modal --}}
+   <div class="reveal" id="restAlarmModal" data-reveal data-overlay="false">
+    <div class="grid-x align-center-middle text-center" >
+      <div class="cell">
+        <h4>Welcome Back! Your rest time is over.</h4>
+      </div>
+      <div class="cell">
+        <p class="lead">Let's finish these tasks! </p>
+      </div>
+      <div class="cell">
+        <p>Would you like to start working? </p>
+      </div>
+      <div class="cell">
+        <div class="grid-x align-justify align-middle">
+          <div class="cell small-5">
+            <button class="button" id="beginWork">YES, kill the alarm and start working now.</button>
+          </div>
+          <div class="cell small-5">
+            <button class="button" id="killRestAlarm">NO, kill the alarm. I'm not ready to start working yet. </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   {{!-- Toggle --}}
   <div class="cell small-12 flex-container align-center-middle">
@@ -52,6 +98,11 @@
         </label>
       </div>
     </div>
+  </div>
+
+  {{!-- Audio Element for Alarm --}}
+  <div class="cell">
+    <audio controls src="{{ audioPath user.settings.alarm }}" id="alarmEl" loop></audio>
   </div>
 
   {{!-- Timer --}}

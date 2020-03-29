@@ -19,7 +19,7 @@ var UserSchema = new Schema(
       trim: true,
       required: 'A password is required',
       validate: [
-        function(input) {
+        function (input) {
           return input.length >= 4;
         },
         'Password should be four characters or longer'
@@ -29,7 +29,7 @@ var UserSchema = new Schema(
       workTime: { type: Number, default: 30 },
       breakTime: { type: Number, default: 5 },
       volume: { type: Number, default: 50 },
-      alarm: String
+      alarm: { type: String, default: "air_raid" }
     }
   },
   { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } }

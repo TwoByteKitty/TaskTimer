@@ -1,11 +1,15 @@
 import { Reveal } from 'foundation-sites';
-import { min } from 'moment';
 
 const PLAYBTN = document.getElementById('startTimerBtn');
 const PAUSEBTN = document.getElementById('pauseTimerBtn');
 const STOPBTN = document.getElementById('resetTimerBtn');
 const TIMER_TOGGLE = document.getElementById('workOrRest');
+const ALARM = document.getElementById('alarmEl');
 
+const MODAL_KILL_WORK_ALARM = document.getElementById('killWorkAlarm');
+const MODAL_KILL_REST_ALARM = document.getElementById('killRestAlarm');
+const MODAL_START_BREAK = document.getElementById('beginRest');
+const MODAL_START_WORK = document.getElementById('beginWork');
 const MODAL_RESET_TIMER = document.getElementById('yesResetTimer');
 const MODAL_NO_RESET_TIMER = document.getElementById('noResetTimer');
 
@@ -21,7 +25,8 @@ const DEFAULTS = {
   typeOfTimer: 'work',
   workTime: 30,
   breakTime: 5,
-  volume: 50
+  volume: 50,
+  alarm: "air_raid"
 };
 
 let isPaused = false;
@@ -31,6 +36,8 @@ let settings = {};
 let intervalTimer;
 let secondsInterval;
 let timerModal;
+let workAlarmModal;
+let restAlarmModal;
 let currrentTimerTotalTime;
 
 //Called by displayTimeLeft
@@ -54,14 +61,12 @@ function displayTimeLeft() {
   }
   const minutesDisp = `${
     minAccumualtor < 10 ? '0' + minAccumualtor : minAccumualtor
-  }`;
+    }`;
   const secondsDisp = `${
     settings.timer.seconds() < 10
       ? '0' + settings.timer.seconds()
       : settings.timer.seconds()
-  }`;
-  console.log('Log from displayTimeLeft', settings.timer.hours());
-  console.log('Log from displayTimeLeft', minutesDisp);
+    }`;
   const displayString = `${minutesDisp}:${secondsDisp}`;
   DISPLAY_OUTPUT.textContent = displayString;
   updateSvg();
@@ -71,21 +76,24 @@ function displayTimeLeft() {
 function runTimer() {
   let mSec = 1000;
 
-  secondsInterval = setInterval(function() {
+  secondsInterval = setInterval(function () {
     const timeFraction = mSec / 1000;
     const secsOffset = SECONDS_LENGTH - SECONDS_LENGTH * timeFraction;
     SECS_PROGRESS_BAR.style.strokeDashoffset = secsOffset;
     mSec = mSec - 100;
   }, 100);
 
-  intervalTimer = setInterval(function() {
+  intervalTimer = setInterval(function () {
     settings.timer.subtract(1000, 'ms');
     const timeLeft = settings.timer.asSeconds();
-    if (timeLeft < 0) {
-      clearInterval(intervalTimer);
-      clearInterval(secondsInterval);
-      SECS_PROGRESS_BAR.style.strokeDashoffset = 1000;
-      isStarted = false;
+    if (timeLeft <= 0) {
+      resetTimer();
+      ALARM.play();
+      if (settings.typeOfTimer === 'work') {
+        workAlarmModal.open();
+      } else {
+        restAlarmModal.open();
+      }
     }
     displayTimeLeft();
   }, 1000);
@@ -154,7 +162,6 @@ function toggleTimer(event) {
 }
 
 export function updateTimerSettings(event) {
-  console.log(event.detail);
   settings = Object.assign(settings, event.detail);
   console.log(settings);
   if (isStarted === true) {
@@ -180,12 +187,37 @@ export function initTimer(options = {}) {
 
   displayTimeLeft();
 
+  workAlarmModal = new Reveal($('#workAlarmModal'));
+  restAlarmModal = new Reveal($('#restAlarmModal'));
   timerModal = new Reveal($('#timerModal'));
+
   PAUSEBTN.addEventListener('click', pauseTimer);
   PLAYBTN.addEventListener('click', playTimer);
   STOPBTN.addEventListener('click', resetTimer);
   TIMER_TOGGLE.addEventListener('click', toggleTimer);
 
+  MODAL_KILL_WORK_ALARM.addEventListener('click', event => {
+    ALARM.pause();
+    workAlarmModal.close();
+  });
+  MODAL_START_BREAK.addEventListener('click', event => {
+    ALARM.pause();
+    workAlarmModal.close();
+    TIMER_TOGGLE.click();
+    PLAYBTN.click();
+  })
+  MODAL_KILL_REST_ALARM.addEventListener('click', event => {
+    ALARM.pause();
+    restAlarmModal.close();
+    TIMER_TOGGLE.click();
+  });
+  MODAL_START_WORK.addEventListener('click', event => {
+    ALARM.pause();
+    restAlarmModal.close();
+    TIMER_TOGGLE.click();
+    PLAYBTN.click();
+
+  })
   MODAL_RESET_TIMER.addEventListener('click', event => {
     resetTimer(event);
     timerModal.close();

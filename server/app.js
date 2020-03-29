@@ -76,6 +76,9 @@ app.engine(
             priorityToolTip = 'None';
         }
         return priorityToolTip;
+      },
+      audioPath: (fileName) => {
+        return `/assets/audio/${fileName}.wav`;
       }
     }
   })
