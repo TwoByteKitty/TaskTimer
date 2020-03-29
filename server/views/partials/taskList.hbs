@@ -78,10 +78,13 @@
             {{#if tasks}}
             {{#each tasks}}
             <div id="{{_id}}" class="cell small-12">
-                <div class="card taskCard {{ priorityLvl }}">
+                <div class="card taskCard">
                     <div class="card-divider flex-container align-justify align-middle">
-                        <button class="button priorityCircle" data-tooltip tabindex="1" title="Priority Level: Low"
-                            data-position="top" data-alignment="right"></button>
+                        {{!-- ~~~~~ Priority Circle ~~~~~ --}}
+                        <button class="button priorityCircle {{ priorityColor priorityLvl }}" data-tooltip tabindex="1"
+                            title="Priority Level: {{ priorityText priorityLvl }}" data-position="top"
+                            data-alignment="right"></button>
+
                         <h4 class="text-center taskCardTitle"> {{ title }} </h4>
                         {{#if completed}}
                         <h4><small>Completed! &nbsp;</small><i class="far fa-check-square"></i></h4>
@@ -102,8 +105,8 @@
                     {{#unless completed}}
                     <div class="card-section">
                         <div>
-                            <button class="button large primary markActiveBtn" type="button" {{#if active}} disabled {{/if}}
-                                data-task-id="{{_id}}">Set As Active</button>
+                            <button class="button large primary markActiveBtn" type="button" {{#if active}} disabled
+                                {{/if}} data-task-id="{{_id}}">Set As Active</button>
 
                             <button class="button large success markComplBtn" type="button" data-task-id="{{_id}}">Mark
                                 Complete</button>

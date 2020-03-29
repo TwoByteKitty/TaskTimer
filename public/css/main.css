@@ -5259,11 +5259,26 @@ input:checked ~ .switch-paddle {
 .taskCard .priorityCircle {
   border-radius: 5000px;
   border: none;
-  background: #1ec257;
-  background: linear-gradient(151deg, #1ec257 7%, #036029 99%);
   padding: 40px;
-  margin: 0 10px;
-  box-shadow: 3px 4px 6px rgba(0, 0, 0, 0.8), inset -2px -2px 3px 2px rgba(0, 0, 0, 0.6), inset 3px 4px 5px rgba(255, 255, 255, 0.6); }
+  margin: 0 10px; }
+  .taskCard .priorityCircle.oneRed {
+    background: #f71a4f;
+    background: linear-gradient(151deg, #f71a4f 7%, #6a0431 99%);
+    box-shadow: 3px 4px 6px 2px rgba(0, 0, 0, 0.8), inset -2px -2px 4px 2px rgba(0, 0, 0, 0.6), inset 3px 4px 6px rgba(255, 255, 255, 0.75); }
+  .taskCard .priorityCircle.twoOrg {
+    background: #f7851a;
+    background: linear-gradient(107deg, #f7851a 7%, #904606 99%);
+    box-shadow: 3px 4px 6px 2px rgba(0, 0, 0, 0.8), inset -2px -2px 4px 2px rgba(0, 0, 0, 0.6), inset 3px 4px 6px rgba(255, 255, 255, 0.75); }
+  .taskCard .priorityCircle.threeYel {
+    background: #f5ea0c;
+    background: linear-gradient(151deg, #f5ea0c 7%, #908e06 99%);
+    box-shadow: 3px 4px 6px 2px rgba(0, 0, 0, 0.8), inset -2px -2px 5px 2px rgba(0, 0, 0, 0.6), inset 3px 4px 5px rgba(255, 255, 255, 0.85); }
+  .taskCard .priorityCircle.fourGrn {
+    background: #1ec257;
+    background: linear-gradient(151deg, #1ec257 7%, #036029 99%); }
+  .taskCard .priorityCircle.fiveBlu {
+    background: #0cddf5;
+    background: linear-gradient(151deg, #0cddf5 7%, #036971 99%); }
 
 .taskCard .taskCardTitle {
   font-size: 30px;
