@@ -120,6 +120,8 @@ function resetTimer(event, toggle) {
     PAUSEBTN.disabled = true;
     STOPBTN.disabled = true;
     displayTimeLeft();
+    //Call Add Time here. Pass current time on clock as milliseconds or total time???
+    ==================
   }
 }
 
@@ -170,6 +172,12 @@ export function updateTimerSettings(event) {
   }
 }
 //#endregion
+
+function addTime(time) {
+  let taskId;
+  //get active task Id, should put as a data param on the active panel
+  return $.ajax({ method: "PUT", url: `/api/tasks/add-time/${taskId}?time=${time}` });
+}
 
 export function initTimer(options = {}) {
   let minutes;
