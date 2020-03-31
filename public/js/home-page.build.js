@@ -41007,10 +41007,9 @@ function resetTimer(event, toggle) {
       minutes = settings.breakTime;
     }
 
-    console.log('Log from reset', minutes);
     settings.timer = moment.duration(minutes, 'minutes');
     currrentTimerTotalTime = minutes;
-    console.log('Log from reset', currrentTimerTotalTime);
+    ALARM.src = `/assets/audio/${settings.alarm}.wav`;
     PLAYBTN.disabled = false;
     PAUSEBTN.disabled = true;
     STOPBTN.disabled = true;

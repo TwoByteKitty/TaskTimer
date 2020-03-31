@@ -1,8 +1,8 @@
 //To embed on user to make pulling them easier.
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-var taskSchema = new Schema({
+const taskSchema = new Schema({
 	title : String,
     description : String,
     priorityLvl : Number,
@@ -12,5 +12,9 @@ var taskSchema = new Schema({
     completed: {type: Boolean, default: false},
     dateCompleted : String
 });
+const Task = mongoose.model('tasks', taskSchema);
 
-module.exports = mongoose.model('tasks', taskSchema);
+module.exports = {
+    Task,
+    taskSchema
+}

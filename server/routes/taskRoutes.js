@@ -1,19 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const tasksModel = require('../models/tasksModel');
+const userModel = require('../models/userModel');
 
 //Get all task view
 router.get('/', function (req, res, next) {
   //Once passport is set up, the user will just be available
-  req.user = { name: 'User McUserson' };
-  tasksModel.find({}).lean().exec((err, foundTasks) => {
-    const activeTitle = foundTasks.find(task => task.active).title;
+  req.user = {
+    _id: '5e8293ec83454b62f895935d'
+  }
+  userModel.findOne({ _id: req.user._id }).lean().exec((err, foundUser) => {
+    const activeTitle = '';
 
     res.render('tasks', {
-      user: req.user,
+      user: foundUser,
       title: "Task Search",
       tasks: {
-        tasks: foundTasks,
+        tasks: foundUser.tasks,
         activeTitle
       },
 
@@ -25,88 +28,103 @@ router.get('/', function (req, res, next) {
 //Get Create View
 router.get('/create', function (req, res, next) {
   //Once passport is set up, the user will just be available
-  req.user = { name: 'User McUserson' };
-  res.render('createOrEditTask', {
-    user: req.user,
-    title: "Create New Task",
+  req.user = {
+    _id: '5e8293ec83454b62f895935d'
+  };
+  userModel.findOne({ _id: req.user._id }).lean().exec((err, foundUser) => {
+    console.log(foundUser);
+    res.render('createOrEditTask', {
+      user: foundUser,
+      title: "Create New Task",
+    });
   });
 });
 
 //Send New Task to be created in db
 router.post('/create', function (req, res, next) {
-  const task = new tasksModel({ ...req.body });
-
-  task.save(function (err, task) {
-    if (err) {
-      return res.status(500).json({
-        message: 'Error when creating task',
-        error: err
-      });
-    }
-    res.redirect('/');
-  });
+  const task = { ...req.body };
+  req.user = {
+    _id: '5e8293ec83454b62f895935d'
+  }
+  userModel.findByIdAndUpdate(
+    { _id: req.user._id },
+    { new: true, upsert: true, $push: { tasks: task } })
+    .then((foundUser) => {
+      res.redirect('/');
+    });
 });
 
 //Get Edit View
 router.get('/:id', function (req, res, next) {
   //Once passport is set up, the user will just be available
-  req.user = { name: 'User McUserson' };
-  tasksModel.findOne({ _id: req.params.id }, (err, foundTask) => {
-    res.render('createOrEditTask', {
-      user: req.user,
-      title: "Edit Your Task",
-      task: foundTask.toObject()
-    });
-  });
+  req.user = {
+    _id: '5e8293ec83454b62f895935d'
+  };
+  userModel.findById(req.user._id)
+    .then(user => {
+      const task = user.tasks.id(req.params.id);
+      delete user.password;
+      res.render('createOrEditTask', {
+        user: user.toObject(),
+        title: 'Edit Task',
+        task: task.toObject()
+      })
+    })
+    .catch(err => res.status(500).json(err));
 });
 
 //Send updates back to server to be saved to db
 router.post('/:id', function (req, res, next) {
-  tasksModel.findByIdAndUpdate(req.params.id, { ...req.body }, (err, task) => {
-    if (err) {
-      return res.status(500).json({
-        message: 'Error when creating task',
-        error: err
+  req.user = {
+    _id: '5e8293ec83454b62f895935d'
+  };
+  userModel.findById(req.user._id)
+    .then(user => {
+      const task = user.tasks.id(req.params.id);
+      task.title = req.body.title;
+      task.description = req.body.description;
+      task.priority = req.body.priority;
+      user.save().then(user => {
+        res.redirect('/');
       });
-    }
-    res.redirect('/');
-  });
+    })
+    .catch(err => res.status(500).json(err));
 });
 
 //set task active
 router.put('/api/setactive/:id', function (req, res, next) {
-  tasksModel.findOneAndUpdate({ active: true }, { active: false }, { new: true }, (err, task) => {
-    if (err) {
-      return res.status(500).json({
-        message: 'Error when updating active status',
-        error: err
+  req.user = {
+    _id: '5e8293ec83454b62f895935d'
+  };
+  userModel.findById(req.user._id)
+    .then(user => {
+      user.tasks.forEach(task => task.active = false);
+      const task = user.tasks.id(req.params.id);
+      task.active = true;
+      user.save().then(user => {
+        delete user.password;
+        res.json(task);
       });
-    }
-    console.log(task)
-    tasksModel.findByIdAndUpdate(req.params.id, { active: true }, { new: true }, (err, task) => {
-      if (err) {
-        return res.status(500).json({
-          message: 'Error when setting to active',
-          error: err
-        });
-      }
-      res.json(task);
-    });
-  });
-
+    })
+    .catch(err => res.status(500).json(err));
 });
 
 //mark task complete
 router.put('/api/complete/:id', function (req, res, next) {
-  tasksModel.findByIdAndUpdate(req.params.id, { completed: true, dateCompleted: req.query.dateCompleted }, { new: true }, (err, task) => {
-    if (err) {
-      return res.status(500).json({
-        message: 'Error when marking complete',
-        error: err
+  req.user = {
+    _id: '5e8293ec83454b62f895935d'
+  };
+  userModel.findById(req.user._id)
+    .then(user => {
+      const task = user.tasks.id(req.params.id);
+      task.completed = true;
+      task.dateCompleted = req.query.dateCompleted;
+      user.save().then(user => {
+        delete user.password;
+        res.json(task);
       });
-    }
-    res.json(task);
-  });
+    })
+    .catch(err => res.status(500).json(err));
 });
 
 module.exports = router;

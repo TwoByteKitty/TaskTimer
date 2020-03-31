@@ -113,10 +113,9 @@ function resetTimer(event, toggle) {
     } else {
       minutes = settings.breakTime;
     }
-    console.log('Log from reset', minutes);
     settings.timer = moment.duration(minutes, 'minutes');
     currrentTimerTotalTime = minutes;
-    console.log('Log from reset', currrentTimerTotalTime);
+    ALARM.src = `/assets/audio/${settings.alarm}.wav`;
     PLAYBTN.disabled = false;
     PAUSEBTN.disabled = true;
     STOPBTN.disabled = true;
@@ -216,7 +215,6 @@ export function initTimer(options = {}) {
     restAlarmModal.close();
     TIMER_TOGGLE.click();
     PLAYBTN.click();
-
   })
   MODAL_RESET_TIMER.addEventListener('click', event => {
     resetTimer(event);

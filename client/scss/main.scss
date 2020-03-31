@@ -32,8 +32,7 @@ $warning: map-get($foundation-palette, "warning");
       rgba(107, 16, 73, 0.9) 100%
     );
     box-shadow: 7px 7px 9px rgba($black, 0.7),
-      inset -3px -3px 5px rgba($black, 0.6),
-      inset 4px 3px 5px rgba($white, 0.4);
+      inset -3px -3px 5px rgba($black, 0.6), inset 4px 3px 5px rgba($white, 0.4);
   }
 
   &.primary {
@@ -48,8 +47,7 @@ $warning: map-get($foundation-palette, "warning");
       rgba(61, 51, 79, 0.8) 100%
     );
     box-shadow: 7px 7px 9px rgba($black, 0.7),
-      inset -3px -3px 5px rgba($black, 0.6),
-      inset 4px 3px 5px rgba($white, 0.3);
+      inset -3px -3px 5px rgba($black, 0.6), inset 4px 3px 5px rgba($white, 0.3);
   }
 
   &.success {
@@ -78,15 +76,30 @@ $warning: map-get($foundation-palette, "warning");
 }
 
 //Settings Menu
-.setgMenuLabel {
-  font-size: 18px;
-  font-weight: 600;
+#settingsForm {
+
+  .setgMenuCell {
+    padding: 15px;
+
+    label {
+      color: white;
+      font-size: 22px;
+    }
+    .help-text {
+      color: white;
+    }
+  }
+  .fieldsetLabel {
+    font-size: 22px;
+  }
+  .fieldset {
+    .alarmLbl {
+      color: white;
+      font-size: 18px;
+    }
+  }
 }
 
-.setgMenuCell {
-  padding: 15px;
-  margin: 10px;
-}
 //Nav Menu
 #offCanvasNavL {
   .navMenuLinks {
@@ -140,8 +153,8 @@ $warning: map-get($foundation-palette, "warning");
       );
 
       box-shadow: 7px 7px 9px rgba($black, 0.7),
-      inset -3px -3px 5px rgba($black, 0.6),
-      inset 4px 3px 3px rgba($white, 0.7);
+        inset -3px -3px 5px rgba($black, 0.6),
+        inset 4px 3px 3px rgba($white, 0.7);
     }
 
     &.sear {

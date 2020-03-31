@@ -1,6 +1,7 @@
 //Need to embed task for easier searching and saving
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var { taskSchema } = require('./tasksModel');
 
 var UserSchema = new Schema(
   {
@@ -30,18 +31,20 @@ var UserSchema = new Schema(
       breakTime: { type: Number, default: 5 },
       volume: { type: Number, default: 50 },
       alarm: { type: String, default: "air_raid" }
-    }
+    },
+    tasks: [taskSchema]
   },
   { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } }
 );
 
 class newUser {
-  constructor({ _id, fullName, email, password, settings }) {
+  constructor({ _id, fullName, email, password, settings, tasks }) {
     this._id = _id;
     this.fullName = fullName;
     this.email = email;
     this.password = password;
     this.settings = settings;
+    this.tasks = tasks;
   }
 
   comparePassword(challenge) {

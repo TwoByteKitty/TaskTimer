@@ -414,7 +414,7 @@ legend {
 .fieldset {
   margin: 1.02273rem 0;
   padding: 1.13636rem;
-  border: 1px solid #9A9EAB; }
+  border: 1px solid #E4E2EA; }
   .fieldset legend {
     margin: 0;
     margin-left: -0.17045rem;
@@ -5324,13 +5324,20 @@ input:checked ~ .switch-paddle {
   padding: 50px 20px;
   width: 30%; }
 
-.setgMenuLabel {
-  font-size: 18px;
-  font-weight: 600; }
+#settingsForm .setgMenuCell {
+  padding: 15px; }
+  #settingsForm .setgMenuCell label {
+    color: white;
+    font-size: 22px; }
+  #settingsForm .setgMenuCell .help-text {
+    color: white; }
 
-.setgMenuCell {
-  padding: 15px;
-  margin: 10px; }
+#settingsForm .fieldsetLabel {
+  font-size: 22px; }
+
+#settingsForm .fieldset .alarmLbl {
+  color: white;
+  font-size: 18px; }
 
 #offCanvasNavL .navMenuLinks {
   text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
