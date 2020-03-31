@@ -26,7 +26,7 @@ const DEFAULTS = {
   workTime: 30,
   breakTime: 5,
   volume: 50,
-  alarm: "air_raid"
+  alarm: 'air_raid'
 };
 
 let isPaused = false;
@@ -61,12 +61,12 @@ function displayTimeLeft() {
   }
   const minutesDisp = `${
     minAccumualtor < 10 ? '0' + minAccumualtor : minAccumualtor
-    }`;
+  }`;
   const secondsDisp = `${
     settings.timer.seconds() < 10
       ? '0' + settings.timer.seconds()
       : settings.timer.seconds()
-    }`;
+  }`;
   const displayString = `${minutesDisp}:${secondsDisp}`;
   DISPLAY_OUTPUT.textContent = displayString;
   updateSvg();
@@ -76,14 +76,14 @@ function displayTimeLeft() {
 function runTimer() {
   let mSec = 1000;
 
-  secondsInterval = setInterval(function () {
+  secondsInterval = setInterval(function() {
     const timeFraction = mSec / 1000;
     const secsOffset = SECONDS_LENGTH - SECONDS_LENGTH * timeFraction;
     SECS_PROGRESS_BAR.style.strokeDashoffset = secsOffset;
     mSec = mSec - 100;
   }, 100);
 
-  intervalTimer = setInterval(function () {
+  intervalTimer = setInterval(function() {
     settings.timer.subtract(1000, 'ms');
     const timeLeft = settings.timer.asSeconds();
     if (timeLeft <= 0) {
@@ -105,6 +105,16 @@ function resetTimer(event, toggle) {
   if (isStarted === true || toggle) {
     clearInterval(intervalTimer);
     clearInterval(secondsInterval);
+    //==================
+    //if(isStarted){
+    //if(!event && !toggle){
+    //call addTime with currentTotalTimerTime parsed as milliseconds as arg. This will be from end of timer
+    //}
+    //if(toggle === 'timerType' && settings.typeOfTimer === 'break'){
+    //  call addTime with setting.timer.asMillisSeconds(). This will be from user initiated switch.
+    //}
+    //}
+    //=============
     SECS_PROGRESS_BAR.style.strokeDashoffset = 0;
     isPaused = false;
     isStarted = false;
@@ -120,8 +130,6 @@ function resetTimer(event, toggle) {
     PAUSEBTN.disabled = true;
     STOPBTN.disabled = true;
     displayTimeLeft();
-    //Call Add Time here. Pass current time on clock as milliseconds or total time???
-    ==================
   }
 }
 
@@ -159,12 +167,11 @@ function toggleTimer(event) {
   } else {
     settings.typeOfTimer = 'rest';
   }
-  resetTimer(null, true);
+  resetTimer(null, 'timerType');
 }
 
 export function updateTimerSettings(event) {
   settings = Object.assign(settings, event.detail);
-  console.log(settings);
   if (isStarted === true) {
     timerModal.open();
   } else {
@@ -173,10 +180,10 @@ export function updateTimerSettings(event) {
 }
 //#endregion
 
+//This call the server to add the current amount of time spent to the current task.
 function addTime(time) {
-  let taskId;
-  //get active task Id, should put as a data param on the active panel
-  return $.ajax({ method: "PUT", url: `/api/tasks/add-time/${taskId}?time=${time}` });
+  let taskId; //get active task Id, should put as a data param on the active panel
+  $.ajax({ method: 'PUT', url: `/api/tasks/add-time/${taskId}?time=${time}` });
 }
 
 export function initTimer(options = {}) {
@@ -212,7 +219,7 @@ export function initTimer(options = {}) {
     workAlarmModal.close();
     TIMER_TOGGLE.click();
     PLAYBTN.click();
-  })
+  });
   MODAL_KILL_REST_ALARM.addEventListener('click', event => {
     ALARM.pause();
     restAlarmModal.close();
@@ -223,7 +230,7 @@ export function initTimer(options = {}) {
     restAlarmModal.close();
     TIMER_TOGGLE.click();
     PLAYBTN.click();
-  })
+  });
   MODAL_RESET_TIMER.addEventListener('click', event => {
     resetTimer(event);
     timerModal.close();
